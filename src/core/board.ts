@@ -12,7 +12,7 @@ import type {
   SectorState,
   WallToken,
 } from './types';
-import { DIR_DELTA, OPPOSITE } from './types';
+import { DIR_DELTA, OPPOSITE, COLORS, DIRS } from './types';
 
 export const SECTOR_SIZE = 8;
 export const BOARD_SIZE = 16;
@@ -101,6 +101,59 @@ export function createBoard(): BoardState {
     },
     portals: [],
   };
+}
+
+// --- Data-driven topology (from extract-board.py / board-data.json) ---
+
+export interface TopologyCell {
+  kind?: 'corridor' | 'home' | 'treasure-start';
+  walls?: Partial<Record<Dir, boolean>>;
+  doors?: Partial<Record<Dir, { color: Color; locked?: boolean }>>;
+}
+
+export interface BoardTopology {
+  sectors: Partial<Record<Color, TopologyCell[][]>>;
+  portals?: PortalDef[];
+}
+
+// Build a BoardState from extracted topology data. Missing sectors fall back
+// to the placeholder layout so partial data still works.
+export function createBoardFromTopology(topo: BoardTopology): BoardState {
+  const board = createBoard();
+  for (const color of COLORS) {
+    const grid = topo.sectors[color];
+    if (!grid) continue;
+    const sector = board.sectors[color];
+    for (let r = 0; r < SECTOR_SIZE; r++) {
+      for (let c = 0; c < SECTOR_SIZE; c++) {
+        const tc = grid[r]?.[c];
+        if (!tc) continue;
+        const cell = sector.grid[r][c];
+        if (tc.kind) cell.kind = tc.kind;
+        if (tc.walls) {
+          for (const d of DIRS) {
+            if (tc.walls[d] !== undefined) cell.walls[d] = tc.walls[d]!;
+          }
+        }
+        if (tc.doors) {
+          for (const d of DIRS) {
+            const door = tc.doors[d];
+            if (door) {
+              cell.doors[d] = {
+                color: door.color,
+                locked: door.locked ?? true,
+                cracks: 0,
+                destroyed: false,
+                heldOpenBy: null,
+              };
+            }
+          }
+        }
+      }
+    }
+  }
+  if (topo.portals) board.portals = topo.portals;
+  return board;
 }
 
 export function getCell(board: BoardState, ref: CellRef): Cell {
