@@ -1,0 +1,370 @@
+[
+  {
+    "id": "conjuring-energy",
+    "name": "Energy",
+    "school": "conjuring",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "conjuring-glue",
+    "name": "Glue",
+    "school": "conjuring",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 3,
+    "text": "Glue Glue 1 target object or treasure in place. While this spell lasts, the glued target cannot be picked up or moved. This spell cannot be cast on a carried item or carried treasure. A 3",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "conjuring-handful-of-tacks",
+    "name": "Handful of Tacks",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "Handful of Tacks Trinket Can be dropped in 1 empty square to fill that square with tacks. Any wizard or creature entering a square filled with tacks suffers 3 physical damage. This spell is not an attack and cannot be evaded. A wizard or creature starting its turn adjacent to a tack-filled square may spend its entire Move and Cast phase picking up the tacks to re-use later. If dropped tacks are affected by a Water spell, they are washed away and destroyed. 3",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-booby-trap",
+    "name": "Booby Trap",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Booby Trap Creation Look at the 4 trap tokens and place them facedown on 4 different empty squares on the game board. If an enemy wizard or creature enters a square with a trap token, flip the token faceup. If it shows a trap, the wizard or creature suffers 4 magical damage (this is not an attack). Then, discard all trap tokens and this spell ends: If the trap token is blank, discard it. If dispelled, each trap token must be dispelled separately.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-dust-cloud",
+    "name": "Dust Cloud",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Dust Cloud Creation Fill 1 empty square with a cloud of dust that obscures sight. The Dust Cloud blocks  and wizards and creatures in the square have no  except to themselves and the Dust Cloud itself. Wizards and creatures may enter the square normally, but each one attempting to leave the square must roll a die to randomly determine in which direction it moves. A die result that causes the wizard or creature to bump into a wall costs 1 movement point, and the wizard or creature remains in the square. The target may try to move again as long as it has movement points to do so. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-thornbush",
+    "name": "Thornbush",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "THORNBUSH Creation -Create 1 Thornbush in target empty square. Thornbushes block  and take 1 crack (or 1 fire damage) to destroy. Any wizard or creature who enters a square containing a Thornbush immediately ends its turn, suffers 1 physical damage, and becomes stunned for 1 turn. This spell is not an attack and cannot be evaded.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-shield",
+    "name": "Shield",
+    "school": "conjuring",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "Shield Reduce damage being dealt to you from a single source by this spell's energy plus 2. A 2",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "conjuring-ka-bong",
+    "name": "Ka-Bong!",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "KA~BONG! Momentarily create a heavy mallet to strike the target object, wizard, or creature for 4 physical damage. If a wizard or creature suffers any damage from this spell, it becomes stunned for 1 turn.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "conjuring-wall-of-earth",
+    "name": "Wall of Earth",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non- attacks. Wall of Earth is immune to damage, and it blocks both  and movement.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "conjuring-rosebush",
+    "name": "Rosebush",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Rosebush Creation Create 1 fragrant Rosebush in target empty square. Rosebushes block  and take 1 crack (or 1 fire damage) to destroy. Any wizard or creature who enters a square containing a Rosebush suffers 3 physical damage. This spell is not an attack and cannot be evaded.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-create-wall",
+    "name": "Create Wall",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "CREATE WALL Creation Create a 1-square-long section of stone wall on a target border line between 2 squares. Stone walls take 5 cracks to destroy. Create Wall cannot be cast on a border line that is already occupied (i.e., there cannot already be a wall or door there).",
+    "effect": {
+      "op": "create-object",
+      "object": "wall"
+    }
+  },
+  {
+    "id": "conjuring-energy-2",
+    "name": "Energy",
+    "school": "conjuring",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY 4 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "conjuring-thornbush-2",
+    "name": "Thornbush",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "THORNBUSH Creation Create 1 Thornbush in target empty square. Thornbushes block  and take 1 crack (or 1 fire damage) to destroy. Any wizard or creature who enters a square containing a Thornbush immediately ends its turn, suffers 1 physical damage, and becomes stunned for 1 turn. This spell is not an attack and cannot be evaded.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-ka-bong-2",
+    "name": "Ka-Bong!",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "KA~BONG! Momentarily create a heavy mallet to strike the target object, wizard, or creature for 4 physical damage. If a wizard or creature suffers any damage from this spell, it becomes stunned for 1 turn. A",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "conjuring-shield-2",
+    "name": "Shield",
+    "school": "conjuring",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "Shield Reduce damage being dealt to you from a single source by this spell's energy plus 2. 2",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "conjuring-swap",
+    "name": "Swap",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Swap Swap places with target wizard or creature. You may not move again this turn. A",
+    "effect": {
+      "op": "swap-positions"
+    }
+  },
+  {
+    "id": "conjuring-dispel",
+    "name": "Dispel",
+    "school": "conjuring",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Dispel Immediatly end 1 target non-instant spell, as well as any spells affecting that spell. A",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "conjuring-rosebush-2",
+    "name": "Rosebush",
+    "school": "conjuring",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Rosebush Creation Create 1 fragrant Rosebush in target empty square. Rosebushes block  and take 1 crack (or 1 fire damage) to destroy. Any wizard or creature who enters a square containing a Rosebush suffers 3 physical damage. This spell is not an attack and cannot be evaded.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "conjuring-create-door",
+    "name": "Create Door",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 2,
+    "text": "CREATE DOOR Creation Create 1 door on a target stone wall or border line between 2 squares. Like a door in your home sector, it is locked for others, but not for you. If created adjacent to you, you may \"hold it open\" as it appears. Create Door cannot be cast on any type of wall other than \"a stone wall.\" A 2",
+    "effect": {
+      "op": "create-object",
+      "object": "wall"
+    }
+  },
+  {
+    "id": "conjuring-around-the-corner",
+    "name": "Around the Corner",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Around the Corner Aim one target spell you cast around one corner (up to 180°).",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "conjuring-fire-darts",
+    "name": "Fire Darts",
+    "school": "conjuring",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIRE DARTS Fire Shoot a number of fiery darts equal to this spell's energy at target object, wizard, or creature. Each dart may have a different target, and/or multiple darts may strike the same target. Each dart deals 1 magical fire damage to its target. Each dart is a separate damage source and must be countered separately. A",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "conjuring-energy-4",
+    "name": "Energy 4",
+    "school": "conjuring",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY 4 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "conjuring-ward",
+    "name": "Ward",
+    "school": "conjuring",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "WARO Cast when a target wizard picks up 1 of your treasures. Ward deals 3 magical damage to the target and forces him to roll a die. On a result of 1-2, he drops the treasure. A",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "conjuring-negate-neutral",
+    "name": "Negate Neutral",
+    "school": "conjuring",
+    "type": "counter-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "NEGATE NEUTRAL Cancel 1 target neutral spell as it is cast.",
+    "effect": {
+      "op": "negate"
+    }
+  }
+]

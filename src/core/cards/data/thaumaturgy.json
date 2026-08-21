@@ -1,0 +1,378 @@
+[
+  {
+    "id": "thaumaturgy-energy",
+    "name": "Energy",
+    "school": "thaumaturgy",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "thaumaturgy-master-key",
+    "name": "Master Key",
+    "school": "thaumaturgy",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "MASTER KEY Trinket While carrying this item, you may unlock any target door. (Doors re-lock after you pass through them, although if you wish you may \"hold the door open\" for others while you are adjacent to the door.)",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "thaumaturgy-globe-of-pain",
+    "name": "Globe of Pain",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 3,
+    "text": "Globe of Pain Shoot a reddish globe of energy at target wizard or creature. The target must be within 6 movement of the caster. The globe can go around corners and ignores all objects (except those that stop movement). If the globe enters the target wizard's or creature's square, it deals magical damage to the target equal to this spell's energy. This spell only damages the target. 3",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-globe-of-pain-2",
+    "name": "Globe of Pain",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 3,
+    "text": "Globe of Pain Shoot a reddish globe of energy at target wizard or creature. The target must be within 6 movement of the caster. The globe can go around corners and ignores all objects (except those that stop movement). If the globe enters the target wizard's or creature's square, it deals magical damage to the target equal to this spell's energy. This spell only damages the target. 3",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-wizardblade",
+    "name": "Wizardblade",
+    "school": "thaumaturgy",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "WIZAROBLADE Weapon While carrying this item, you may use this sword to channel energy into a magical attack that targets an object, wizard, or creature. You may discard 1 Magic card to deal magical damage equal to the discarded Magic card's energy value. Wizardblade deals 1 crack per point of damage you inflict (rather than 1 crack per 3 points of damage).",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "thaumaturgy-drop-object",
+    "name": "Drop Object",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "object",
+    "energyValue": 2,
+    "text": "Drop Object Force target wizard to drop 1 treasure or carried item of your choice. 2",
+    "effect": {
+      "op": "drop-object"
+    }
+  },
+  {
+    "id": "thaumaturgy-anti-anti",
+    "name": "Anti-Anti",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "Anti-Anti Cancel 1 target counter spell targeting one of your spells. Anti-Anti cannot be canceled. A 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "thaumaturgy-slow-death",
+    "name": "Slow Death",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Slow Death Curse Curse target wizard to suffer a lingering death. While this spell lasts, target wizard suffers 1 magical damage each time he draws a card. The target is not forced to draw cards. This spell only counts as your attack on the turn it is cast.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-invisible",
+    "name": "Invisible",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "INVISIBLE You become invisible. While this spell lasts, roll a die each time you are attacked. You evade the attack on a result of 2-4. When attacked, you may cast this spell as a counter.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "thaumaturgy-pick-lock",
+    "name": "Pick Lock",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 3,
+    "text": "Pick Lock Mundane Unlock target door momentarily. The door re-locks after you pass through it, although you may \"hold the door open\" for others while you are adjacent to the door. Mundane actions cannot be countered. 3",
+    "effect": {
+      "op": "pick-lock"
+    }
+  },
+  {
+    "id": "thaumaturgy-seal-door",
+    "name": "Seal Door",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 2,
+    "text": "Seal Door Create a seal on target door. The door cannot be unlocked or opened by anyone, but it may still be destroyed. 2",
+    "effect": {
+      "op": "seal-door"
+    }
+  },
+  {
+    "id": "thaumaturgy-fire-darts",
+    "name": "Fire Darts",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIRE DARTS Shoot a number of fiery darts equal to this spell's energy at target object, wizard, or creature. Each dart may have a different target, and/or multiple darts may strike the same target. Each dart deals 1 magical fire damage to its target. Each dart is a separate damage source and must be countered separately. Fire",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-energy-5",
+    "name": "Energy 5",
+    "school": "thaumaturgy",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "thaumaturgy-rotate-sector",
+    "name": "Rotate Sector",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 0,
+    "text": "ROTATE SECTOR Rotate target sector board in either direction by 90° or 180°.",
+    "effect": {
+      "op": "rotate-sector"
+    }
+  },
+  {
+    "id": "thaumaturgy-full-shield",
+    "name": "Full Shield",
+    "school": "thaumaturgy",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Full Shield Cancei 1 target spell targeting you as it is cast.",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "thaumaturgy-dispel",
+    "name": "Dispel",
+    "school": "thaumaturgy",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Dispel Immediately end 1 target non-instant spell, as well as any spells affecting that spell.",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "thaumaturgy-around-the-corner",
+    "name": "Around the Corner",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "AROUND THE CORNER Aim one target spell you cast around one corner (up to 180°).",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "thaumaturgy-gravity",
+    "name": "Gravity",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "GRAVITY Global Increase the pull of gravity within the entire game board. All wizards and creatures immediately drop all carried items and treasures. While this spell lasts, wizards and creatures cannot pick up objects or treasures. All wizards have  to Global spells for purposes of dispelling or countering them.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-backlash",
+    "name": "Backlash",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "BACKLASH Cancel 1 attack spell targeting you as it is cast. The caster of the canceled attack spell then suffers magical damage equal to the canceled spell's energy. This spell is not an attack and cannot be evaded. A",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-fire-darts-2",
+    "name": "Fire Darts",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIRE DARTS Shoot a number of fiery darts equal to this spell's energy at target object, wizard, or creature. Each dart may have a different target, and/or multiple darts may strike the same target. Each dart deals 1 magical fire damage to its target. Each dart is a separate damage source and must be countered separately.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-yoink",
+    "name": "Yoink",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "YOINK! Take 1 carried item (not a treasure) from target wizard and immediately place it in your play area. It is now 1 of your carried items.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "thaumaturgy-negate-neutral",
+    "name": "Negate Neutral",
+    "school": "thaumaturgy",
+    "type": "counter-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "NEGATE NEUTRAL Cancel 1 target neutral spell as it is cast.",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "thaumaturgy-pass-through-wall",
+    "name": "Pass Through Wall",
+    "school": "thaumaturgy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "PASS THROUGH WALL Move through target wall once, ignoring any effects of the wall.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "thaumaturgy-powerthirst",
+    "name": "Powerthirst",
+    "school": "thaumaturgy",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "POWERTRUST A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
+    "effect": {
+      "op": "no-op"
+    }
+  }
+]

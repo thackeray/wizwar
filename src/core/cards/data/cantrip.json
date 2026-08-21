@@ -1,0 +1,185 @@
+[
+  {
+    "id": "cantrip-drop-object",
+    "name": "Drop Object",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "object",
+    "energyValue": 2,
+    "text": "Drop Object Force target wizard to drop 1 treasure or carried item of your choice. 2",
+    "effect": {
+      "op": "drop-object"
+    }
+  },
+  {
+    "id": "cantrip-pick-lock",
+    "name": "Pick Lock",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 3,
+    "text": "Pick Lock Mundane Unlock target door momentarily. The door re-locks after you pass through it, although you may \"hold the door open\" for others while you are adjacent to the door. Mundane actions cannot be countered. A 3",
+    "effect": {
+      "op": "pick-lock"
+    }
+  },
+  {
+    "id": "cantrip-create-wall",
+    "name": "Create Wall",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "CREATE WALL Creation Create a 1-square-long section of stone wall on a target border line between 2 squares. Stone walls take 5 cracks to destroy. Create Wall cannot be cast on a border line that is already occupied (i.e., there cannot already be a wall or door there).",
+    "effect": {
+      "op": "create-object",
+      "object": "wall"
+    }
+  },
+  {
+    "id": "cantrip-rotate-sector",
+    "name": "Rotate Sector",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 0,
+    "text": "Rotate Sector Rotate target sector board in either direction by 90° or 180°.",
+    "effect": {
+      "op": "rotate-sector"
+    }
+  },
+  {
+    "id": "cantrip-zot",
+    "name": "Zot!",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Zot! Deal magical damage to target object, wizard, or creature equal to this spell’s energy. -or- Stun target wizard or creature for 2 turns.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "cantrip-full-shield",
+    "name": "Full Shield",
+    "school": "cantrip",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Full Shield Cancel 1 target spell targeting you as it is cast. A",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "cantrip-large-rock",
+    "name": "Large Rock",
+    "school": "cantrip",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "LARGE ROCK Thrown Weapon While carrying this item, you may throw this hefty rock as an attack at target object, wizard, or creature for 2 physical damage. After hitting the target, the rock falls to the ground in the target’s square (if possible), where it can be picked up. 3",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "cantrip-dispel",
+    "name": "Dispel",
+    "school": "cantrip",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Dispel Immediately end 1 target non-instant spell, as well as any spells affecting that spell.",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "cantrip-energy",
+    "name": "Energy",
+    "school": "cantrip",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 6,
+    "text": "ENERGY 6 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "cantrip-destroy-wall",
+    "name": "Destroy Wall",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "DESTROY WALL Destroy either a 1-square-long section of target wall or 1 target door. Any wizard or creature adjacent to target wall (or door) suffers 2 physical damage. This spell is not an attack and cannot be evaded. A",
+    "effect": {
+      "op": "destroy-object"
+    }
+  },
+  {
+    "id": "cantrip-around-the-corner",
+    "name": "Around the Corner",
+    "school": "cantrip",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "AROUND THE CORNER Aim one target spell you cast around one corner (up to 180°). A",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "cantrip-negate-neutral",
+    "name": "Negate Neutral",
+    "school": "cantrip",
+    "type": "counter-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Negate Neutral Cancel 1 target neutral spell as it is cast. A",
+    "effect": {
+      "op": "negate"
+    }
+  }
+]

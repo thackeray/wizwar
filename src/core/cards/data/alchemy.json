@@ -1,0 +1,366 @@
+[
+  {
+    "id": "alchemy-energy",
+    "name": "Energy",
+    "school": "alchemy",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "alchemy-lifestone",
+    "name": "Lifestone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "LIFESTONE Magic Stone While carrying this item, you gain 1 life at the start of your turn. (You may never exceed 20 life.) If you suffer any fire damage, all Magic Stones you are carrying are destroyed. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-bloodshard",
+    "name": "Bloodshard",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "BLOODSHARD Trinket While carrying this item, reduce the damage by 1 each time you suffer damage from a source. A",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "alchemy-boomstone",
+    "name": "Boomstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "BOOMSTONE Magic Stone While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-spellstone",
+    "name": "Spellstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Spellstone Magic Stone While carrying this item, you may draw 1 extra card each turn, although you still may not exceed your maximum hand size. If you suffer any fire damage, all Magic Stones you are carrying are destroyed.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-boomstone-2",
+    "name": "Boomstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "BOOMSTONE While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage. Magic Stone",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-add",
+    "name": "Add",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. A 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "alchemy-stone-dead",
+    "name": "Stone Dead",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "Stone Dead Strike target wizard with a glittering beam, causing magical damage equal to this spell's energy plus the number of Magic Stones the target is carrying. 3",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-universal-solvent",
+    "name": "Universal Solvent",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "UNIVERSAL SOLVENT Thrown Weapon While carrying this item, you may throw this clear acid during your turn at any target object (such as a wall or Thornbush, but not a treasure). This is not an attack. Both the target and Universal Solvent are destroyed. 4",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-energy-2",
+    "name": "Energy",
+    "school": "alchemy",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY 4 A",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "alchemy-homunculus",
+    "name": "Homunculus",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Homunculus Creation Create a Homunculus with life equal to this spell's energy. While this spell lasts, each time a  attack targets you, Homunculus leaps into its path, allowing you to automatically evade the attack (if possible). Homunculus suffers all damage from the attack, ignoring all other effects. If Homunculus intercepts an attack that cannot be evaded, you both suffer the damage and you suffer any other effects as normal.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "alchemy-acid-bath",
+    "name": "Acid Bath",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Acid Bath Drench target wizard or creature in acid. While this spell lasts, the target suffers 2 points of magical damage during your Time Passes phase. This spell only counts as your attack on the turn it is cast. If the target is affected by a Water spell, the acid washes off and this spell ends. Curse",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "alchemy-universal-solvent-2",
+    "name": "Universal Solvent",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "UNIVERSAL SOLVENT Thrown Weapon While carrying this item, you may throw this clear acid during your turn at any target object (such as a wall or Thornbush, but not a treasure). This is not an attack. Both the target and Universal Solvent are destroyed. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-speedstone",
+    "name": "Speedstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Speedstone Magic Stone While carrying this item, you increase your base move by 1. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-acid-bath-2",
+    "name": "Acid Bath",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Acid Bath Drench target wizard or creature in acid. While this spell lasts, the target suffers 2 points of magical damage during your Time Passes phase. This spell only counts as your attack on the turn it is cast. If the target is affected by a Water spell, the acid washes off and this spell ends.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "alchemy-powerstone",
+    "name": "Powerstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "POWERSTONE Magic Stone While carrying this item, you increase the energy value of all Magic cards you play to boost your speed or spells by 1. If you suffer any fire damage, all Magic Stones you are carrying are destroyed.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-powerstone-2",
+    "name": "Powerstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "POWERSTONE Magic Stone While carrying this item, you increase the energy value of all Magic cards you play to boost your speed or spells by 1. If you suffer any fire damage, all Magic Stones you are carrying are destroyed.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-boomstone-3",
+    "name": "Boomstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "BOOMSTONE Magic Stone While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-brainstone",
+    "name": "Brainstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "BRAINSTONE Magic Stone While carrying this item, your maximum hand size is increased by 2. The first time you cast or acquire Brainstone, immediately draw 2 cards. If Brainstone leaves your possession, immediately discard 2 cards of your choice. If you suffer any fire damage, all Magic Stones you are carrying are destroyed.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-null-powder",
+    "name": "Null Powder",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Null Powder While carrying this item, you may discard this item as a counter spell to cancel a  spell targeting you. -or- While carrying this item, you may discard this item during your turn to end a non-instant spell.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-mightstone",
+    "name": "Mightstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 2,
+    "text": "MIGHTSTONE Magic Stone While carrying this item, you punch for additional physical damage equal to the result of a die roll. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. 2",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-visionstone",
+    "name": "Visionstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "VISIONSTONE Magic Stone While carrying this item, you may cast spells (but not throw items) through 1 wall or door. You may choose a different wall or door each time you cast a spell. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-speedstone-2",
+    "name": "Speedstone",
+    "school": "alchemy",
+    "type": "item",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Speedstone Magic Stone While carrying this item, you increase your base move by 1. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. A",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "alchemy-fool-s-gold",
+    "name": "Fool's Gold",
+    "school": "alchemy",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Fool's Gold Cast when another wizard picks up 1 target treasure in your home sector. The treasure is a fake! That wizard's turn ends, and you take the treasure marker picked up by that wizard and drop it in any other square in your home sector. (The treasure marker now indicates where the real treasure is hidden.) A",
+    "effect": {
+      "op": "no-op"
+    }
+  }
+]

@@ -1,0 +1,372 @@
+[
+  {
+    "id": "mutation-energy",
+    "name": "Energy",
+    "school": "mutation",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "mutation-extra-arms",
+    "name": "Extra Arms",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "EXTRA ARMS Transformation You grow extra arms! While this spell lasts, carried items do not count against your hand size, and for 1 movement point you may pick up any or all items in your square, including 1 treasure. Picking up a treasure does not end your turn, but you cannot carry more than 1 treasure at a time. When punching, your punch affects all wizards and creatures within your reach. 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-gnome-form",
+    "name": "Gnome Form",
+    "school": "mutation",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 2,
+    "text": "Gnome Form Transformation Transform yourself or target creature you control to the size of a gnome. A gnome's base move is 2. While transformed, roll a die each time you are attacked. You evade the attack on a result of 1-2. When you are attacked, you may cast this spell as a counter. 2",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mutation-heave-ho",
+    "name": "Heave-Ho",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "heave-no Mundane Throw a treasure you are carrying at target object, wizard, creature, or empty squate. The treasure deals physical damage equal to the number of squares it was thrown. If thrown diagonally, distance is measured as a wizard would move. Mundane actions cannot be countered.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mutation-absorb-spell",
+    "name": "Absorb Spell",
+    "school": "mutation",
+    "type": "counter-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Absorb Spell Cancel 1 target spell being cast. Then take the canceled spell card and add it to your hand. Discard any Magic cards used to boost the canceled spell. A HAND",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "mutation-wallivore",
+    "name": "Wallivore",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "WALLIVORE Eat 1 stone wall. The devoured wall is destroyed, and then you gain 2 life.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-golem-form",
+    "name": "Golem Form",
+    "school": "mutation",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Golem Form Transformation Transform yourself or target creature you control into a golem. A golem's base move is 2, its punches inflict 2 physical damage, and all damage dealt to a golem is reduced by 2. Golems may only cast counter spells. Picking up a treasure costs 1 movement point instead of ending a golem's turn.",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mutation-energy-2",
+    "name": "Energy",
+    "school": "mutation",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY 4",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "mutation-extra-arms-2",
+    "name": "Extra Arms",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "EXTRA ARMS Transformation You grow extra arms! While this spell lasts, carried items do not count against your hand size, and for 1 movement point you may pick up any or all items in your square, including 1 treasure. Picking up a treasure does not end your turn, but you cannot carry more than 1 treasure at a time. When punching, your punch affects all wizards and creatures within your reach. 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-disease",
+    "name": "Disease",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Disease You become the carrier of a deadly disease! While this spell lasts, you deal 3 physical damage each time you enter a square to each other wizard or creature in that square. Each wizard or creature may only be damaged by this spell once per turn. This spell only uses up your attack on the turn it is cast.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mutation-werewolf-form",
+    "name": "Werewolf Form",
+    "school": "mutation",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "WEREWOLF FORM Transformation Transform yourself or target creature you control into a large, hairy werewolf. A werewolf's base move is 4. A werewolf's punches inflict physical damage equal to the result of a die roll. Werewolves can only cast counter spells.",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mutation-adrenaline",
+    "name": "Adrenaline",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "ADRENALINE Target yourself, a wizard, or a creature. While this spell lasts, the target may attack twice per turn. If the target is stunned, it may either attack once and move, or attack twice without moving.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-dispel",
+    "name": "Dispel",
+    "school": "mutation",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Dispel Immediately end 1 target non-instant spell, as well as any spells affecting that spell.",
+    "effect": {
+      "op": "negate"
+    }
+  },
+  {
+    "id": "mutation-slime-form",
+    "name": "Slime Form",
+    "school": "mutation",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Slime Form Transformation Transform yourself or target creature you control into a slime. A slime's base move is 3, and it ignores doors and objects (except walls and stone blocks) when moving. Moving through a closed door forces a slime to drop any carried treasure. Each time a slime enters a square with any wizards or creatures in it, each wizard or creature in that square suffers 1 physical damage. This spell is not an attack and cannot be evaded. Slimes cannot attack and may only cast counter spells.",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mutation-strength",
+    "name": "Strength",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Strength Grant yourself or target creature you control great strength! While this spell lasts, double any physical damage dealt by the target. As an attack, the target may try to physically tear a treasure or carried item of its choice from a wizard or creature in the same square. Roll a die. This attack succeeds on a result of 2-4. The target takes possession of the treasure or carried item. If the target is already carrying a treasure, he cannot tear another from someone's grasp.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-stretch",
+    "name": "Stretch",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 2,
+    "text": "Stretch Strech your arms like taffy. You may pick up any 1 uncarrled item or treasure in your 。 Picking up objects still costs movement points, and picking up a treasure still ends your turn. -or- Drop 1 item or treasure you are carrying in any square in your 。 -or- As an attack, punch any target in your 。",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mutation-stretch-2",
+    "name": "Stretch",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 2,
+    "text": "Stretch Stretch your arms like taffy. You may pick up any 1 uncarrried item or treasure in your 。 Picking up objects still costs movement points, and picking up a treasure still ends your turn. -or- Drop 1 item or treasure you are carrying in any square in your 。 -or- As an attack, punch any target in your 。",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mutation-mad-dash",
+    "name": "Mad Dash",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "MAD DASH Target yourself or a creature you control. Double the target's remaining movement points for the turn. The target immediately drops any treasure it is carrying and cannot pick up any treasures for the remainder of the turn.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mutation-wallivore-2",
+    "name": "Wallivore",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "WALLIVORE Eat 1 stone wall. The devoured wall is destroyed, and then you gain 2 life.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-featherweight",
+    "name": "Featherweight",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "FEATHERWEIGHT When you are attacked, cast this spell as a counter to become as light as a feather. While this spell lasts, all damage done to you moves you back 1 square per point instead of doing damage. When this moves you through intersections, you choose which direction to move. You may move around corners, but if you become unable to move, you suffer any remaining damage normally.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-energy-4",
+    "name": "Energy 4",
+    "school": "mutation",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "mutation-adrenaline-2",
+    "name": "Adrenaline",
+    "school": "mutation",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "ADRENALINE Target yourself, a wizard, or a creature. While this spell lasts, the target may attack twice per turn. If the target is stunned, it may either attack once and move, or attack twice without moving.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mutation-big-man-form",
+    "name": "Big Man Form",
+    "school": "mutation",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Big Man Form Transformation Transform yourself or target creature you control into a big man. A big man's base move is 3, and he fills the entire square he's in, blocking . No one can move past a big man, cast spells past him, or enter his square. When he moves, a big man pushes wizards and creatures (but not objects) down the corridor in front of him. At intersections, pushed wizards and creatures choose which direction to move. A big man punches for 3 physical damage.",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mutation-mist-body",
+    "name": "Mist Body",
+    "school": "mutation",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Mist Body Transformation You evaporate into mist. While this spell lasts, you can pass through anything but stone walls and stone blocks. You cannot attack or be attacked. Touched objects and treasures turn to mist, so you may pick up and carry objects and treasures as usual.",
+    "effect": {
+      "op": "shield"
+    }
+  }
+]

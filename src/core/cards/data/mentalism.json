@@ -1,0 +1,372 @@
+[
+  {
+    "id": "mentalism-brain-burn",
+    "name": "Brain Burn",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "BRAIN BURN Target wizard may discard any number of cards from his hand (including any of his maintained spells) that he desires. The target then suffers magical damage equal to the number of cards left in his hand (including any of his maintained spells, but excluding carried items).",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mentalism-share-life",
+    "name": "Share Life",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Share Life Add your current life and target wizard's current life together, and then divide the total life evenly between the two wizards. If there is an odd total, you receive the extra point of life. A",
+    "effect": {
+      "op": "share-life"
+    }
+  },
+  {
+    "id": "mentalism-add",
+    "name": "Add",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-pick-lock",
+    "name": "Pick Lock",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 3,
+    "text": "Pick Lock. Mundane Unlock target door momentarily. The door re-locks after you pass through it, although you may \"hold the door open\" for others while you are adjacent to the door. Mundane actions cannot be countered. 3",
+    "effect": {
+      "op": "pick-lock"
+    }
+  },
+  {
+    "id": "mentalism-shield",
+    "name": "Shield",
+    "school": "mentalism",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "Shield Reduce damage being dealt to you from a single source by this spell's energy plus 2. 2",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "mentalism-pain-link",
+    "name": "Pain Link",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "PAIN LINK While this spell lasts, all damage dealt to you by a wizard or creature's attack is also inflicted on that wizard or creature. This spell is not an attack and cannot be evaded. When being attacked, you may cast this spell on yourself as a counter. A",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-thought-steal",
+    "name": "Thought Steal",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 2,
+    "text": "Thought Steal Look at the target wizard's hand of cards. Take up to 2 cards of your choice from the target's hand and then discard back down to your maximum hand size. Maintained spells and carried items cannot be affected by this spell. 2",
+    "effect": {
+      "op": "steal-treasure"
+    }
+  },
+  {
+    "id": "mentalism-powerthirst",
+    "name": "Powerthirst",
+    "school": "mentalism",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "Powerthrust A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-add-2",
+    "name": "Add",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-meditate",
+    "name": "Meditate",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "MEDITATE Draw 3 cards and then discard back down to your maximum hand size. This does not end your turn. 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-meditate-2",
+    "name": "Meditate",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 3,
+    "text": "MEDITATE Draw 3 cards and then discard back down to your maximum hand size. This does not end your turn. A 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-energy",
+    "name": "Energy",
+    "school": "mentalism",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY 4",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "mentalism-pain-link-2",
+    "name": "Pain Link",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "PAIN LINK While this spell lasts, all damage dealt to you by a wizard or creature's attack is also inflicted on that wizard or creature. This spell is not an attack and cannot be evaded. When being attacked, you may cast this spell on yourself as a counter. A",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-astral-projection",
+    "name": "Astral Projection",
+    "school": "mentalism",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Astral Projection Choose 1 empty square within 3 squares of you (ignoring walls and other objects, but not counting diagonally) and cast 1 target spell as though you were in that square. A",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mentalism-mental-force",
+    "name": "Mental Force",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "MENTAL FORCE Force target wizard or creature to move up to a number of squares equal to this spell's energy plus 3. The target moves as normal, per your direction.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mentalism-shatter",
+    "name": "Shatter",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 3,
+    "text": "Shatter While this spell lasts, you deal 1 crack per point of damage you inflict to objects (rather than 1 crack per 3 points of damage). 3",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-thought-steal-2",
+    "name": "Thought Steal",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 2,
+    "text": "Thought Steal Look at the target wizard's hand of cards. Take up to 2 cards of your choice from the target's hand and then discard back down to your maximum hand size. Maintained spells and carried items cannot be affected by this spell. 2",
+    "effect": {
+      "op": "steal-treasure"
+    }
+  },
+  {
+    "id": "mentalism-brain-burn-2",
+    "name": "Brain Burn",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "BRAIN BURN Target wizard may discard any number of cards from his hand (including any of his maintained spells) that he desires. The target then suffers magical damage equal to the number of cards left in his hand (including any of his maintained spells, but excluding carried items).",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mentalism-teleport",
+    "name": "Teleport",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Teleport Move up to 4 squares (not diagonally), ignoring walls, doors, and objects. You may not move again this turn. -or- When attacked, you may cast this spell as a counter. Teleport as described above. If is broken after teleporting, any attack is evaded. A",
+    "effect": {
+      "op": "teleport"
+    }
+  },
+  {
+    "id": "mentalism-astral-projection-2",
+    "name": "Astral Projection",
+    "school": "mentalism",
+    "type": "transform",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Astral Projection Choose 1 empty square within 3 squares of you (ignoring walls and other objects, but not counting diagonally) and cast 1 target spell as though you were in that square. A",
+    "effect": {
+      "op": "transform"
+    }
+  },
+  {
+    "id": "mentalism-featherweight",
+    "name": "Featherweight",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "instant",
+    "target": "self",
+    "energyValue": 0,
+    "text": "FEATHERWEIGHT When you are attacked, cast this spell as a counter to become as light as a feather. While this spell lasts, all damage done to you moves you back 1 square per point instead of doing damage. When this moves you through intersections, you choose which direction to move. You may move around corners, but if you become unable to move, you suffer any remaining damage normally.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "mentalism-mental-force-2",
+    "name": "Mental Force",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "MENTAL FORCE Force target wizard or creature to move up to a number of squares equal to this spell’s energy plus 3. The target moves as normal, per your direction.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mentalism-psychic-storm",
+    "name": "Psychic Storm",
+    "school": "mentalism",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "PSYCHIC STORM Strike target square and all adjacent squares (even through walls, but not diagonals) with a howling storm of power. The storm does not wrap around from one board edge to another and does not extend through portals. Each wizard or creature caught in the storm (including you and your creatures) suffers magical damage equal to this spell's energy. This spell cannot be evaded.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "mentalism-powerthirst-2",
+    "name": "Powerthirst",
+    "school": "mentalism",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "POWERTRUST A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
+    "effect": {
+      "op": "no-op"
+    }
+  }
+]

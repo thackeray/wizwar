@@ -1,0 +1,60 @@
+Complete components list of Wiz-War
+
+- Rulebook
+- 4 Double sided sector boards (1 of each Blue, Red, Yellow, Green)
+- 4 Plastic wizard figures
+- 4 Plastic wizard bases (1 of each Blue, Red, Yellow, Green)
+- 5 Plastic transformed wizard figures
+	Big man, Golem, Slime, Gnome, Werewolf
+- 4 Life dials (1 of each Blue, Red, Yellow, Green)
+	Faceplate, Dial, Plastic connector
+- 1 Random direction overlay
+- 45 Object markers
+	Dagger, Handful of tacks, Universal solvent (2), Large rock (2),
+	Master key, Null powder, Wizardblade, Spellstone, Visionstone,
+	Boomstone (3), Brainstone, Lifestone, Mightstone, Powerstone (2),
+	Speedstone (2), Booby trap/Black (3), Booby trap/4, Dust cloud,
+	Glue, Rosebush (2), Stone block, Thornbush (2), Sealed door,
+	Created/Destroyed wall (10), Created door, Wall of fire
+- 4 Portal markers (2 of each Purple and Cyan)
+- 8 Treasure markers (2 of each Blue, Red, Yellow, Green)
+- 20 Crack tokens
+- 26 Energy tokens
+- 24 Hat tokens (6 of each Blue, Red, Yellow, Green)
+- 10 Stun tokens
+- 168 Magic cards (24 per school)
+	Cantrip (White, Black same as White): Full shield, Negate neutral,
+		Drop object, Zot, Around the corner, Create wall,
+		Destroy wall, Dispel, Pick lock, Rotate sector,
+		Large rock, 6 Energy
+	Alchemy: Fool's gold, Acid bath (2), Stone dead, Add, Homonculus,
+		Blood shard, Boomstone (3), Brainstone, Lifestone,
+		Mightstone, Null powder, Powerstone (2), Speedstone (2),
+		Spellstone, Universal solvent (2), Visionstone,
+		4 Energy, 5 Energy
+	Conjuring: Negate neutral, Shield (2), Wall of earth, Ward,
+		Fire darts, Ka-bong (2), Swap, Around the corner,
+		Booby trap, Create door, Create wall, Dispel, Dust cloud,
+		Glue, Rosebush (2), Thornbush (2), Handful of tacks,
+		4 Energy (2), 5 Energy
+	Elemental: Wall of earth (2), Fireball (3), Lightning bolt (2),
+		Waterbolt (2), Flood, Wall of fire, Create wall (2),
+		Destroy wall, Fog, Mist body, Stone block, Stone spikes,
+		Windrider (2), Fire clock, 4 Energy (2), 5 Energy
+	Mentalism: Absorb spell, Shield, Brain burn (2), Mental force (2),
+		Powerthrust (2), Psychic storm, Share life,
+		Thought steal (2), Pain link (2), Teleport, Add (2),
+		Astral projection (2), Meditate (2), Pick lock, Shatter,
+		4 Energy
+	Mutation: Featherweight (2), Disease, Heave-ho, Gnome form,
+		Stretch (2), Adrenaline (2), Big man form, Dispel,
+		Extra arms (2), Golem form, Mad dash, Mist body,
+		Slime form, Strength, Wallivore (2), Werewolf form,
+		4 Energy (2), 5 Energy
+	Thaumaturgy: Anti-anti, Backlash, Full shield, Negate neutral,
+		Drop object, Fire darts, Globe of pain (2), Powerthrust,
+		Slow death, Yoink, Invisible, Around the corner, Dispel,
+		Gravity, Pass through wall, Pick lock, Rotate sector,
+		Seal door, Master key, Dagger, Wizardblade, 5 Energy (2)
+- 1 Four-sided dice
+- 4 Plastic portal stands

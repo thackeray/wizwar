@@ -1,0 +1,382 @@
+[
+  {
+    "id": "elemental-stone-block",
+    "name": "Stone Block",
+    "school": "elemental",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "door",
+    "energyValue": 0,
+    "text": "Stone Block Creation Create a solid stone block in 1 empty square. The stone block completely fills the square, blocking  and movement through the square. This block takes 8 cracks to destroy and is not a wall.",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "elemental-energy",
+    "name": "Energy",
+    "school": "elemental",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 5,
+    "text": "ENERGY 5 4",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "elemental-wall-of-fire",
+    "name": "Wall of Fire",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 2,
+    "text": "WALL OF FIRE Fire Create a 1-square-long barrier of fire on a target border line between 2 squares. Any wizard or creature passing through Wall of Fire suffers 4 magical fire damage. This spell is not an attack and cannot be evaded. -or- Counter any target Water spell as it is cast, in which case the two spells cancel each other out. 2",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-lightning-bolt",
+    "name": "Lightning Bolt",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "LIGHTNING BOLT Lightning Shoot a lightning bolt from your square in a straight, non-diagonal line for a number of squares equal to this spell's energy. The bolt deals 3 magical lightning damage to all wizards and creatures it passes through each time it passes through them. If the bolt strikes an object that blocks movement, such as a wall, it reverses direction, re-entering its current square, and keeps moving. If a wizard or creature suffers any damage from this spell, it becomes stunned for 1 turn.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-fireball",
+    "name": "Fireball",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIREBALL Fire Searing flames inflict 5 magical fire damage to target object, wizard, or creature.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-wall-of-earth",
+    "name": "Wall of Earth",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non-👁️ attacks. Wall of Earth is immune to damage, and it blocks both 👁️ and movement.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "elemental-create-wall",
+    "name": "Create Wall",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "CREATE WALL Creation Create a 1-square-long section of stone wall on a target border line between 2 squares. Stone walls take 5 cracks to destroy. Create Wall cannot be cast on a border line that is already occupied (i.e., there cannot already be a wall or door there).",
+    "effect": {
+      "op": "create-object",
+      "object": "wall"
+    }
+  },
+  {
+    "id": "elemental-energy-2",
+    "name": "Energy",
+    "school": "elemental",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "elemental-fireball-2",
+    "name": "Fireball",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIREBALL Fire Searing flames inflict 5 magical fire damage to target object, wizard, or creature.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-waterbolt",
+    "name": "Waterbolt",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 3,
+    "text": "WATERBOLT Water Shoot a bolt of water at yourself or target object, wizard, or creature. The bolt deals magical water damage to the target equal to this spell's energy, or knocks the target (if mobile) back a number of squares equal to this spell's energy, or any combination of the two (the caster decides the combination). Any Fire spells affecting the target end, and any Fire object affected by Waterbolt is destroyed. 3",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-flood",
+    "name": "Flood",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "Flood Global, Water Flood the entire game board with ankle-deep water, ending all Fire spells and destroying all Fire items and Fire objects. While this spell lasts, Fire spells and Fire items cannot be played. When attacked, you may cast this spell as a counter. All wizards have  to Global spells for purposes of dispelling or countering them.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-wall-of-earth-2",
+    "name": "Wall of Earth",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non- attacks. Wall of Earth is immune to damage, and it blocks both  and movement.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "elemental-fireball-3",
+    "name": "Fireball",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "FIREBALL Fire Searing flames inflict 5 magical fire damage to target object, wizard, or creature.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-create-wall-2",
+    "name": "Create Wall",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "CREATE WALL Creation Create a 1-square-long section of stone wall on a target border line between 2 squares. Stone walls take 5 cracks to destroy. Create Wall cannot be cast on a border line that is already occupied (i.e., there cannot already be a wall or door there).",
+    "effect": {
+      "op": "create-object",
+      "object": "wall"
+    }
+  },
+  {
+    "id": "elemental-waterbolt-2",
+    "name": "Waterbolt",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 3,
+    "text": "WATERBOLT Water Shoot a bolt of water at yourself or target object, wizard, or creature. The bolt deals magical water damage to the target equal to this spell’s energy, or knocks the target (if mobile) back a number of squares equal to this spell’s energy, or any combination of the two (the caster decides the combination). Any Fire spells affecting the target end, and any Fire object affected by Waterbolt is destroyed. 3",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-destroy-wall",
+    "name": "Destroy Wall",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wall",
+    "energyValue": 0,
+    "text": "DESTROY WALL Destroy either a 1-square-long section of target wall or 1 target door. Any wizard or creature-adjacent to target wall (or door) suffers 2 physical damage. This spell is not an attack and cannot be evaded.",
+    "effect": {
+      "op": "destroy-object"
+    }
+  },
+  {
+    "id": "elemental-fog",
+    "name": "Fog",
+    "school": "elemental",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 0,
+    "text": "Fog Global Blanket the entire game board with thick fog. While this spell lasts, wizards and creatures cannot trace  farther away than 1 square. All wizards have  to Global spells for purposes of dispelling or countering them.",
+    "effect": {
+      "op": "shield"
+    }
+  },
+  {
+    "id": "elemental-windrider",
+    "name": "Windrider",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "WINORIDER Move in a straight line (not diagonally) as far as you like, ignoring any objects (except for walls, doors, and stone blocks) while moving. You suffer the effects of any objects in the square where you end this move. Moving this way costs 0 movement points.",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "elemental-energy-4",
+    "name": "Energy 4",
+    "school": "elemental",
+    "type": "energy",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 4,
+    "text": "ENERGY",
+    "effect": {
+      "op": "energy"
+    }
+  },
+  {
+    "id": "elemental-fire-cloak",
+    "name": "Fire Cloak",
+    "school": "elemental",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "temporary",
+    "target": "square",
+    "energyValue": 2,
+    "text": "FIRE CLOAK Fire While carrying this item, you punch for an additional 2 magical fire damage. Any object, wizard, or creature that deals you damage from your square or an adjacent square suffers 2 magical fire damage after damaging you. If you suffer any water damage, Fire Cloak is destroyed and does not damage your attacker. 2",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "elemental-stone-spikes",
+    "name": "Stone Spikes",
+    "school": "elemental",
+    "type": "item",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 2,
+    "text": "Stone Spikes While this spell lasts, you have the ability to create stone spikes, which you can throw as an attack at any object, wizard, or creature in  for 3 physical damage. Spikes shatter and vanish after they hit. 2",
+    "effect": {
+      "op": "item"
+    }
+  },
+  {
+    "id": "elemental-windrider-2",
+    "name": "Windrider",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "square",
+    "energyValue": 0,
+    "text": "WINORIDER Move in a straight line (not diagonally) as far as you like, ignoring any objects (except for walls, doors, and stone blocks) while moving. You suffer the effects of any objects in the square where you end this move. Moving this way costs 0 movement points. A",
+    "effect": {
+      "op": "no-op"
+    }
+  },
+  {
+    "id": "elemental-lightning-bolt-2",
+    "name": "Lightning Bolt",
+    "school": "elemental",
+    "type": "attack-spell",
+    "energy": 1,
+    "range": "los",
+    "duration": "instant",
+    "target": "wizard",
+    "energyValue": 0,
+    "text": "LIGHTNING BOLT Lightning Shoot a lightning bolt from your square in a straight, non-diagonal line for a number of squares equal to this spell's energy. The bolt deals 3 magical lightning damage to all wizards and creatures it passes through each time it passes through them. If the bolt strikes an object that blocks movement, such as a wall, it reverses direction, re-entering its current square, and keeps moving. If a wizard or creature suffers any damage from this spell, it becomes stunned for 1 turn.",
+    "effect": {
+      "op": "damage",
+      "amount": 2,
+      "kind": "magical"
+    }
+  },
+  {
+    "id": "elemental-mist-body",
+    "name": "Mist Body",
+    "school": "elemental",
+    "type": "neutral-spell",
+    "energy": 1,
+    "range": "caster",
+    "duration": "temporary",
+    "target": "self",
+    "energyValue": 0,
+    "text": "Mist Body Transformation You evaporate into mist. While this spell lasts, you can pass through anything but stone walls and stone blocks. You cannot attack or be attacked. Touched objects and treasures turn to mist, so you may pick up and carry objects and treasures as usual.",
+    "effect": {
+      "op": "shield"
+    }
+  }
+]
