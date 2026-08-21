@@ -175,6 +175,7 @@ export interface Door {
   cracks: number;
   destroyed: boolean;
   heldOpenBy: number | null;
+  sealed: boolean; // sealed doors cannot be opened/unlocked (but can be destroyed)
 }
 
 export interface WallToken {

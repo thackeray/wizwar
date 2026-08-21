@@ -175,8 +175,25 @@ function executeNode(ctx: EffectContext, node: EffectNode, events: GameEvent[]):
     }
 
     case 'negate': {
-      // Negate: cancel a spell.
-      addLog(state, caster.id, `${caster.color} wizard negates a spell`);
+      // End a target maintained spell.
+      const t = target;
+      if (t && t.kind === 'wizard') {
+        const p = state.players.find((pl) => pl.id === t.id)!;
+        if (p.maintainedSpells.length > 0) {
+          const spell = p.maintainedSpells.pop()!;
+          state.discard.push(spell.cardId);
+          addLog(state, caster.id, `${caster.color} wizard negates a spell on ${p.color} wizard`);
+        }
+      } else if (t && t.kind === 'spell') {
+        for (const p of state.players) {
+          if (t.index >= 0 && t.index < p.maintainedSpells.length) {
+            const spell = p.maintainedSpells.splice(t.index, 1)[0];
+            state.discard.push(spell.cardId);
+            addLog(state, caster.id, `${caster.color} wizard negates a spell`);
+            break;
+          }
+        }
+      }
       break;
     }
 
@@ -197,17 +214,48 @@ function executeNode(ctx: EffectContext, node: EffectNode, events: GameEvent[]):
     }
 
     case 'seal-door': {
-      addLog(state, caster.id, `${caster.color} wizard seals a door`);
+      const t = target;
+      if (t && t.kind === 'door') {
+        const cell = getCell(state.board, { sector: t.ref.sector, r: t.ref.r, c: t.ref.c });
+        const door = cell.doors[t.ref.side];
+        if (door) {
+          door.sealed = true;
+          addLog(state, caster.id, `${caster.color} wizard seals a door`);
+        }
+      }
       break;
     }
 
     case 'pick-lock': {
-      addLog(state, caster.id, `${caster.color} wizard picks a lock`);
+      const t = target;
+      if (t && t.kind === 'door') {
+        const cell = getCell(state.board, { sector: t.ref.sector, r: t.ref.r, c: t.ref.c });
+        const door = cell.doors[t.ref.side];
+        if (door && !door.sealed) {
+          door.locked = false;
+          door.heldOpenBy = caster.id;
+          addLog(state, caster.id, `${caster.color} wizard picks a lock`);
+        }
+      }
       break;
     }
 
     case 'drop-object': {
-      addLog(state, caster.id, `${caster.color} wizard drops an object`);
+      // Force target wizard to drop 1 treasure or carried item.
+      const t = target;
+      if (t && t.kind === 'wizard') {
+        const p = state.players.find((pl) => pl.id === t.id)!;
+        const cell = getCell(state.board, p.pos);
+        if (p.carriedTreasure !== null) {
+          cell.treasures.push(p.carriedTreasure);
+          p.carriedTreasure = null;
+          addLog(state, caster.id, `${caster.color} wizard forces ${p.color} wizard to drop treasure`);
+        } else if (p.carriedItems.length > 0) {
+          const cardId = p.carriedItems.pop()!;
+          cell.objects.push({ cardId, id: state.nextObjectId++, owner: null });
+          addLog(state, caster.id, `${caster.color} wizard forces ${p.color} wizard to drop an item`);
+        }
+      }
       break;
     }
 
@@ -224,9 +272,24 @@ function executeNode(ctx: EffectContext, node: EffectNode, events: GameEvent[]):
     }
 
     case 'share-life': {
-      addLog(state, caster.id, `${caster.color} wizard shares life`);
+      // Average life between caster and target (caster gets the extra point).
+      const t = target;
+      if (t && t.kind === 'wizard') {
+        const p = state.players.find((pl) => pl.id === t.id)!;
+        const total = caster.life + p.life;
+        caster.life = Math.ceil(total / 2);
+        p.life = Math.floor(total / 2);
+        addLog(state, caster.id, `${caster.color} wizard shares life with ${p.color} wizard (${caster.life}/${p.life})`);
+      }
       break;
     }
+
+    case 'no-op':
+    case 'item':
+    case 'energy':
+      // Cards whose effect is handled elsewhere (items via use-item, energy via
+      // boost-speed) or not yet implemented. No state change here.
+      break;
 
     default:
       // Unknown op: log and continue.

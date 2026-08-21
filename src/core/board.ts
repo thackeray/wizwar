@@ -145,6 +145,7 @@ export function createBoardFromTopology(topo: BoardTopology): BoardState {
                 cracks: 0,
                 destroyed: false,
                 heldOpenBy: null,
+                sealed: false,
               };
             }
           }
@@ -350,6 +351,7 @@ function wallBlocksLOS(
 
 export function isDoorOpenFor(door: Door, color: Color): boolean {
   if (door.destroyed) return true;
+  if (door.sealed) return false;
   if (!door.locked) return true;
   if (door.color === color) return true;
   if (door.heldOpenBy !== null) return true;
@@ -371,7 +373,7 @@ export function makeWallToken(cracks = 0): WallToken {
 }
 
 export function makeDoor(color: Color, locked = true): Door {
-  return { color, locked, cracks: 0, destroyed: false, heldOpenBy: null };
+  return { color, locked, cracks: 0, destroyed: false, heldOpenBy: null, sealed: false };
 }
 
 export { OPPOSITE };
