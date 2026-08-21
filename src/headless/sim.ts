@@ -2,7 +2,7 @@
 
 import { createBoard } from '../core/board';
 import { createGameState } from '../core/state';
-import { startTurn, endTurn } from '../core/turn';
+import { startTurn } from '../core/turn';
 import { applyAction } from '../core/actions';
 import { loadBuiltInCards } from '../core/cards';
 import { buildDeck } from '../core/cards/registry';
@@ -58,26 +58,20 @@ export async function runSimulation(config: SimConfig): Promise<SimResult> {
     startTurn(state);
     if (state.winner !== null || !p.alive) continue;
 
-    // Bot takes actions until it ends its turn.
+    // Bot takes actions until its turn fully ends (advances to next player).
     let actionsThisTurn = 0;
-    const maxActionsPerTurn = 20;
+    const maxActionsPerTurn = 30;
     while (state.phase === 'move-cast' || state.phase === 'discard-draw') {
       if (actionsThisTurn++ > maxActionsPerTurn) break;
       if (state.winner !== null) break;
+      // Turn advanced to another player -> stop.
+      if (state.players[state.currentPlayer].id !== p.id) break;
 
       const legal = getLegalActions(state, p.id);
       if (legal.length === 0) break;
 
       const action = await bot.chooseAction(state, legal);
       applyAction(state, action);
-
-      // If the action ended the turn, break.
-      if (action.type === 'end-turn') break;
-    }
-
-    // Ensure the turn ends.
-    if (state.phase !== 'time-passes' && state.winner === null) {
-      endTurn(state);
     }
   }
 

@@ -4,7 +4,7 @@ import type { GameState, Action } from '../types';
 import { DIR_DELTA } from '../types';
 import { getCard } from '../cards/registry';
 import { adjacentRefs, hasLOS, toGlobal } from '../board';
-import { currentPlayer } from '../state';
+import { currentPlayer, handSize, MAX_HAND_SIZE } from '../state';
 
 export interface AIPlayer {
   name: string;
@@ -51,9 +51,11 @@ export function getLegalActions(state: GameState, playerId: number): Action[] {
     if (p.hand.length > 0) {
       actions.push({ type: 'discard', cardIds: [p.hand[0]] });
     }
-    // Draw actions.
-    actions.push({ type: 'draw', count: 1 });
-    actions.push({ type: 'draw', count: 2 });
+    // Draw actions (only if hand not full).
+    if (handSize(p) < MAX_HAND_SIZE) {
+      actions.push({ type: 'draw', count: 1 });
+      actions.push({ type: 'draw', count: 2 });
+    }
     // End turn.
     actions.push({ type: 'end-turn' });
   }

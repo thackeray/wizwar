@@ -242,6 +242,13 @@ function doCounter(state: GameState, id: number, cardId: string, _spellIndex: nu
 
 function doEndTurn(state: GameState, id: number): Result {
   const e = notTurn(state, id); if (e) return e;
-  if (state.phase === 'move-cast') endMoveCast(state);
-  return endTurn(state);
+  if (state.phase === 'move-cast') {
+    // Finish Move & Cast -> enter Discard & Draw (do not advance yet).
+    return endMoveCast(state);
+  }
+  if (state.phase === 'discard-draw') {
+    // Finish Discard & Draw -> advance to the next player.
+    return endTurn(state);
+  }
+  return { ok: false, reason: 'Cannot end turn now', events: [] };
 }
