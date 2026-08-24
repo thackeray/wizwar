@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+#root {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.app-meta {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.app-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.app-board {
+  flex: 0 0 500px;
+}
+
+.app-sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Board styles */
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 1px;
+  background: #0f172a;
+  border: 2px solid #475569;
+  aspect-ratio: 1;
+}
+
+.board-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.board-cell:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.board-cell--blue {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.board-cell--red {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.board-cell--yellow {
+  background-color: rgba(234, 179, 8, 0.1);
+}
+
+.board-cell--green {
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+/* Token styles */
+.token {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.token--blue {
+  background-color: #3b82f6;
+}
+
+.token--red {
+  background-color: #ef4444;
+}
+
+.token--yellow {
+  background-color: #eab308;
+}
+
+.token--green {
+  background-color: #22c55e;
+}
+
+/* Player panel styles */
+.player-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.player-panel {
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 12px;
+  border-left: 4px solid;
+}
+
+.player-panel.blue-border {
+  border-left-color: #3b82f6;
+}
+
+.player-panel.red-border {
+  border-left-color: #ef4444;
+}
+
+.player-panel.yellow-border {
+  border-left-color: #eab308;
+}
+
+.player-panel.green-border {
+  border-left-color: #22c55e;
+}
+
+/* Card styles */
+.hand {
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.hand-label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+.hand-cards {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 140px;
+  height: 190px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 12px;
+  position: relative;
+  cursor: pointer;
+  border: 2px solid;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-selected {
+  transform: translateY(-12px);
+  box-shadow: 0 12px 24px rgba(250, 204, 21, 0.3);
+  border-color: #facc15 !important;
+}
+
+.card-energy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.card-name {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  margin-top: 20px;
+}
+
+.card-school {
+  font-size: 11px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.card-text {
+  font-size: 10px;
+  margin-top: 8px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Log panel styles */
+.log-panel {
+  background: #0f172a;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.log-title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+.log-content {
+  height: 120px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+
+.log-line {
+  padding: 2px 0;
+  opacity: 0.8;
+}
