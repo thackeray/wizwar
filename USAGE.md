@@ -28,6 +28,12 @@ npm run typecheck
 npm run build
 ```
 
+### 运行 UI 原型（Mock）
+```bash
+npm run dev:mock
+```
+在浏览器打开 http://localhost:5173/mock.html 查看 React UI 原型
+
 ## 游戏设置
 
 ### 创建新游戏
