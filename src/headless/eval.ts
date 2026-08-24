@@ -73,6 +73,17 @@ async function main() {
   console.log(`games=${r.games} won=${Object.values(r.wins).reduce((a, b) => a + b, 0)} stalled=${r.stalled} avgTurns=${Math.round(r.totalTurns / r.games)}`);
   console.log(`wins by color: ${JSON.stringify(r.wins)}`);
   console.log(`kills total=${r.kills} vpEvents total=${r.vpEvents}`);
+  
+  // §18.2: Show sector difficulty rating based on win rates.
+  const totalWins = Object.values(r.wins).reduce((a, b) => a + b, 0);
+  if (totalWins > 0) {
+    console.log(`\nSector difficulty (based on win rate):`);
+    for (const color of ['blue', 'red', 'yellow', 'green']) {
+      const winRate = (r.wins[color] ?? 0) / totalWins;
+      const stars = winRate > 0.4 ? '★★★ (strong)' : winRate > 0.2 ? '★★ (medium)' : winRate > 0.1 ? '★ (weak)' : '☆ (very weak)';
+      console.log(`  ${color}: ${winRate.toFixed(1)}% ${stars}`);
+    }
+  }
 }
 
 if (process.argv[1] && process.argv[1].includes('eval.ts')) {
