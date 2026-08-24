@@ -579,7 +579,7 @@ function resolveItemEffect(
           for (const cell of row) {
             const obj = cell.objects.find((o) => o.id === objId);
             if (obj) {
-              obj.cracks += 4;
+              obj.cracks = (obj.cracks ?? 0) + 4;
               if (obj.cracks >= 3) obj.destroyed = true;
               addLog(state, p.id, `Boomstone hits the object!`);
               break;
@@ -601,7 +601,7 @@ function resolveItemEffect(
           for (const cell of row) {
             const obj = cell.objects.find((o) => o.id === objId);
             if (obj) {
-              obj.cracks += 3;
+              obj.cracks = (obj.cracks ?? 0) + 3;
               if (obj.cracks >= 3) obj.destroyed = true;
               addLog(state, p.id, `Large Rock hits the object!`);
               break;
@@ -625,7 +625,7 @@ function resolveItemEffect(
           for (const cell of row) {
             const obj = cell.objects.find((o) => o.id === objId);
             if (obj) {
-              obj.cracks += dmg;
+              obj.cracks = (obj.cracks ?? 0) + dmg;
               if (obj.cracks >= 3) obj.destroyed = true;
               addLog(state, p.id, `Stone Spikes hit the object for ${dmg}!`);
               break;
