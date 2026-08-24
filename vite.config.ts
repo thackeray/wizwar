@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    host: true, // Enable network access via IP
   },
   test: {
     include: ['tests/**/*.test.ts'],
