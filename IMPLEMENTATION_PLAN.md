@@ -1167,7 +1167,15 @@ App → SetupScreen → BattleScreen
 | **4 打磨收尾** | 响应式、hover/过渡完善、删死代码、更新 USAGE/PROJECT_REPORT、修/增 e2e | `npm run build` 通过，体验完整 |
 
 ### 21.6 关键文件
-- 改：`vite.config.ts`、`index.html`、`package.json`、`src/client/main.ts`、`battle.ts`、`battle-ui.ts`、`board-view.ts`、`card-view.ts`、`vfx.ts`。
-- 删：`src/client/ui.ts`、`src/client/hotseat.ts`、`tests/e2e/game.spec.ts`。
-- 新：`src/client/App.tsx`、`components/{Board,PlayerPanel,Hand,LogPanel,SetupScreen,BattleScreen,HumanInput}.tsx`、`styles/*.css`、`src/client/mock/`。
-- 复用不动：`src/core/*`、`src/headless/run-game.ts`（afterAction hook）、`src/client/vfx.ts`（9 个特效方法）、`getLegalActions`。
+- 改：`vite.config.ts`、`index.html`、`package.json`、`tsconfig.json`、`src/client/main.ts`、`battle.ts`、`battle-ui.ts`、`board-view.ts`、`card-view.ts`、`vfx.ts`、`src/headless/run-game.ts`（仅加可选回调）。
+- 删：`src/client/ui.ts`、`src/client/hotseat.ts`、`battle.ts`、`battle-ui.ts`、`board-view.ts`、`card-view.ts`、`vfx.ts`、`main.ts`（逻辑并入新结构）、`tests/e2e/game.spec.ts`。
+- 新：`src/client/main.tsx`、`App.tsx`、`components/{Board,PlayerPanel,Hand,LogPanel,EffectBar,SetupScreen,BattleScreen,Overlays}.tsx`、`styles/{tokens,base,animations,index}.css`、`src/client/prototype/`（含 mock-data.ts）、`tailwind.config.ts`、`postcss.config.js`、`scripts/gen-card-manifest.ts`。
+- 复用不动：`src/core/*`、`src/headless/sim.ts`、`tests/core/**`、`tests/e2e/ai-battle.test.ts`、`src/board-data.json`、`public/images/**`、`getLegalActions`。
+
+### 21.7 实施细节（Plan 代理补充，opencode 照做）
+- **状态模式**：新增 `src/client/battle/BattleController.ts`（普通类，持 `state`/`bots`/`version`/订阅者），`dispatch(action)` → `applyAction` → 事件交 `FxEngine` → `bump()`；`useBattle.ts` 用 `useSyncExternalStore(subscribe, getVersion)` 读数据。动画时序：**先落终态（React 渲染），`useLayoutEffect` 里 gsap `fromTo` 从旧位插值到新位**。
+- **VFX 根治**：弃用 `querySelector('[data-player]')`；新增 `src/client/lib/RefRegistry.ts`（`Map`，React ref 回调注册 cell/token/card 元素，cleanup 注销）。`FxEngine.consume(events, state)` 由 Controller 每 action 后调，`vfx.ts` 的 9 个方法迁入 `src/client/fx/effects.ts` + `FxLayer.tsx`。
+- **事件流补全**：`run-game.ts` 加**可选** `onEvents?(state, events)` 回调（`startTurn` 后带其 turn-start/phase 事件、每次 `applyAction` 后带其事件）——现有调用方零影响，让 turn-start/phase 也能驱动特效。
+- **卡图容错**：`scripts/gen-card-manifest.ts` 扫 `public/images/cards/**/*.png` 产 `image-manifest.json`；`image-resolver.ts` 精确→manifest 归一化匹配→失败返回 null；`CardFace.tsx` 无图时纯 CSS 卡面（学派色渐变顶栏+能量圈+文字）。Plan 代理已核实**现有 156 张卡全部能精确匹配**（脆弱点只在未来自定义卡）。
+- **墙线**：推荐 `WallLayer` 用**一个 SVG**（`<line>` 半透明对齐扫描图，动态墙/裂缝/门锁实色）替代 CSS `::before/::after` 双画；若实现有阻力可先用 Tailwind class，但要避免与图片墙双层。
+- **原型入口**：`prototype.html`（`/prototype.html` 独立入口）+ `PrototypeScreen.tsx`（真实棋盘图 + 4 token + 分档高亮 + 4 个面板 + 手牌含 1 张故意走 CSS 降级 + "播放特效"按钮演示 Move/Damage/Cast/TurnStart 动效），数据用 `prototype/mock-data.ts`（不接引擎）。`npm run dev` → `/prototype.html` 看效果，作为阶段 0 评审闸门。
