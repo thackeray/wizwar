@@ -210,3 +210,27 @@ describe('M5: Object Destruction', () => {
     expect(cell.objects.find((o) => o.id === objId)).toBeUndefined();
   });
 });
+describe('§21: Items usable from hand (not just carried)', () => {
+  it('magic stone passive applies from hand', () => {
+    const state = makeGame();
+    const p = state.players[0];
+    p.hand.push('alchemy-lifestone');
+    expect(getPassives(state, p.id).lifestone).toBe(true);
+  });
+
+  it('weapon can be used from hand', () => {
+    const state = makeGame();
+    const p = state.players[0];
+    const t = state.players[1];
+    t.life = 15;
+    state.turnNumber = 2;
+    p.hand.push('thaumaturgy-wizardblade');
+    const res = applyAction(state, {
+      type: 'use-item',
+      cardId: 'thaumaturgy-wizardblade',
+      target: { kind: 'wizard', id: t.id },
+    });
+    expect(res.ok).toBe(true);
+    expect(t.life).toBeLessThan(15); // dealt damage
+  });
+});

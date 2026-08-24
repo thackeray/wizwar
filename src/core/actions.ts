@@ -505,7 +505,11 @@ function doUseItem(state: GameState, id: number, cardId: string, target?: Target
   const p = currentPlayer(state);
   const card = getCard(cardId);
   if (!card) return { ok: false, reason: 'Unknown card', events: [] };
-  if (!p.carriedItems.includes(cardId)) return { ok: false, reason: 'Item not carried', events: [] };
+  // §21: Item cards may be used from hand OR carriedItems (Wiz-War: an item in
+  // hand is carried). Previously hand-drawn items were unusable.
+  const inHand = p.hand.includes(cardId);
+  const inCarried = p.carriedItems.includes(cardId);
+  if (!inHand && !inCarried) return { ok: false, reason: 'Item not carried', events: [] };
   // R2: First turn attack ban for attack items.
   if (isFirstTurn(state) && isAttackCard(card)) {
     return { ok: false, reason: 'No attacks on first turn', events: [] };
@@ -526,8 +530,12 @@ function doUseItem(state: GameState, id: number, cardId: string, target?: Target
     }
   }
   
-  // All validations passed, now consume items.
-  p.carriedItems = p.carriedItems.filter((c) => c !== cardId);
+  // All validations passed, now consume items (from hand or carried).
+  if (p.hand.includes(cardId)) {
+    p.hand = p.hand.filter((c) => c !== cardId);
+  } else {
+    p.carriedItems = p.carriedItems.filter((c) => c !== cardId);
+  }
   const events: GameEvent[] = [];
   addLog(state, p.id, `${p.color} wizard uses ${card.name}`);
   if (isAttackCard(card)) {

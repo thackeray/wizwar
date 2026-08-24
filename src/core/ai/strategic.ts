@@ -189,6 +189,9 @@ export class StrategicBot implements AIPlayer {
     if (this.weights.combatFinish > 0.3) {
       const cast = this.bestAttackSpell(state, p, legal);
       if (cast) return cast;
+      // §21: Also throw offensive items (weapons) at enemies in LOS.
+      const weapon = this.bestWeaponAttack(state, p, legal);
+      if (weapon) return weapon;
     }
 
     // (Boost while chasing is handled above; don't boost idly.)
@@ -283,6 +286,33 @@ export class StrategicBot implements AIPlayer {
         if (score > bestScore) {
           bestScore = score;
           bestAction = { type: 'cast', cardId: a.cardId, target: { kind: 'wizard', id: t.id } };
+        }
+      }
+    }
+    return bestAction;
+  }
+
+  // Throw an offensive item (weapon) at a worthy target in LOS. Items may come
+  // from hand or carriedItems (§21).
+  private bestWeaponAttack(state: GameState, p: PlayerState, legal: Action[]): Action | null {
+    let bestAction: Action | null = null;
+    let bestScore = 0;
+    if (p.life < 8) return null;
+    for (const a of legal) {
+      if (a.type !== 'use-item') continue;
+      const card = getCard(a.cardId);
+      if (!card || card.effect.op !== 'item') continue;
+      // Offensive throwables.
+      const offensive = /boomstone|large-rock|stone-spikes|wizardblade/.test(card.id);
+      if (!offensive) continue;
+      for (const t of state.players) {
+        if (t.id === p.id || !t.alive) continue;
+        if (!hasLOS(state.board, p.pos, t.pos, p.color)) continue;
+        let score = (20 - t.life);
+        if (t.carriedTreasure !== null) score += 8;
+        if (score > bestScore) {
+          bestScore = score;
+          bestAction = { type: 'use-item', cardId: a.cardId, target: { kind: 'wizard', id: t.id } };
         }
       }
     }

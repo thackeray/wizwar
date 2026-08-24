@@ -1080,6 +1080,27 @@ StrategicBot 相对 heuristic：胜率 5/12 → 15/16，平均回合 204 → 65�
 - 提交：把工作区按逻辑分几个 commit（规则修复 / 卡数据 / AI / 测试 / 文档），commit message 带 milestone 说明。
 - USAGE.md / PROJECT_REPORT.md 更新：sim `--strategic`、`--record`、eval、train 用法。
 
+### 20.4 qwen 返工复查（2026-08-24 Claude 复验）
+- 7 个 commit 已提交（b28d146 及之前）。122 测试 / typecheck / build 全绿。
+- **P0 §18.2 棋盘平衡：❌ 未解决**。qwen 给蓝/红 +1 能量卡开局，实测无效甚至更糟：
+  - 全同质 strategic ×4（16 seed）：green 10/16、yellow 4/16、blue/red **0**；eval 难度评级 green ★★★ 70%。
+  - 强 bot 坐蓝 vs 3 弱：**0 胜 9 stall**（修前 0/8、4 stall，反而更差）；坐红/黄仍 0 胜；坐绿 8/10。
+  - 补偿已确认生效（蓝/红 6 张手牌含能量卡）→ **+1 能量卡不足以抵消绿色扇区墙迷宫的地形优势**。
+  - **正解方向**：① 修正 board-data.json 使 4 front 面旋转对称（真实 Wiz-War 各扇区=同一迷宫旋转，提取可能错位）——这才是根治；② 或大幅补偿（能量 +2、宝箱靠近 home、起手位置优势）；③ SECTOR_BONUS 按颜色硬编码不可取，应按实际胜率数据驱动。
+- **P1 物品保真度：✅ 修好**。Universal Solvent 可溶墙/门；Boomstone/Large Rock/Stone Spikes 可打 object。残留小问题：毁坏 object 不移出数组（残留占位）；Large Rock 打 object 不产生 GameEvent（只写 log）。
+- **P2 人类 vs AI：⚠️ 仅占位**。setup 加了模式选择器，但 `'human'` 座位直接返回 HeuristicBot（commit 自述 "Placeholder"），**没有真正的人类交互选目标**（热座 GameUI 未重接，Battle UI 无介入）。用户真正要的"选定目标/高亮交互"未实现。
+- **P3 文档：✅**。USAGE.md 更新、eval 加扇区难度评级。
+
+### 20.5 §21 新发现并已修：物品卡抽到手牌后完全无法使用（2026-08-24 Claude）
+- **现象**：4 局 strategic 对局 use-item=0；查因——`doUseItem` 只认 `carriedItems`，但引擎**没有任何动作把手牌物品变成携带物**，导致抽到的魔法石被动失效、武器 use-item 报 "Item not carried"。实测：lifestone 在手牌 passive=false、wizardblade 在手牌 use-item 失败。
+- **已修**：
+  - `doUseItem`（actions.ts）：物品可从**手牌或携带物**使用（§21 注释）。
+  - `getPassives`（passives.ts）：魔法石被动从**手牌+携带物**聚合。
+  - `getLegalActions`（bots.ts）：对手牌物品也生成 use-item 动作。
+  - `StrategicBot`：新增 `bestWeaponAttack`——健康时对 LOS 内敌人投掷 boomstone/large-rock/stone-spikes/wizardblade。
+- **复验**：重跑 4 局 use-item=13（boomstone×3 变体、large-rock、stone-spikes）；`tests/core/m5-items.test.ts` 加 2 条回归。
+- **观察**：AI 打得基本正确——伤害法术 13 种、投掷物、能量加速、宝藏运输（23 捡 15 放）都用上；**45% 回合浪费 MP**（找不到更有用动作就早结束，效率缺口非 bug）。
+
 ### 20.3 关键运行命令（验证用）
 - 测试：`npm test`（122）；类型：`npm run typecheck`；构建：`npm run build`。
 - AI 对战：`npx tsx src/headless/sim.ts <seed> --strategic`。

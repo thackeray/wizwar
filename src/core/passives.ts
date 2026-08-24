@@ -21,11 +21,10 @@ export function getPassives(state: GameState, playerId: number): Passives {
 
   const passives = emptyPassives();
 
-  // Check carried items
-  for (const itemId of p.carriedItems) {
-    const card = getCard(itemId);
-    if (!card) continue;
-
+  // §21: Magic stone passives apply from hand OR carried items (an item in hand
+  // is carried in Wiz-War). Previously hand-drawn stones were inert.
+  const itemIds = [...p.hand, ...p.carriedItems];
+  for (const itemId of itemIds) {
     switch (itemId) {
       case 'alchemy-lifestone':
         passives.lifestone = true;

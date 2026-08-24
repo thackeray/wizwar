@@ -91,8 +91,9 @@ export function getLegalActions(state: GameState, playerId: number): Action[] {
         }
       }
     }
-    // Use item actions with targets.
-    for (const cardId of p.carriedItems) {
+    // §21: Use item actions — items may be used from hand OR carried.
+    const itemCards = [...new Set([...p.hand, ...p.carriedItems])].filter((c) => getCard(c)?.type === 'item');
+    for (const cardId of itemCards) {
       const card = getCard(cardId);
       if (card) {
         const targets = targetsForCard(state, p, card);
