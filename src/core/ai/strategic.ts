@@ -121,7 +121,13 @@ export class StrategicBot implements AIPlayer {
           if (boost) return boost;
         }
       }
-      // 3. Move toward home (BFS). If blocked by a door, unlock it.
+      // 3. Teleport toward home to shortcut delivery (free action, doesn't
+      //    consume MP).
+      if (this.weights.deliverySpeed > 0.4) {
+        const tele = this.bestUtilityMoveSpell(state, p, legal, home);
+        if (tele) return tele;
+      }
+      // 4. Move toward home (BFS). If blocked by a door, unlock it.
       const step = bfsFirstStep(state, p.pos, home);
       if (step) {
         const mv = legal.find((a) => a.type === 'move' && a.dir === step);
@@ -154,8 +160,19 @@ export class StrategicBot implements AIPlayer {
 
     const enemies = state.players.filter((e) => e.id !== p.id && e.alive);
     const adj = adjacentEnemies(state, p);
+    const target = this.nearestReachableTreasure(state, p);
 
-    // 2. Combat. Punch a weakened enemy, steal a carried treasure, or punch any
+    // 2. Cast a damage spell / throw a weapon at an enemy in LOS. Casting is a
+    //    FREE action (doesn't consume MP), so do it before moving — ranged
+    //    damage while closing in on treasure.
+    if (this.weights.combatFinish > 0.3) {
+      const cast = this.bestAttackSpell(state, p, legal);
+      if (cast) return cast;
+      const weapon = this.bestWeaponAttack(state, p, legal);
+      if (weapon) return weapon;
+    }
+
+    // 3. Combat. Punch a weakened enemy, steal a carried treasure, or punch any
     //    adjacent enemy when we're clearly healthier (creates kills → VP).
     if (this.weights.combatFinish > 0.3 && adj.length > 0) {
       const threat = adj.find((e) => e.life <= 6 || e.carriedTreasure !== null || (p.life >= e.life + 6));
@@ -165,14 +182,20 @@ export class StrategicBot implements AIPlayer {
       }
     }
 
-    // 3. Flee if in danger and healthy enemies loom.
+    // 4. Flee if in danger and healthy enemies loom.
     if (this.weights.selfPreserve > 0.3 && p.life <= 6 && adj.length > 0) {
       const flee = this.findFleeAction(state, p, legal, adj[0]);
       if (flee) return flee;
     }
 
-    // 4. Chase the nearest REACHABLE enemy treasure.
-    const target = this.nearestReachableTreasure(state, p);
+    // 5. Cast a movement utility spell (teleport/windrider) to shortcut toward
+    //    the treasure — visible card use while traveling.
+    if (target) {
+      const tele = this.bestUtilityMoveSpell(state, p, legal, target);
+      if (tele) return tele;
+    }
+
+    // 6. Chase the nearest REACHABLE enemy treasure.
     if (target) {
       const step = bfsFirstStep(state, p.pos, target);
       if (step) {
@@ -183,15 +206,6 @@ export class StrategicBot implements AIPlayer {
         const unlock = this.findUnlockAction(state, p, legal, target);
         if (unlock) return unlock;
       }
-    }
-
-    // 5. Cast a strong attack at a weakened or treasure-carrying enemy in LOS.
-    if (this.weights.combatFinish > 0.3) {
-      const cast = this.bestAttackSpell(state, p, legal);
-      if (cast) return cast;
-      // §21: Also throw offensive items (weapons) at enemies in LOS.
-      const weapon = this.bestWeaponAttack(state, p, legal);
-      if (weapon) return weapon;
     }
 
     // (Boost while chasing is handled above; don't boost idly.)
@@ -317,6 +331,34 @@ export class StrategicBot implements AIPlayer {
       }
     }
     return bestAction;
+  }
+
+  // Cast a movement spell (windrider / teleport) to shortcut toward `goal`.
+  // Casting is free (no MP), so it's pure value while traveling.
+  private bestUtilityMoveSpell(state: GameState, p: PlayerState, legal: Action[], goal: CellRef): Action | null {
+    void state;
+    if (manhattan(p.pos, goal) <= 2) return null; // already close, no need
+    const g1 = toGlobal(p.pos);
+    const g2 = toGlobal(goal);
+
+    for (const a of legal) {
+      if (a.type !== 'cast') continue;
+      const card = getCard(a.cardId);
+      if (!card) continue;
+      // Windrider: move in a straight line toward the goal.
+      if (card.effect.op === 'move-line' && a.target?.kind === 'cell') {
+        // Prefer a cell that keeps us moving toward the goal.
+        const t = a.target as { kind: 'cell'; ref: CellRef };
+        const g = toGlobal(t.ref);
+        const better = Math.abs(g.row - g2.row) + Math.abs(g.col - g2.col) < Math.abs(g1.row - g2.row) + Math.abs(g1.col - g2.col);
+        if (better) return { type: 'cast', cardId: a.cardId, target: a.target };
+      }
+      // Teleport: jump toward the goal.
+      if (card.effect.op === 'teleport' && a.target?.kind === 'cell') {
+        return { type: 'cast', cardId: a.cardId, target: a.target };
+      }
+    }
+    return null;
   }
 
   // Move away from the nearest enemy (simple greedy).

@@ -286,7 +286,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "wizard",
+    "target": "square",
     "energyValue": 0,
     "text": "Teleport Move up to 4 squares (not diagonally), ignoring walls, doors, and objects. You may not move again this turn. -or- When attacked, you may cast this spell as a counter. Teleport as described above. If is broken after teleporting, any attack is evaded. A",
     "effect": {
