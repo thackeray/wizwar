@@ -1115,3 +1115,59 @@ StrategicBot 相对 heuristic：胜率 5/12 → 15/16，平均回合 204 → 65�
 - 评估：`npx tsx src/headless/eval.ts <botType> <seedStart> <count> <maxTurns>`。
 - 记录对局：`npx tsx src/headless/sim.ts <seed> --strategic --record=logs`。
 - 进化训练：`npx tsx src/headless/train.ts <gens> <pop> <gamesPerBot>`。
+
+---
+
+## 21. 客户端 UI 现代化重构方案（2026-08-24 Claude 定稿，opencode 实施）
+
+> 用户定稿：**React + Tailwind** 重写客户端；**保留真实棋盘扫描图、精修周边 UI**；**Human vs AI 做成真可玩**；
+> 先做**方案评审原型（mock）**再全量投入。opencode 按 §21.5 分阶段执行，Claude 把关注：每阶段结束要能跑、124 核心测试保持绿。
+
+### 21.1 现状诊断（"为什么 low"，opencode 先读）
+- **纯 JS + 手写 DOM + 全部 CSS 内联**：`src/client/main.ts` 122-198 行 `BASE_CSS`，无框架、无 CSS 变量、无 hover/transition/keyframes。
+- **每次动作全量重渲染**：`battle.ts` → `battle-ui.ts` `innerHTML=''`（battle-ui.ts:35）重建 → 无过渡。唯一"动画"卡选中 `translateY(-8px)` 无 transition（main.ts:171）。
+- **VFX 管线断链**：`vfx.ts` 用 gsap 写好 9 个特效（flashDamage/shakeAttack/highlightTargets/animateCardPlay/createParticles 等），但 `battle-ui.ts:118-132` 查 `data-player`/`data-ref` 而 `board-view.ts` 从不设置 → **0 特效触发**；gsap 实际没启用。
+- 卡图文件名猜测脆弱（特殊字符/后缀变体对不上，无 onError 降级）；布局固定 500px 不响应（main.ts:132）。
+- 死代码：`src/client/ui.ts`（热座 GameUI ~455 行）、`src/client/hotseat.ts`、`tests/e2e/game.spec.ts`（旧 UI 测试必挂）。"Human vs AI" 是假的（battle.ts:63-66 'human'→HeuristicBot）。
+- 引擎侧是干净 hook：`applyAction` 返回 `Result.events: GameEvent[]`（types.ts:303-317，含 move/damage/cast/phase/death/vp），**这正是接 VFX 的时机**。
+
+### 21.2 目标架构
+React 组件树 + Tailwind 设计系统 + gsap 动画 + 事件流驱动：
+```
+App → SetupScreen → BattleScreen
+      BattleScreen ├─ Board（静态格子 DOM + token 绝对定位层）
+                  ├─ PlayerPanel×N（生命条/VP/MP/状态角标/携带物/生效法术）
+                  ├─ Hand（卡牌横幅，human 模式可施法）
+                  ├─ LogPanel / EffectBar（回合/阶段/反制提示）
+                  └─ GameOverOverlay
+```
+- 状态：不引状态库，`useState` + 每 action 后 `afterAction` 里 `setState(snapshot)`；token 位移/特效不走 React state，用 gsap 操作 DOM ref（避免每帧重渲染）。
+- 驱动：`battle.ts` 改造为 `runBattle(state, bots, { afterAction: s => { setState(s); driveVFX(s.events); } })`。**VFX 消费 `Result.events`**。
+- 技术接入：新装 `react`、`react-dom`、`@vitejs/plugin-react`、`@types/react`、`tailwindcss`、`postcss`、`autoprefixer`；`vite.config.ts` 加 react 插件；`tailwind.config.js`/`postcss.config.js`；`index.html` 挂 `#root`。
+
+### 21.3 呈现要点（"优雅"的具体标准）
+- **Board**：静态层 = 10×10 grid 格子（扇区图背景 + 墙/门线 + 高亮底色）；**动态层 = 绝对定位覆盖层**，token 用百分比 `left/top` 定位，gsap `fromTo` 平滑位移。高亮分档：`legal-move` 青 / `cast-target` 学派色 / `self` 黄 / **路径预览幽灵格**。token 加**状态角标**（眩晕⚡/变形/持宝◆/加速»），同格多 token 错位堆叠；悬停显示格子/token 详情 tooltip。
+- **Card**：卡图优先，`onError` 降级到**纯 CSS 卡面**（学派色边 + 能量徽章 + 名称 + 文字）。hover 放大预览、选中态、出牌飞行动画（复用 `vfx.animateCardPlay`）。
+- **PlayerPanel**：生命条渐变色（受击闪红）、VP 星、MP 点、状态图标、携带物缩略、生效法术（带剩余能量）。
+- **VFX**：`move`→token 平滑；`damage`→飘字+闪红；`cast`→卡片飞行+目标格发光；`death`→粒子+淡出；`vp`→面板闪光；`turn-start`→当前面板高亮。**修选择器 bug**：board-view 给 token 加 `data-player`、cell 加 `data-ref`，或改 vfx 用 React ref 命中。
+- **Human vs AI（真）**：`battle.ts` 拆出人类输入路径——当前玩家是人类座位时暂停 AI 循环，等 `HumanInput` 组件发出动作（与 `getLegalActions` 一致）再继续。交互：点手牌选中→高亮合法目标（复用 `getLegalActions`）→点格执行 `applyAction`；移动直接点目标格；按钮做出拳/结束回合/丢弃/抽牌。可参考热座 `ui.ts` 的交互逻辑迁移。
+
+### 21.4 清理
+- 删 `src/client/ui.ts`、`src/client/hotseat.ts`、`tests/e2e/game.spec.ts`。
+- `main.ts` 内联 CSS 拆到 `src/client/styles/*.css`（Tailwind + CSS 变量 tokens + 关键帧）。
+- 卡图文件名的脆弱降级：`card-view.ts` 加 `onError` 走 CSS 卡面。
+
+### 21.5 分阶段实施（每阶段结束可跑、核心 124 测试绿）
+| 阶段 | 内容 | 验收 |
+|---|---|---|
+| **0 方案评审原型** | 独立 React 视觉 mock（静态+少量交互）：棋盘原图+精修 token/高亮/状态角标、PlayerPanel、卡牌 hover/选中/能量、日志、特效按钮。放 `src/client/mock/`，`npm run dev:mock` 跑 | 用户确认视觉方向后再进 1 |
+| **1 基础设施+战场骨架** | 装 React+Tailwind；main.ts/index.html 重构；CSS 拆分；Board 静态+动态层+高亮分档；PlayerPanel/Card/Log 组件；AI vs AI 跑通 | token 平滑移动、高亮正确、AI 对局在 React UI 正常 |
+| **2 VFX 事件驱动** | 修 vfx 选择器；`Result.events` 接 gsap 全特效 | 伤害飘字/施法飞行/token 位移真实触发 |
+| **3 Human vs AI 真交互** | HumanInput 组件 + battle 驱动改造 + 交互 | 人类能选卡/高亮/点格施法移动，AI 响应 |
+| **4 打磨收尾** | 响应式、hover/过渡完善、删死代码、更新 USAGE/PROJECT_REPORT、修/增 e2e | `npm run build` 通过，体验完整 |
+
+### 21.6 关键文件
+- 改：`vite.config.ts`、`index.html`、`package.json`、`src/client/main.ts`、`battle.ts`、`battle-ui.ts`、`board-view.ts`、`card-view.ts`、`vfx.ts`。
+- 删：`src/client/ui.ts`、`src/client/hotseat.ts`、`tests/e2e/game.spec.ts`。
+- 新：`src/client/App.tsx`、`components/{Board,PlayerPanel,Hand,LogPanel,SetupScreen,BattleScreen,HumanInput}.tsx`、`styles/*.css`、`src/client/mock/`。
+- 复用不动：`src/core/*`、`src/headless/run-game.ts`（afterAction hook）、`src/client/vfx.ts`（9 个特效方法）、`getLegalActions`。
