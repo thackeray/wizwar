@@ -43,7 +43,11 @@ export function renderBoard(
   container.innerHTML = '';
   const board = document.createElement('div');
   board.className = 'board';
+  // Both columns and rows are 1fr so cells stay perfectly square regardless of
+  // content (wizard tokens, objects). Without explicit rows, rows are auto and a
+  // token entering a cell stretches that whole row -> visible height jitter.
   board.style.gridTemplateColumns = `repeat(10, 1fr)`;
+  board.style.gridTemplateRows = `repeat(10, 1fr)`;
 
   const highlightSet = new Set(
     (opts.highlight ?? []).map((r) => `${r.sector}:${r.r}:${r.c}`),

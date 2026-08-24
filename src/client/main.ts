@@ -88,14 +88,14 @@ function showSetup(): void {
     }
     
     // Determine bot types based on mode.
-    let botTypes: ('random' | 'heuristic' | 'evolving' | 'human')[];
+    let botTypes: ('random' | 'heuristic' | 'evolving' | 'strategic' | 'human')[];
     if (mode === 'human') {
       // Human vs AI: first player is human, rest are AI.
-      botTypes = Array(count).fill('heuristic');
+      botTypes = Array(count).fill('strategic');
       botTypes[0] = 'human';
     } else {
-      // AI vs AI: all players are AI.
-      botTypes = Array(count).fill('heuristic');
+      // AI vs AI: all players are AI. StrategicBot is the smart default.
+      botTypes = Array(count).fill('strategic');
     }
     
     const battle = new Battle(root, {

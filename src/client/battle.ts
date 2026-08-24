@@ -7,6 +7,7 @@ import { createGameState } from '../core/state';
 import { loadBuiltInCards } from '../core/cards';
 import { buildDeck } from '../core/cards/registry';
 import { HeuristicBot, RandomBot, type AIPlayer } from '../core/ai/bots';
+import { StrategicBot } from '../core/ai/strategic';
 import { EvolvingBot } from '../core/ai/evolving';
 import { runBattle } from '../headless/run-game';
 import { BattleUI } from './battle-ui';
@@ -14,7 +15,7 @@ import boardDataJSON from '../board-data.json';
 
 export interface BattleConfig {
   playerCount: number;
-  botTypes: ('random' | 'heuristic' | 'evolving' | 'human')[];
+  botTypes: ('random' | 'heuristic' | 'evolving' | 'strategic' | 'human')[];
   schools: School[];
   speed: 'slow' | 'medium' | 'fast' | 'instant';
   seed: number;
@@ -55,6 +56,8 @@ export class Battle {
           return new RandomBot();
         case 'heuristic':
           return new HeuristicBot();
+        case 'strategic':
+          return new StrategicBot(`Bot ${i}`);
         case 'evolving':
           return new EvolvingBot(`Bot ${i}`);
         case 'human':
