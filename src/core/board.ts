@@ -1,4 +1,4 @@
-// Board model: 4 sectors in a 2x2 arrangement, each 8x8. Global board 16x16.
+// Board model: 4 sectors in a 2x2 arrangement, each 5x5. Global board 10x10.
 // Topology is data-driven so M8 can swap in extracted data.
 
 import type {
@@ -8,27 +8,28 @@ import type {
   Color,
   Dir,
   Door,
+  EdgePos,
   PortalDef,
   SectorState,
   WallToken,
 } from './types';
 import { DIR_DELTA, OPPOSITE, COLORS, DIRS } from './types';
 
-export const SECTOR_SIZE = 8;
-export const BOARD_SIZE = 16;
+export const SECTOR_SIZE = 5;
+export const BOARD_SIZE = 10;
 
 // Fixed 2x2 arrangement of sectors in the global board.
 export const SECTOR_ORIGIN: Record<Color, { row: number; col: number }> = {
   blue: { row: 0, col: 0 },
-  red: { row: 0, col: 8 },
-  yellow: { row: 8, col: 0 },
-  green: { row: 8, col: 8 },
+  red: { row: 0, col: 5 },
+  yellow: { row: 5, col: 0 },
+  green: { row: 5, col: 5 },
 };
 
 export function sectorAt(row: number, col: number): Color {
-  if (row < 8 && col < 8) return 'blue';
-  if (row < 8 && col >= 8) return 'red';
-  if (row >= 8 && col < 8) return 'yellow';
+  if (row < 5 && col < 5) return 'blue';
+  if (row < 5 && col >= 5) return 'red';
+  if (row >= 5 && col < 5) return 'yellow';
   return 'green';
 }
 
@@ -88,7 +89,8 @@ export function createSector(color: Color): SectorState {
   grid[tr][tc].kind = 'treasure-start';
   grid[tr + (homeR === 0 ? 1 : -1)][tc].kind = 'treasure-start';
 
-  return { color, rotation: 0, grid };
+  const side: 'front' | 'back' = Math.random() < 0.5 ? 'front' : 'back';
+  return { color, rotation: 0, grid, side };
 }
 
 export function createBoard(): BoardState {
@@ -180,6 +182,18 @@ export function adjacentRefs(ref: CellRef): CellRef[] {
   return out;
 }
 
+// §17.2.1: Get the effective direction after accounting for sector rotation.
+function getEffectiveDir(sector: SectorState, dir: Dir): Dir {
+  const rotation = sector.rotation;
+  if (rotation === 0) return dir;
+  
+  // Rotate direction counter-clockwise by rotation * 90°.
+  const dirs: Dir[] = ['N', 'E', 'S', 'W'];
+  const idx = dirs.indexOf(dir);
+  const rotatedIdx = (idx - rotation + 4) % 4;
+  return dirs[rotatedIdx];
+}
+
 // Is there a wall (static or dynamic) blocking movement from `from` in `dir`?
 export function wallBetween(
   board: BoardState,
@@ -187,8 +201,10 @@ export function wallBetween(
   dir: Dir,
 ): boolean {
   const cell = getCell(board, from);
-  if (cell.walls[dir]) return true;
-  const dw = cell.dynamicWalls[dir];
+  const sector = board.sectors[from.sector];
+  const effectiveDir = getEffectiveDir(sector, dir);
+  if (cell.walls[effectiveDir]) return true;
+  const dw = cell.dynamicWalls[effectiveDir];
   if (dw && !dw.destroyed) return true;
   return false;
 }
@@ -200,7 +216,9 @@ export function doorBetween(
   dir: Dir,
 ): Door | undefined {
   const cell = getCell(board, from);
-  return cell.doors[dir];
+  const sector = board.sectors[from.sector];
+  const effectiveDir = getEffectiveDir(sector, dir);
+  return cell.doors[effectiveDir];
 }
 
 // Can a wizard of `color` move from `from` in `dir`?
@@ -218,23 +236,25 @@ export function moveDestination(
 
   // Within the same sector?
   if (nr >= 0 && nr < SECTOR_SIZE && nc >= 0 && nc < SECTOR_SIZE) {
-    // Check wall/door between.
-    if (wallBetween(board, from, dir)) return null;
+    // Check door first - doors can override walls.
     const door = doorBetween(board, from, dir);
     if (door && !door.destroyed) {
       // Door must be open for this color or held open.
       if (door.locked && door.color !== color && door.heldOpenBy === null) {
         return null;
       }
+      return { sector: from.sector, r: nr, c: nc };
     }
+    // No door - check wall.
+    if (wallBetween(board, from, dir)) return null;
     return { sector: from.sector, r: nr, c: nc };
   }
 
-  // Off the edge of this sector -> wraparound or portal.
-  // Determine global position and where we'd re-enter.
+  // Off the edge of this sector -> check for portal or block.
+  // Determine global position.
   const g = toGlobal(from);
-  let gr = g.row + d.dr;
-  let gc = g.col + d.dc;
+  const gr = g.row + d.dr;
+  const gc = g.col + d.dc;
 
   // Portal check: is there a portal on this edge at this index?
   const portal = findPortalAtEdge(board, from.sector, dir, from.r, from.c);
@@ -243,13 +263,29 @@ export function moveDestination(
     if (dest) return dest;
   }
 
-  // Wraparound: re-enter on the opposite side of the board.
-  if (gr < 0) gr = BOARD_SIZE - 1;
-  else if (gr >= BOARD_SIZE) gr = 0;
-  if (gc < 0) gc = BOARD_SIZE - 1;
-  else if (gc >= BOARD_SIZE) gc = 0;
+  // Check if we're still on the board.
+  if (gr < 0 || gr >= BOARD_SIZE || gc < 0 || gc >= BOARD_SIZE) {
+    return null; // Blocked by board edge
+  }
 
-  return toLocal(gr, gc);
+  const dest = toLocal(gr, gc);
+
+  // Check boundary wall (stored on either side of the boundary).
+  if (wallBetween(board, from, dir) || wallBetween(board, dest, OPPOSITE[dir])) {
+    return null;
+  }
+
+  // Check boundary door (stored on either side of the boundary).
+  const door1 = doorBetween(board, from, dir);
+  const door2 = doorBetween(board, dest, OPPOSITE[dir]);
+  const door = door1 ?? door2;
+  if (door && !door.destroyed) {
+    if (door.locked && door.color !== color && door.heldOpenBy === null) {
+      return null;
+    }
+  }
+
+  return dest;
 }
 
 function findPortalAtEdge(
@@ -288,13 +324,24 @@ function portalOtherEnd(
 // --- Line of Sight ---
 
 // Check LOS from `from` to `to`. Returns true if visible.
-// Blocked by walls (including columns). Can pass through objects/wizards/treasures.
+// Blocked by walls (including columns) and closed doors.
+// Can pass through objects/wizards/treasures.
+// Portal-connected cells are always visible to each other.
+// Around the Corner: allows seeing around corners (relaxed LOS).
 export function hasLOS(
   board: BoardState,
   from: CellRef,
   to: CellRef,
+  observerColor?: Color,
+  aroundTheCorner = false,
 ): boolean {
   if (from.sector === to.sector && from.r === to.r && from.c === to.c) return true;
+
+  // Check if connected by portal (always visible).
+  if (isConnectedByPortal(board, from, to)) return true;
+
+  // Around the Corner: if in same sector, always visible.
+  if (aroundTheCorner && from.sector === to.sector) return true;
 
   const g1 = toGlobal(from);
   const g2 = toGlobal(to);
@@ -312,12 +359,40 @@ export function hasLOS(
   for (let i = 0; i < steps; i++) {
     const nx = Math.round((i + 1) * yStep + g1.col);
     const ny = Math.round((i + 1) * xStep + g1.row);
-    // Check wall between (x,y) and (nx,ny).
-    if (wallBlocksLOS(board, x, y, nx, ny)) return false;
+    // Check wall/door between (x,y) and (nx,ny).
+    if (wallBlocksLOS(board, x, y, nx, ny, observerColor)) return false;
     x = nx;
     y = ny;
   }
   return true;
+}
+
+// Check if two cells are connected by a portal.
+export function isConnectedByPortal(board: BoardState, a: CellRef, b: CellRef): boolean {
+  for (const portal of board.portals) {
+    const posA = portalEdgeToCell(portal.a);
+    const posB = portalEdgeToCell(portal.b);
+    // Check if a is at one end and b is at the other (or vice versa).
+    if (
+      (posA.sector === a.sector && posA.r === a.r && posA.c === a.c &&
+       posB.sector === b.sector && posB.r === b.r && posB.c === b.c) ||
+      (posA.sector === b.sector && posA.r === b.r && posA.c === b.c &&
+       posB.sector === a.sector && posB.r === a.r && posB.c === a.c)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Convert a portal edge position to a cell reference.
+function portalEdgeToCell(ep: EdgePos): CellRef {
+  let r = 0, c = 0;
+  if (ep.edge === 'N') { r = 0; c = ep.index; }
+  else if (ep.edge === 'S') { r = SECTOR_SIZE - 1; c = ep.index; }
+  else if (ep.edge === 'E') { r = ep.index; c = SECTOR_SIZE - 1; }
+  else { r = ep.index; c = 0; }
+  return { sector: ep.sector, r, c };
 }
 
 function wallBlocksLOS(
@@ -326,25 +401,69 @@ function wallBlocksLOS(
   c1: number,
   r2: number,
   c2: number,
+  observerColor?: Color,
 ): boolean {
   const dr = r2 - r1;
   const dc = c2 - c1;
   if (dr === 0 && dc === 0) return false;
+
+  // Bounds check: if either cell is out of bounds, no wall blocks.
+  if (!inBounds(r1, c1) || !inBounds(r2, c2)) return false;
+
+  // Diagonal movement: check if both walls forming the corner are present.
+  if (dr !== 0 && dc !== 0) {
+    const ref1 = toLocal(r1, c1);
+    // Determine the two directions that form the corner.
+    const dirR: Dir = dr === 1 ? 'S' : 'N';
+    const dirC: Dir = dc === 1 ? 'E' : 'W';
+    
+    // Check if both walls are present (either on ref1 or the adjacent cells).
+    const wallR = wallBetween(board, ref1, dirR);
+    const wallC = wallBetween(board, ref1, dirC);
+    
+    // If both walls are present, the diagonal is blocked.
+    if (wallR && wallC) return true;
+    
+    // Also check doors - if both are closed doors, blocked.
+    const doorR = doorBetween(board, ref1, dirR);
+    const doorC = doorBetween(board, ref1, dirC);
+    const doorRBlocked = doorR && !doorR.destroyed && !isDoorOpenFor(doorR, observerColor ?? 'blue');
+    const doorCBlocked = doorC && !doorC.destroyed && !isDoorOpenFor(doorC, observerColor ?? 'blue');
+    if (doorRBlocked && doorCBlocked) return true;
+    
+    // Mixed wall+door also blocks.
+    if ((wallR && doorCBlocked) || (wallC && doorRBlocked)) return true;
+    
+    return false;
+  }
+
   // Determine direction from cell1 to cell2.
   let dir: Dir;
   if (dr === -1) dir = 'N';
   else if (dr === 1) dir = 'S';
   else if (dc === 1) dir = 'E';
-  else if (dc === -1) dir = 'W';
-  else return false; // diagonal, not a direct wall check
-
-  // Bounds check: if either cell is out of bounds, no wall blocks.
-  if (!inBounds(r1, c1) || !inBounds(r2, c2)) return false;
+  else dir = 'W';
 
   // Check wall on either side (walls can be stored on either cell).
   const ref1 = toLocal(r1, c1);
   const ref2 = toLocal(r2, c2);
-  return wallBetween(board, ref1, dir) || wallBetween(board, ref2, OPPOSITE[dir]);
+  if (wallBetween(board, ref1, dir) || wallBetween(board, ref2, OPPOSITE[dir])) {
+    return true;
+  }
+
+  // Check door on either side (doors can be stored on either cell).
+  const door1 = doorBetween(board, ref1, dir);
+  const door2 = doorBetween(board, ref2, OPPOSITE[dir]);
+  const door = door1 ?? door2;
+  if (door && !door.destroyed) {
+    // A closed door blocks LOS.
+    const isOpen = observerColor !== undefined ? isDoorOpenFor(door, observerColor) : false;
+    if (!isOpen) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 // --- Doors ---

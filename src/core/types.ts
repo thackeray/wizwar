@@ -22,11 +22,11 @@ export const OPPOSITE: Record<Dir, Dir> = {
   W: 'E',
 };
 
-// A cell reference within a single sector's 8x8 grid.
+// A cell reference within a single sector's 5x5 grid.
 export interface CellRef {
   sector: Color;
-  r: number; // 0..7
-  c: number; // 0..7
+  r: number; // 0..4
+  c: number; // 0..4
 }
 
 export type School =
@@ -101,6 +101,11 @@ export interface CardDef {
   // Optional flags
   countsAsAttack?: boolean;
   cannotEvade?: boolean;
+  // Counter declaration (§2.2)
+  counter?: {
+    blocks: CardType[]; // spell types this card can counter
+    requiresTargetingMe?: boolean; // true = only when the spell targets me
+  };
   // Item-specific
   mobile?: boolean; // mobile objects can be picked up
   crackLimit?: number; // how many cracks before destroyed
@@ -138,6 +143,8 @@ export interface MaintainedSpell {
   energy: number; // remaining energy tokens
   target: TargetRef | null;
   owner: number;
+  behavior?: 'time-passes-damage' | 'modifier' | 'shield' | 'reflect' | 'summon';
+  meta?: Record<string, number | string>; // e.g., {dmg:1, type:'strength'}
 }
 
 export interface PlayerState {
@@ -154,10 +161,13 @@ export interface PlayerState {
   mp: number;
   speedBoosted: boolean;
   attacked: boolean;
+  attacksUsed: number; // number of attacks used this turn (for Adrenaline)
   stunned: boolean;
   stunTokens: number;
   alive: boolean;
   transformed: string | null; // transform card id
+  transformEnergy?: number; // §17.2.4: remaining energy for temporary transformations
+  stunnedActionUsed: 'move' | 'attack' | null; // for stunned wizards: which action they used
 }
 
 export interface Cell {
@@ -165,6 +175,7 @@ export interface Cell {
   walls: { N: boolean; S: boolean; E: boolean; W: boolean };
   doors: { N?: Door; S?: Door; E?: Door; W?: Door };
   dynamicWalls: { N?: WallToken; S?: WallToken; E?: WallToken; W?: WallToken };
+  wallCracks?: { N?: number; S?: number; E?: number; W?: number }; // §16.2.1: Track cracks on static walls
   objects: DroppedObject[];
   treasures: number[]; // treasure marker ids
 }
@@ -188,6 +199,8 @@ export interface DroppedObject {
   cardId: string;
   id: number;
   owner: number | null; // hat token
+  cracks?: number;
+  destroyed?: boolean;
 }
 
 export interface PortalDef {
@@ -200,13 +213,14 @@ export interface PortalDef {
 export interface EdgePos {
   sector: Color;
   edge: Dir;
-  index: number; // 0..7 along the edge
+  index: number; // 0..4 along the edge
 }
 
 export interface SectorState {
   color: Color;
   rotation: number; // 0-3
-  grid: Cell[][]; // [8][8]
+  grid: Cell[][]; // [5][5]
+  side: 'front' | 'back'; // which side of the sector is showing
 }
 
 export interface BoardState {
@@ -238,8 +252,11 @@ export interface GameState {
   // runtime helpers
   nextObjectId: number;
   nextTreasureId: number;
-  // counter-spell sub-state
-  awaitingCounter: CastInfo | null;
+  // M1: Counter-spell sub-state
+  awaitingCast: AwaitingCast | null;
+  // R5: Treasure VP tracking
+  treasureHome: Record<number, Color>; // treasureId -> home sector color
+  treasureScorer: Record<number, number>; // treasureId -> player id scoring it
 }
 
 export interface CastInfo {
@@ -249,11 +266,24 @@ export interface CastInfo {
   energyCard: string | null;
 }
 
+export interface AwaitingCast {
+  caster: number;
+  cardId: string;
+  target: TargetRef | null;
+  energy: number;
+  energyCard: string | null;
+  counterOrder: number[]; // player ids in order
+  countered: boolean;
+}
+
 export type Action =
   | { type: 'move'; dir: Dir }
   | { type: 'punch'; target: number }
   | { type: 'cast'; cardId: string; target?: TargetRef; energyCard?: string }
-  | { type: 'use-item'; cardId: string; target?: TargetRef }
+  | { type: 'resolve-cast' }
+  | { type: 'counter'; cardId: string; playerId: number }
+  | { type: 'use-item'; cardId: string; target?: TargetRef; fuel?: string }
+  | { type: 'attack-object'; target: TargetRef; power?: number; kind?: DamageKind }
   | { type: 'pick-up-object'; objectId: number }
   | { type: 'drop-item'; cardId: string }
   | { type: 'pick-up-treasure'; treasureId: number }
@@ -262,7 +292,6 @@ export type Action =
   | { type: 'discard'; cardIds: string[] }
   | { type: 'draw'; count: number }
   | { type: 'boost-speed'; cardId: string }
-  | { type: 'counter'; cardId: string; spellIndex: number }
   | { type: 'end-turn' };
 
 export interface Result {
@@ -278,6 +307,8 @@ export type GameEvent =
   | { type: 'death'; playerId: number; killer: number | null }
   | { type: 'vp'; playerId: number; amount: number }
   | { type: 'cast'; playerId: number; cardId: string }
+  | { type: 'awaiting-counter'; playerId: number }
+  | { type: 'counter'; playerId: number; cardId: string }
   | { type: 'draw'; playerId: number; count: number }
   | { type: 'discard'; playerId: number; cardIds: string[] }
   | { type: 'phase'; phase: Phase }

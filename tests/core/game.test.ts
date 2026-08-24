@@ -1,15 +1,18 @@
 import { describe, it, expect } from 'vitest';
-import { createBoard } from '../../src/core/board';
+import { createBoardFromTopology } from '../../src/core/board';
+import { convertBoardData } from '../../src/core/board-data';
 import { createGameState, currentPlayer } from '../../src/core/state';
 import { startTurn, endTurn } from '../../src/core/turn';
 import { applyAction } from '../../src/core/actions';
 import { loadBuiltInCards } from '../../src/core/cards';
 import { buildDeck } from '../../src/core/cards/registry';
 import type { GameState } from '../../src/core/types';
+import boardDataJSON from '../../src/board-data.json';
 
 function makeGame(seed = 42): GameState {
   loadBuiltInCards();
-  const board = createBoard();
+  const topo = convertBoardData(boardDataJSON as any);
+  const board = createBoardFromTopology(topo);
   const deck = buildDeck(['cantrip', 'alchemy', 'elemental']);
   return createGameState(
     {
@@ -50,8 +53,8 @@ describe('game state', () => {
     let treasures = 0;
     for (const color of ['blue', 'red', 'yellow', 'green']) {
       const sector = state.board.sectors[color as keyof typeof state.board.sectors];
-      for (let r = 0; r < 8; r++) {
-        for (let c = 0; c < 8; c++) {
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
           treasures += sector.grid[r][c].treasures.length;
         }
       }
@@ -111,9 +114,9 @@ describe('actions', () => {
     startTurn(state);
     const p = currentPlayer(state);
     const from = { ...p.pos };
-    const res = applyAction(state, { type: 'move', dir: 'S' });
+    const res = applyAction(state, { type: 'move', dir: 'N' });
     expect(res.ok).toBe(true);
-    expect(p.pos.r).toBe(from.r + 1);
+    expect(p.pos.r).toBe(from.r - 1);
     expect(p.mp).toBe(2);
   });
 

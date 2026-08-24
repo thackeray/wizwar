@@ -3,7 +3,7 @@
     "id": "cantrip-drop-object",
     "name": "Drop Object",
     "school": "cantrip",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -18,7 +18,7 @@
     "id": "cantrip-pick-lock",
     "name": "Pick Lock",
     "school": "cantrip",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -33,7 +33,7 @@
     "id": "cantrip-create-wall",
     "name": "Create Wall",
     "school": "cantrip",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -49,7 +49,7 @@
     "id": "cantrip-rotate-sector",
     "name": "Rotate Sector",
     "school": "cantrip",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -90,6 +90,14 @@
     "text": "Full Shield Cancel 1 target spell targeting you as it is cast. A",
     "effect": {
       "op": "shield"
+    },
+    "counter": {
+      "blocks": [
+        "attack-spell",
+        "neutral-spell",
+        "transform"
+      ],
+      "requiresTargetingMe": true
     }
   },
   {
@@ -100,7 +108,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "wizard",
     "energyValue": 3,
     "text": "LARGE ROCK Thrown Weapon While carrying this item, you may throw this hefty rock as an attack at target object, wizard, or creature for 2 physical damage. After hitting the target, the rock falls to the ground in the target’s square (if possible), where it can be picked up. 3",
     "effect": {
@@ -156,7 +164,7 @@
     "id": "cantrip-around-the-corner",
     "name": "Around the Corner",
     "school": "cantrip",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -164,7 +172,7 @@
     "energyValue": 0,
     "text": "AROUND THE CORNER Aim one target spell you cast around one corner (up to 180°). A",
     "effect": {
-      "op": "no-op"
+      "op": "around-the-corner"
     }
   },
   {
@@ -180,6 +188,11 @@
     "text": "Negate Neutral Cancel 1 target neutral spell as it is cast. A",
     "effect": {
       "op": "negate"
+    },
+    "counter": {
+      "blocks": [
+        "neutral-spell"
+      ]
     }
   }
 ]

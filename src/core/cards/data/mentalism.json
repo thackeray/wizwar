@@ -20,7 +20,7 @@
     "id": "mentalism-share-life",
     "name": "Share Life",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "caster",
     "duration": "instant",
@@ -35,22 +35,22 @@
     "id": "mentalism-add",
     "name": "Add",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
-    "range": "caster",
+    "range": "los",
     "duration": "instant",
-    "target": "self",
-    "energyValue": 3,
-    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. 3",
+    "target": "square",
+    "energyValue": 0,
+    "text": "ADD Combine the energy values of 2 Magic cards together. The combined energy is used for the next spell you cast.",
     "effect": {
-      "op": "no-op"
+      "op": "add"
     }
   },
   {
     "id": "mentalism-pick-lock",
     "name": "Pick Lock",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -83,19 +83,20 @@
     "type": "attack-spell",
     "energy": 1,
     "range": "caster",
-    "duration": "instant",
+    "duration": "temporary",
     "target": "self",
     "energyValue": 0,
     "text": "PAIN LINK While this spell lasts, all damage dealt to you by a wizard or creature's attack is also inflicted on that wizard or creature. This spell is not an attack and cannot be evaded. When being attacked, you may cast this spell on yourself as a counter. A",
     "effect": {
-      "op": "no-op"
+      "op": "apply-spell",
+      "modifier": "reflect"
     }
   },
   {
     "id": "mentalism-thought-steal",
     "name": "Thought Steal",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -118,29 +119,31 @@
     "energyValue": 2,
     "text": "Powerthrust A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
     "effect": {
-      "op": "no-op"
+      "op": "damage",
+      "amount": "@energy+2",
+      "kind": "magical"
     }
   },
   {
     "id": "mentalism-add-2",
     "name": "Add",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
-    "range": "caster",
+    "range": "los",
     "duration": "instant",
-    "target": "self",
-    "energyValue": 3,
-    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. 3",
+    "target": "square",
+    "energyValue": 0,
+    "text": "ADD Combine the energy values of 2 Magic cards together. The combined energy is used for the next spell you cast.",
     "effect": {
-      "op": "no-op"
+      "op": "add"
     }
   },
   {
     "id": "mentalism-meditate",
     "name": "Meditate",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "caster",
     "duration": "instant",
@@ -148,14 +151,14 @@
     "energyValue": 3,
     "text": "MEDITATE Draw 3 cards and then discard back down to your maximum hand size. This does not end your turn. 3",
     "effect": {
-      "op": "no-op"
+      "op": "meditate"
     }
   },
   {
     "id": "mentalism-meditate-2",
     "name": "Meditate",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "caster",
     "duration": "instant",
@@ -163,7 +166,7 @@
     "energyValue": 3,
     "text": "MEDITATE Draw 3 cards and then discard back down to your maximum hand size. This does not end your turn. A 3",
     "effect": {
-      "op": "no-op"
+      "op": "meditate"
     }
   },
   {
@@ -188,12 +191,12 @@
     "type": "attack-spell",
     "energy": 1,
     "range": "caster",
-    "duration": "instant",
+    "duration": "temporary",
     "target": "self",
     "energyValue": 0,
     "text": "PAIN LINK While this spell lasts, all damage dealt to you by a wizard or creature's attack is also inflicted on that wizard or creature. This spell is not an attack and cannot be evaded. When being attacked, you may cast this spell on yourself as a counter. A",
     "effect": {
-      "op": "no-op"
+      "op": "pain-link"
     }
   },
   {
@@ -240,14 +243,14 @@
     "energyValue": 3,
     "text": "Shatter While this spell lasts, you deal 1 crack per point of damage you inflict to objects (rather than 1 crack per 3 points of damage). 3",
     "effect": {
-      "op": "no-op"
+      "op": "shatter"
     }
   },
   {
     "id": "mentalism-thought-steal-2",
     "name": "Thought Steal",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -309,7 +312,7 @@
     "id": "mentalism-featherweight",
     "name": "Featherweight",
     "school": "mentalism",
-    "type": "attack-spell",
+    "type": "counter-spell",
     "energy": 1,
     "range": "caster",
     "duration": "instant",
@@ -317,7 +320,14 @@
     "energyValue": 0,
     "text": "FEATHERWEIGHT When you are attacked, cast this spell as a counter to become as light as a feather. While this spell lasts, all damage done to you moves you back 1 square per point instead of doing damage. When this moves you through intersections, you choose which direction to move. You may move around corners, but if you become unable to move, you suffer any remaining damage normally.",
     "effect": {
-      "op": "no-op"
+      "op": "apply-spell",
+      "modifier": "featherweight"
+    },
+    "counter": {
+      "blocks": [
+        "attack-spell"
+      ],
+      "requiresTargetingMe": true
     }
   },
   {
@@ -366,7 +376,9 @@
     "energyValue": 2,
     "text": "POWERTRUST A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
     "effect": {
-      "op": "no-op"
+      "op": "damage",
+      "amount": "@energy+2",
+      "kind": "magical"
     }
   }
 ]

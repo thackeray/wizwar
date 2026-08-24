@@ -41,7 +41,7 @@
     "energyValue": 0,
     "text": "BLOODSHARD Trinket While carrying this item, reduce the damage by 1 each time you suffer damage from a source. A",
     "effect": {
-      "op": "no-op"
+      "op": "bloodshard"
     }
   },
   {
@@ -52,7 +52,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "wizard",
     "energyValue": 0,
     "text": "BOOMSTONE Magic Stone While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage.",
     "effect": {
@@ -82,7 +82,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "wizard",
     "energyValue": 0,
     "text": "BOOMSTONE While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage. Magic Stone",
     "effect": {
@@ -93,15 +93,15 @@
     "id": "alchemy-add",
     "name": "Add",
     "school": "alchemy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
-    "range": "caster",
+    "range": "los",
     "duration": "instant",
-    "target": "self",
-    "energyValue": 3,
-    "text": "Add Combine the energy values of 2 Magic cards together and use them to boost 1 of your spells or actions. No further energy values can be added to them. A 3",
+    "target": "square",
+    "energyValue": 0,
+    "text": "ADD Combine the energy values of 2 Magic cards together. The combined energy is used for the next spell you cast.",
     "effect": {
-      "op": "no-op"
+      "op": "add"
     }
   },
   {
@@ -127,7 +127,7 @@
     "energy": 1,
     "range": "caster",
     "duration": "instant",
-    "target": "self",
+    "target": "object",
     "energyValue": 0,
     "text": "UNIVERSAL SOLVENT Thrown Weapon While carrying this item, you may throw this clear acid during your turn at any target object (such as a wall or Thornbush, but not a treasure). This is not an attack. Both the target and Universal Solvent are destroyed. 4",
     "effect": {
@@ -155,13 +155,14 @@
     "school": "alchemy",
     "type": "attack-spell",
     "energy": 1,
-    "range": "caster",
+    "range": "los",
     "duration": "instant",
-    "target": "self",
+    "target": "square",
     "energyValue": 0,
-    "text": "Homunculus Creation Create a Homunculus with life equal to this spell's energy. While this spell lasts, each time a  attack targets you, Homunculus leaps into its path, allowing you to automatically evade the attack (if possible). Homunculus suffers all damage from the attack, ignoring all other effects. If Homunculus intercepts an attack that cannot be evaded, you both suffer the damage and you suffer any other effects as normal.",
+    "text": "HOMUNCULUS Create a Homunculus in target empty square. The Homunculus has 5 health and 1 speed. It is not a valid target for spells or attacks.",
     "effect": {
-      "op": "no-op"
+      "op": "create-creature",
+      "object": "homunculus"
     }
   },
   {
@@ -171,14 +172,14 @@
     "type": "attack-spell",
     "energy": 1,
     "range": "los",
-    "duration": "instant",
+    "duration": "temporary",
     "target": "wizard",
     "energyValue": 0,
     "text": "Acid Bath Drench target wizard or creature in acid. While this spell lasts, the target suffers 2 points of magical damage during your Time Passes phase. This spell only counts as your attack on the turn it is cast. If the target is affected by a Water spell, the acid washes off and this spell ends. Curse",
     "effect": {
-      "op": "damage",
-      "amount": 2,
-      "kind": "magical"
+      "op": "apply-spell",
+      "when": "time-passes",
+      "timePassesDamage": 2
     }
   },
   {
@@ -189,7 +190,7 @@
     "energy": 1,
     "range": "caster",
     "duration": "instant",
-    "target": "self",
+    "target": "object",
     "energyValue": 0,
     "text": "UNIVERSAL SOLVENT Thrown Weapon While carrying this item, you may throw this clear acid during your turn at any target object (such as a wall or Thornbush, but not a treasure). This is not an attack. Both the target and Universal Solvent are destroyed. A",
     "effect": {
@@ -218,14 +219,14 @@
     "type": "attack-spell",
     "energy": 1,
     "range": "los",
-    "duration": "instant",
+    "duration": "temporary",
     "target": "wizard",
     "energyValue": 0,
     "text": "Acid Bath Drench target wizard or creature in acid. While this spell lasts, the target suffers 2 points of magical damage during your Time Passes phase. This spell only counts as your attack on the turn it is cast. If the target is affected by a Water spell, the acid washes off and this spell ends.",
     "effect": {
-      "op": "damage",
-      "amount": 2,
-      "kind": "magical"
+      "op": "apply-spell",
+      "when": "time-passes",
+      "timePassesDamage": 2
     }
   },
   {
@@ -266,7 +267,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "wizard",
     "energyValue": 0,
     "text": "BOOMSTONE Magic Stone While carrying this item, you may throw Boomstone as an attack at a target object, wizard, or creature for 4 magical fire damage. Afterwards, discard Boomstone. If you suffer any fire damage, all Magic Stones you are carrying are destroyed. If Boomstone is destroyed in this way, you suffer 4 magical fire damage.",
     "effect": {
@@ -301,6 +302,14 @@
     "text": "Null Powder While carrying this item, you may discard this item as a counter spell to cancel a  spell targeting you. -or- While carrying this item, you may discard this item during your turn to end a non-instant spell.",
     "effect": {
       "op": "item"
+    },
+    "counter": {
+      "blocks": [
+        "attack-spell",
+        "neutral-spell",
+        "transform"
+      ],
+      "requiresTargetingMe": true
     }
   },
   {
@@ -354,13 +363,13 @@
     "school": "alchemy",
     "type": "attack-spell",
     "energy": 1,
-    "range": "caster",
+    "range": "los",
     "duration": "instant",
-    "target": "self",
+    "target": "square",
     "energyValue": 0,
-    "text": "Fool's Gold Cast when another wizard picks up 1 target treasure in your home sector. The treasure is a fake! That wizard's turn ends, and you take the treasure marker picked up by that wizard and drop it in any other square in your home sector. (The treasure marker now indicates where the real treasure is hidden.) A",
+    "text": "FOOL'S GOLD When an enemy wizard picks up a treasure in your home sector, this spell deals 3 magical damage to them.",
     "effect": {
-      "op": "no-op"
+      "op": "fools-gold"
     }
   }
 ]

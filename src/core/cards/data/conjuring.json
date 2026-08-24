@@ -133,7 +133,8 @@
     "energyValue": 0,
     "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non- attacks. Wall of Earth is immune to damage, and it blocks both  and movement.",
     "effect": {
-      "op": "no-op"
+      "op": "create-object",
+      "object": "wall-of-earth"
     }
   },
   {
@@ -155,7 +156,7 @@
     "id": "conjuring-create-wall",
     "name": "Create Wall",
     "school": "conjuring",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -233,7 +234,7 @@
     "id": "conjuring-swap",
     "name": "Swap",
     "school": "conjuring",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -278,7 +279,7 @@
     "id": "conjuring-create-door",
     "name": "Create Door",
     "school": "conjuring",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -294,7 +295,7 @@
     "id": "conjuring-around-the-corner",
     "name": "Around the Corner",
     "school": "conjuring",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -302,7 +303,7 @@
     "energyValue": 0,
     "text": "Around the Corner Aim one target spell you cast around one corner (up to 180°).",
     "effect": {
-      "op": "no-op"
+      "op": "around-the-corner"
     }
   },
   {
@@ -365,6 +366,11 @@
     "text": "NEGATE NEUTRAL Cancel 1 target neutral spell as it is cast.",
     "effect": {
       "op": "negate"
+    },
+    "counter": {
+      "blocks": [
+        "neutral-spell"
+      ]
     }
   }
 ]

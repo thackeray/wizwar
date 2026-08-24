@@ -13,9 +13,9 @@ import type { CellRef } from '../../src/core/types';
 describe('board topology', () => {
   it('maps global coords to sectors correctly', () => {
     expect(sectorAt(0, 0)).toBe('blue');
-    expect(sectorAt(0, 15)).toBe('red');
-    expect(sectorAt(15, 0)).toBe('yellow');
-    expect(sectorAt(15, 15)).toBe('green');
+    expect(sectorAt(0, 9)).toBe('red');
+    expect(sectorAt(9, 0)).toBe('yellow');
+    expect(sectorAt(9, 9)).toBe('green');
   });
 
   it('converts between global and local coords', () => {
@@ -24,18 +24,18 @@ describe('board topology', () => {
     expect(g).toEqual({ row: 3, col: 4 });
     expect(toLocal(3, 4)).toEqual(ref);
 
-    const ref2: CellRef = { sector: 'green', r: 2, c: 5 };
+    const ref2: CellRef = { sector: 'green', r: 2, c: 3 };
     const g2 = toGlobal(ref2);
-    expect(g2).toEqual({ row: 10, col: 13 });
-    expect(toLocal(10, 13)).toEqual(ref2);
+    expect(g2).toEqual({ row: 7, col: 8 });
+    expect(toLocal(7, 8)).toEqual(ref2);
   });
 
   it('creates a board with 4 sectors', () => {
     const board = createBoard();
     expect(Object.keys(board.sectors)).toHaveLength(4);
     for (const color of ['blue', 'red', 'yellow', 'green']) {
-      expect(board.sectors[color as keyof typeof board.sectors].grid).toHaveLength(8);
-      expect(board.sectors[color as keyof typeof board.sectors].grid[0]).toHaveLength(8);
+      expect(board.sectors[color as keyof typeof board.sectors].grid).toHaveLength(5);
+      expect(board.sectors[color as keyof typeof board.sectors].grid[0]).toHaveLength(5);
     }
   });
 
@@ -44,7 +44,7 @@ describe('board topology', () => {
     // Blue home base should be in top-left corner area.
     expect(board.sectors.blue.grid[0][0].kind).toBe('home');
     // Green home base should be in bottom-right corner area.
-    expect(board.sectors.green.grid[7][7].kind).toBe('home');
+    expect(board.sectors.green.grid[4][4].kind).toBe('home');
   });
 
   it('places treasure start squares', () => {
@@ -52,8 +52,8 @@ describe('board topology', () => {
     let treasureCount = 0;
     for (const color of ['blue', 'red', 'yellow', 'green']) {
       const sector = board.sectors[color as keyof typeof board.sectors];
-      for (let r = 0; r < 8; r++) {
-        for (let c = 0; c < 8; c++) {
+      for (let r = 0; r < 5; r++) {
+        for (let c = 0; c < 5; c++) {
           if (sector.grid[r][c].kind === 'treasure-start') treasureCount++;
         }
       }
@@ -70,13 +70,12 @@ describe('movement', () => {
     expect(dest).toEqual({ sector: 'blue', r: 4, c: 3 });
   });
 
-  it('wraps around at board edges', () => {
+  it('blocks movement at board edges', () => {
     const board = createBoard();
-    // Moving north from the top edge wraps to the bottom of the board.
+    // Moving north from the top edge is blocked.
     const from: CellRef = { sector: 'blue', r: 0, c: 3 };
     const dest = moveDestination(board, from, 'N', 'blue');
-    // Bottom of board at col 3 is in the yellow sector (bottom-left).
-    expect(dest).toEqual({ sector: 'yellow', r: 7, c: 3 });
+    expect(dest).toBeNull();
   });
 
   it('returns null for blocked moves', () => {

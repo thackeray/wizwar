@@ -7,7 +7,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "door",
+    "target": "square",
     "energyValue": 0,
     "text": "Stone Block Creation Create a solid stone block in 1 empty square. The stone block completely fills the square, blocking  and movement through the square. This block takes 8 cracks to destroy and is not a wall.",
     "effect": {
@@ -90,16 +90,17 @@
     "duration": "instant",
     "target": "wall",
     "energyValue": 0,
-    "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non-👁️ attacks. Wall of Earth is immune to damage, and it blocks both 👁️ and movement.",
+    "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non- attacks. Wall of Earth is immune to damage, and it blocks both  and movement.",
     "effect": {
-      "op": "no-op"
+      "op": "create-object",
+      "object": "wall-of-earth"
     }
   },
   {
     "id": "elemental-create-wall",
     "name": "Create Wall",
     "school": "elemental",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -156,7 +157,7 @@
     "text": "WATERBOLT Water Shoot a bolt of water at yourself or target object, wizard, or creature. The bolt deals magical water damage to the target equal to this spell's energy, or knocks the target (if mobile) back a number of squares equal to this spell's energy, or any combination of the two (the caster decides the combination). Any Fire spells affecting the target end, and any Fire object affected by Waterbolt is destroyed. 3",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -189,7 +190,8 @@
     "energyValue": 0,
     "text": "WALL OF EARTH Momentarily raise a 1-square-long wall of dirt on a target border line between 2 squares. The wall blocks 1 attack that hits it, and then it collapses. The wall cannot block non- attacks. Wall of Earth is immune to damage, and it blocks both  and movement.",
     "effect": {
-      "op": "no-op"
+      "op": "create-object",
+      "object": "wall-of-earth"
     }
   },
   {
@@ -213,7 +215,7 @@
     "id": "elemental-create-wall-2",
     "name": "Create Wall",
     "school": "elemental",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -238,7 +240,7 @@
     "text": "WATERBOLT Water Shoot a bolt of water at yourself or target object, wizard, or creature. The bolt deals magical water damage to the target equal to this spell’s energy, or knocks the target (if mobile) back a number of squares equal to this spell’s energy, or any combination of the two (the caster decides the combination). Any Fire spells affecting the target end, and any Fire object affected by Waterbolt is destroyed. 3",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -276,15 +278,15 @@
     "id": "elemental-windrider",
     "name": "Windrider",
     "school": "elemental",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
     "target": "square",
     "energyValue": 0,
-    "text": "WINORIDER Move in a straight line (not diagonally) as far as you like, ignoring any objects (except for walls, doors, and stone blocks) while moving. You suffer the effects of any objects in the square where you end this move. Moving this way costs 0 movement points.",
+    "text": "WINDRIDER Move in a straight line in any direction for a number of squares equal to this spell's energy. You may not move through walls, doors, or objects. You may not move through other wizards or creatures.",
     "effect": {
-      "op": "no-op"
+      "op": "move-line"
     }
   },
   {
@@ -314,7 +316,7 @@
     "energyValue": 2,
     "text": "FIRE CLOAK Fire While carrying this item, you punch for an additional 2 magical fire damage. Any object, wizard, or creature that deals you damage from your square or an adjacent square suffers 2 magical fire damage after damaging you. If you suffer any water damage, Fire Cloak is destroyed and does not damage your attacker. 2",
     "effect": {
-      "op": "no-op"
+      "op": "fire-cloak"
     }
   },
   {
@@ -325,7 +327,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "wizard",
     "energyValue": 2,
     "text": "Stone Spikes While this spell lasts, you have the ability to create stone spikes, which you can throw as an attack at any object, wizard, or creature in  for 3 physical damage. Spikes shatter and vanish after they hit. 2",
     "effect": {
@@ -336,15 +338,15 @@
     "id": "elemental-windrider-2",
     "name": "Windrider",
     "school": "elemental",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
     "target": "square",
     "energyValue": 0,
-    "text": "WINORIDER Move in a straight line (not diagonally) as far as you like, ignoring any objects (except for walls, doors, and stone blocks) while moving. You suffer the effects of any objects in the square where you end this move. Moving this way costs 0 movement points. A",
+    "text": "WINDRIDER Move in a straight line in any direction for a number of squares equal to this spell's energy. You may not move through walls, doors, or objects. You may not move through other wizards or creatures.",
     "effect": {
-      "op": "no-op"
+      "op": "move-line"
     }
   },
   {

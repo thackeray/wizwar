@@ -1,0 +1,3139 @@
+{
+ "faces": {
+  "blue": {
+   "front": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "red",
+        "locked": false
+       },
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "blue"
+       },
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "yellow",
+        "locked": false
+       },
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ],
+   "back": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "green"
+       },
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ]
+  },
+  "red": {
+   "front": [
+    [
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "red"
+       },
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "green",
+        "locked": false
+       },
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ],
+   "back": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "red"
+       },
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "red"
+       },
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ]
+  },
+  "yellow": {
+   "front": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "green"
+       },
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "green",
+        "locked": false
+       },
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ],
+   "back": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": {
+        "color": "green"
+       },
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ]
+  },
+  "green": {
+   "front": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "green"
+       },
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ],
+   "back": [
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "home",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": {
+        "color": "green"
+       },
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "treasure",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": false,
+       "E": true,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ],
+    [
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": true,
+       "E": false,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": true,
+       "S": false,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": false,
+       "W": true
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     },
+     {
+      "kind": "corridor",
+      "walls": {
+       "N": false,
+       "S": true,
+       "E": true,
+       "W": false
+      },
+      "doors": {
+       "N": null,
+       "S": null,
+       "E": null,
+       "W": null
+      }
+     }
+    ]
+   ]
+  }
+ },
+ "portals": []
+}

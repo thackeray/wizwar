@@ -22,7 +22,7 @@
     "energy": 1,
     "range": "los",
     "duration": "instant",
-    "target": "square",
+    "target": "door",
     "energyValue": 0,
     "text": "MASTER KEY Trinket While carrying this item, you may unlock any target door. (Doors re-lock after you pass through them, although if you wish you may \"hold the door open\" for others while you are adjacent to the door.)",
     "effect": {
@@ -42,7 +42,7 @@
     "text": "Globe of Pain Shoot a reddish globe of energy at target wizard or creature. The target must be within 6 movement of the caster. The globe can go around corners and ignores all objects (except those that stop movement). If the globe enters the target wizard's or creature's square, it deals magical damage to the target equal to this spell's energy. This spell only damages the target. 3",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -59,7 +59,7 @@
     "text": "Globe of Pain Shoot a reddish globe of energy at target wizard or creature. The target must be within 6 movement of the caster. The globe can go around corners and ignores all objects (except those that stop movement). If the globe enters the target wizard's or creature's square, it deals magical damage to the target equal to this spell's energy. This spell only damages the target. 3",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -82,7 +82,7 @@
     "id": "thaumaturgy-drop-object",
     "name": "Drop Object",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -97,7 +97,7 @@
     "id": "thaumaturgy-anti-anti",
     "name": "Anti-Anti",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -105,7 +105,12 @@
     "energyValue": 3,
     "text": "Anti-Anti Cancel 1 target counter spell targeting one of your spells. Anti-Anti cannot be canceled. A 3",
     "effect": {
-      "op": "no-op"
+      "op": "negate"
+    },
+    "counter": {
+      "blocks": [
+        "counter-spell"
+      ]
     }
   },
   {
@@ -132,19 +137,20 @@
     "type": "attack-spell",
     "energy": 1,
     "range": "caster",
-    "duration": "instant",
+    "duration": "temporary",
     "target": "self",
     "energyValue": 0,
     "text": "INVISIBLE You become invisible. While this spell lasts, roll a die each time you are attacked. You evade the attack on a result of 2-4. When attacked, you may cast this spell as a counter.",
     "effect": {
-      "op": "no-op"
+      "op": "apply-spell",
+      "modifier": "invisible"
     }
   },
   {
     "id": "thaumaturgy-pick-lock",
     "name": "Pick Lock",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -159,7 +165,7 @@
     "id": "thaumaturgy-seal-door",
     "name": "Seal Door",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -183,7 +189,7 @@
     "text": "FIRE DARTS Shoot a number of fiery darts equal to this spell's energy at target object, wizard, or creature. Each dart may have a different target, and/or multiple darts may strike the same target. Each dart deals 1 magical fire damage to its target. Each dart is a separate damage source and must be countered separately. Fire",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -206,7 +212,7 @@
     "id": "thaumaturgy-rotate-sector",
     "name": "Rotate Sector",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -230,6 +236,14 @@
     "text": "Full Shield Cancei 1 target spell targeting you as it is cast.",
     "effect": {
       "op": "shield"
+    },
+    "counter": {
+      "blocks": [
+        "attack-spell",
+        "neutral-spell",
+        "transform"
+      ],
+      "requiresTargetingMe": true
     }
   },
   {
@@ -251,7 +265,7 @@
     "id": "thaumaturgy-around-the-corner",
     "name": "Around the Corner",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -259,7 +273,7 @@
     "energyValue": 0,
     "text": "AROUND THE CORNER Aim one target spell you cast around one corner (up to 180°).",
     "effect": {
-      "op": "no-op"
+      "op": "around-the-corner"
     }
   },
   {
@@ -283,7 +297,7 @@
     "id": "thaumaturgy-backlash",
     "name": "Backlash",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "counter-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -294,6 +308,12 @@
       "op": "damage",
       "amount": 2,
       "kind": "magical"
+    },
+    "counter": {
+      "blocks": [
+        "attack-spell"
+      ],
+      "requiresTargetingMe": true
     }
   },
   {
@@ -309,7 +329,7 @@
     "text": "FIRE DARTS Shoot a number of fiery darts equal to this spell's energy at target object, wizard, or creature. Each dart may have a different target, and/or multiple darts may strike the same target. Each dart deals 1 magical fire damage to its target. Each dart is a separate damage source and must be countered separately.",
     "effect": {
       "op": "damage",
-      "amount": 2,
+      "amount": "@energy",
       "kind": "magical"
     }
   },
@@ -343,13 +363,18 @@
     "text": "NEGATE NEUTRAL Cancel 1 target neutral spell as it is cast.",
     "effect": {
       "op": "negate"
+    },
+    "counter": {
+      "blocks": [
+        "neutral-spell"
+      ]
     }
   },
   {
     "id": "thaumaturgy-pass-through-wall",
     "name": "Pass Through Wall",
     "school": "thaumaturgy",
-    "type": "attack-spell",
+    "type": "neutral-spell",
     "energy": 1,
     "range": "los",
     "duration": "instant",
@@ -357,7 +382,7 @@
     "energyValue": 0,
     "text": "PASS THROUGH WALL Move through target wall once, ignoring any effects of the wall.",
     "effect": {
-      "op": "no-op"
+      "op": "move-through-wall"
     }
   },
   {
@@ -372,7 +397,9 @@
     "energyValue": 2,
     "text": "POWERTRUST A telekinetic blow strikes target object, wizard, or creature, dealing magical damage equal to this spell's energy plus 2. 2",
     "effect": {
-      "op": "no-op"
+      "op": "damage",
+      "amount": "@energy+2",
+      "kind": "magical"
     }
   }
 ]

@@ -8,7 +8,6 @@ import type {
   PlayerState,
   School,
 } from './types';
-import { SECTOR_ORIGIN } from './board';
 import { mulberry32 } from './rng';
 
 export interface NewGameConfig {
@@ -20,10 +19,8 @@ export interface NewGameConfig {
 }
 
 export function homeRef(color: Color): CellRef {
-  const o = SECTOR_ORIGIN[color];
-  const hr = o.row === 0 ? 0 : 6;
-  const hc = o.col === 0 ? 0 : 6;
-  return { sector: color, r: hr, c: hc };
+  // All sectors have home at (2,2) per board-data.json
+  return { sector: color, r: 2, c: 2 };
 }
 
 export function createPlayer(
@@ -45,10 +42,12 @@ export function createPlayer(
     mp: 3,
     speedBoosted: false,
     attacked: false,
+    attacksUsed: 0,
     stunned: false,
     stunTokens: 0,
     alive: true,
     transformed: null,
+    stunnedActionUsed: null,
   };
 }
 
@@ -64,13 +63,15 @@ export function createGameState(
 
   // Place treasure markers on treasure-start squares.
   let nextTreasureId = 0;
+  const treasureHome: Record<number, Color> = {};
   for (const p of players) {
     const sector = board.sectors[p.color];
     let placed = 0;
-    for (let r = 0; r < 8 && placed < 2; r++) {
-      for (let c = 0; c < 8 && placed < 2; c++) {
+    for (let r = 0; r < 5 && placed < 2; r++) {
+      for (let c = 0; c < 5 && placed < 2; c++) {
         if (sector.grid[r][c].kind === 'treasure-start') {
           sector.grid[r][c].treasures.push(nextTreasureId);
+          treasureHome[nextTreasureId] = p.color;
           nextTreasureId++;
           placed++;
         }
@@ -100,7 +101,9 @@ export function createGameState(
     log: [],
     nextObjectId: 0,
     nextTreasureId,
-    awaitingCounter: null,
+    awaitingCast: null,
+    treasureHome,
+    treasureScorer: {},
   };
 }
 
@@ -117,8 +120,10 @@ export function alivePlayers(state: GameState): PlayerState[] {
 }
 
 // Hand size includes carried items and maintained spells.
-export function handSize(p: PlayerState): number {
-  return p.hand.length + p.carriedItems.length + p.maintainedSpells.length;
+// Extra Arms: carried items don't count toward hand limit.
+export function handSize(p: PlayerState, hasExtraArms = false): number {
+  const itemsCount = hasExtraArms ? 0 : p.carriedItems.length;
+  return p.hand.length + itemsCount + p.maintainedSpells.length;
 }
 
 export const MAX_HAND_SIZE = 7;
@@ -136,8 +141,8 @@ export function addLog(
 
 export function serialize(state: GameState): string {
   // RNG state is not serialized; replay uses seed + action log.
-  const { seed, players, board, deck, discard, currentPlayer, turnNumber, phase, winner, log, nextObjectId, nextTreasureId, awaitingCounter } = state;
-  return JSON.stringify({ seed, players, board, deck, discard, currentPlayer, turnNumber, phase, winner, log, nextObjectId, nextTreasureId, awaitingCounter });
+  const { seed, players, board, deck, discard, currentPlayer, turnNumber, phase, winner, log, nextObjectId, nextTreasureId, awaitingCast, treasureHome, treasureScorer } = state;
+  return JSON.stringify({ seed, players, board, deck, discard, currentPlayer, turnNumber, phase, winner, log, nextObjectId, nextTreasureId, awaitingCast, treasureHome, treasureScorer });
 }
 
 export function deserialize(json: string): GameState {
