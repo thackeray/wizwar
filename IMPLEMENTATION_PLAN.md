@@ -1101,6 +1101,14 @@ StrategicBot 相对 heuristic：胜率 5/12 → 15/16，平均回合 204 → 65�
 - **复验**：重跑 4 局 use-item=13（boomstone×3 变体、large-rock、stone-spikes）；`tests/core/m5-items.test.ts` 加 2 条回归。
 - **观察**：AI 打得基本正确——伤害法术 13 种、投掷物、能量加速、宝藏运输（23 捡 15 放）都用上；**45% 回合浪费 MP**（找不到更有用动作就早结束，效率缺口非 bug）。
 
+### 20.6 web 端体验修复（2026-08-24 Claude，含 §21 续）
+- **web 端 AI 不用牌 → 根因是跑错了 bot**：`main.ts` 默认 `fill('heuristic')`（老 bot 爱互殴几乎不施法），StrategicBot 没接进 web。已改 web 默认 strategic（`battle.ts` 加 case、`main.ts` fill('strategic')）。sim 默认也改 strategic（`--heuristic` 保留旧 bot），无头与 web 一致。
+- **施法量过低**：施法是免费动作（不耗 MP），但优先级把移动放在施法前 → 重排为**先施法再移动** + 加 `bestUtilityMoveSpell`（windrider/teleport 赶路）。复测 4 局 cast 37→65、击杀 0→4（16 seed 14/16 胜、2 stall、avg 79 回合，比之前略慢/stall 略多，换取大量用牌+击杀，可接受）。顺带修 `mentalism-teleport` target wizard→square（之前传送放不出来）。
+- **物品卡手牌不可用**：`doUseItem` 只认 carriedItems 且无 hand→carried 动作 → 魔法石被动失效、武器 use-item 失败。已修（doUseItem/getPassives/getLegalActions 接受手牌；StrategicBot 加 bestWeaponAttack）。复测 4 局 use-item 0→13。
+- **棋盘格子高矮抖动**：`.board` grid 行高 auto，token 进格拉伸整行。已修（`gridTemplateRows: repeat(10,1fr)`）。
+- **墙双画/错位（根因=随机 side + 只导 front）**：`createSector` 随机 `side`，但 `convertBoardData` 只用 front → back 图配 front 数据，墙错位（观察：某扇区随机到 back 就错位）。已修：`convertBoardData` 保留 front+back，`createBoardFromTopology` 按 `sector.side` 加载对应面。验证 2000/2000 格一致。副作用：每局棋盘随机翻面（真实 Wiz-War 特性）。
+- **遗留**：CSS 墙线（`.board__cell--wall-n/s/e/w`）与图片墙仍双画（视觉上墙偏粗）。若图片墙与数据墙完全一致可去掉 CSS 墙线；待用户确认观感后处理。P0 棋盘平衡仍未解。
+
 ### 20.3 关键运行命令（验证用）
 - 测试：`npm test`（122）；类型：`npm run typecheck`；构建：`npm run build`。
 - AI 对战：`npx tsx src/headless/sim.ts <seed> --strategic`。
