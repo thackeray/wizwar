@@ -565,12 +565,28 @@ function resolveItemEffect(
   const events: GameEvent[] = [];
   
   // Throwing items (attack, consume).
+  // §18.3: Can hit wizards, objects, and creatures.
   if (cardId.startsWith('alchemy-boomstone')) {
     // Boomstone: 4 magical fire damage.
     if (target && target.kind === 'wizard') {
       const t = state.players.find((pl) => pl.id === target.id)!;
       events.push(...applyDamage(state, t, 4, 'magical', p.id).events);
       addLog(state, p.id, `Boomstone explodes for 4 magical fire damage!`);
+    } else if (target && target.kind === 'object') {
+      const objId = target.id;
+      for (const sector of Object.values(state.board.sectors)) {
+        for (const row of sector.grid) {
+          for (const cell of row) {
+            const obj = cell.objects.find((o) => o.id === objId);
+            if (obj) {
+              obj.cracks += 4;
+              if (obj.cracks >= 3) obj.destroyed = true;
+              addLog(state, p.id, `Boomstone hits the object!`);
+              break;
+            }
+          }
+        }
+      }
     }
   } else if (cardId === 'cantrip-large-rock') {
     // Large Rock: 3 physical damage.
@@ -578,6 +594,21 @@ function resolveItemEffect(
       const t = state.players.find((pl) => pl.id === target.id)!;
       events.push(...applyDamage(state, t, 3, 'physical', p.id).events);
       addLog(state, p.id, `Large Rock hits for 3 physical damage!`);
+    } else if (target && target.kind === 'object') {
+      const objId = target.id;
+      for (const sector of Object.values(state.board.sectors)) {
+        for (const row of sector.grid) {
+          for (const cell of row) {
+            const obj = cell.objects.find((o) => o.id === objId);
+            if (obj) {
+              obj.cracks += 3;
+              if (obj.cracks >= 3) obj.destroyed = true;
+              addLog(state, p.id, `Large Rock hits the object!`);
+              break;
+            }
+          }
+        }
+      }
     }
   } else if (cardId === 'elemental-stone-spikes') {
     // Stone Spikes: 2+ physical damage.
@@ -586,9 +617,26 @@ function resolveItemEffect(
       const dmg = 2 + state.rng.int(3); // 2-4 damage
       events.push(...applyDamage(state, t, dmg, 'physical', p.id).events);
       addLog(state, p.id, `Stone Spikes hit for ${dmg} physical damage!`);
+    } else if (target && target.kind === 'object') {
+      const objId = target.id;
+      const dmg = 2 + state.rng.int(3);
+      for (const sector of Object.values(state.board.sectors)) {
+        for (const row of sector.grid) {
+          for (const cell of row) {
+            const obj = cell.objects.find((o) => o.id === objId);
+            if (obj) {
+              obj.cracks += dmg;
+              if (obj.cracks >= 3) obj.destroyed = true;
+              addLog(state, p.id, `Stone Spikes hit the object for ${dmg}!`);
+              break;
+            }
+          }
+        }
+      }
     }
   } else if (cardId.startsWith('alchemy-universal-solvent')) {
-    // Universal Solvent: Destroy target object.
+    // Universal Solvent: Destroy target object, wall, or door.
+    // §18.3: Can dissolve walls and doors per card text.
     if (target && target.kind === 'object') {
       const objId = target.id;
       for (const sector of Object.values(state.board.sectors)) {
@@ -602,6 +650,21 @@ function resolveItemEffect(
             }
           }
         }
+      }
+    } else if (target && target.kind === 'wall') {
+      // Dissolve a wall.
+      const ref = target.ref;
+      const cell = getCell(state.board, { sector: ref.sector, r: ref.r, c: ref.c });
+      cell.walls[ref.side] = false;
+      addLog(state, p.id, `Universal Solvent dissolves the wall!`);
+    } else if (target && target.kind === 'door') {
+      // Dissolve a door.
+      const ref = target.ref;
+      const cell = getCell(state.board, { sector: ref.sector, r: ref.r, c: ref.c });
+      const door = cell.doors[ref.side];
+      if (door) {
+        door.destroyed = true;
+        addLog(state, p.id, `Universal Solvent dissolves the door!`);
       }
     }
   } else if (cardId === 'thaumaturgy-wizardblade') {
