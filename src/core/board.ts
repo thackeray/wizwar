@@ -114,7 +114,9 @@ export interface TopologyCell {
 }
 
 export interface BoardTopology {
-  sectors: Partial<Record<Color, TopologyCell[][]>>;
+  // A plain grid is treated as the front face; {front,back} selects by the
+  // sector's `side` (random per game, matching the image the UI shows).
+  sectors: Partial<Record<Color, TopologyCell[][] | { front: TopologyCell[][]; back: TopologyCell[][] }>>;
   portals?: PortalDef[];
 }
 
@@ -123,9 +125,15 @@ export interface BoardTopology {
 export function createBoardFromTopology(topo: BoardTopology): BoardState {
   const board = createBoard();
   for (const color of COLORS) {
-    const grid = topo.sectors[color];
-    if (!grid) continue;
+    const entry = topo.sectors[color];
+    if (!entry) continue;
     const sector = board.sectors[color];
+    // Pick the face that matches the sector's random `side`, so the wall data
+    // lines up with the image the UI renders. Falls back to front.
+    let grid: TopologyCell[][] | undefined;
+    if (Array.isArray(entry)) grid = entry;
+    else grid = (sector.side === 'back' ? entry.back : entry.front) ?? entry.front;
+    if (!grid) continue;
     for (let r = 0; r < SECTOR_SIZE; r++) {
       for (let c = 0; c < SECTOR_SIZE; c++) {
         const tc = grid[r]?.[c];

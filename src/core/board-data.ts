@@ -1,7 +1,7 @@
 // Convert board-data.json to the format expected by createBoardFromTopology.
 
 import type { Color, Dir } from './types';
-import type { BoardTopology } from './board';
+import type { BoardTopology, TopologyCell } from './board';
 
 export interface BoardDataJSON {
   faces: Record<Color, { front: RawCell[][]; back: RawCell[][] }>;
@@ -20,6 +20,18 @@ function mapKind(kind?: string): 'corridor' | 'home' | 'treasure-start' | undefi
   return kind as 'corridor' | 'home' | 'treasure-start';
 }
 
+function buildFaceGrid(face: RawCell[][]): TopologyCell[][] {
+  return face.map(row =>
+    row.map(cell => ({
+      kind: mapKind(cell.kind),
+      walls: cell.walls,
+      doors: cell.doors ? Object.fromEntries(
+        Object.entries(cell.doors).filter(([_, v]) => v !== null)
+      ) : undefined,
+    }))
+  );
+}
+
 export function convertBoardData(data: BoardDataJSON): BoardTopology {
   const sectors: BoardTopology['sectors'] = {};
 
@@ -27,18 +39,13 @@ export function convertBoardData(data: BoardDataJSON): BoardTopology {
     const face = data.faces[color];
     if (!face) continue;
 
-    // Use the front side as the main grid
-    const grid = face.front.map(row =>
-      row.map(cell => ({
-        kind: mapKind(cell.kind),
-        walls: cell.walls,
-        doors: cell.doors ? Object.fromEntries(
-          Object.entries(cell.doors).filter(([_, v]) => v !== null)
-        ) : undefined,
-      }))
-    );
-
-    sectors[color] = grid;
+    // Keep BOTH faces so the board can show the front or back (matching the
+    // random `sector.side` the UI renders). Previously only front was kept,
+    // so a sector showing its back image had mismatched walls.
+    sectors[color] = {
+      front: buildFaceGrid(face.front),
+      back: buildFaceGrid(face.back),
+    };
   }
 
   return {
