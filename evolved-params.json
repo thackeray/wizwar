@@ -1,0 +1,12 @@
+{
+  "aggression": 0.8425634924065388,
+  "defense": 0.152847279396213,
+  "treasureSeek": 1,
+  "exploration": 0.8132493745174108,
+  "punchThreshold": 0.9345292776628682,
+  "castThreshold": 0.8219107302810578,
+  "saveCards": 0.3269722565808516,
+  "attackCardPriority": 1,
+  "utilityCardPriority": 0.8624944607150076,
+  "energyCardPriority": 0.7818606950822964
+}

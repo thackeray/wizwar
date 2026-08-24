@@ -1,0 +1,11 @@
+{
+  "treasureSeek": 0.13,
+  "deliverySpeed": 0.69,
+  "combatFinish": 0.51,
+  "selfPreserve": 0.59,
+  "unlockDoors": 0.68,
+  "preferBlue": 0.77,
+  "preferRed": 0.53,
+  "preferYellow": 0.81,
+  "preferGreen": 1
+}
