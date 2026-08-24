@@ -83,8 +83,9 @@ export default function Board({ state, highlight, castTargets, onCellClick, inte
   const tokens = state.players.map((p) => {
     if (!p.alive) return null;
     const g = toGlobal(p.pos);
-    const left = g.col * 10;
-    const top = g.row * 10;
+    // Position the token CENTER at the cell center (cell spans col*10..col*10+10%).
+    const left = g.col * 10 + 5;
+    const top = g.row * 10 + 5;
     const badges: React.ReactNode[] = [];
     if (p.stunned) badges.push(<span key="s" className="token-badge" title="Stunned">⚡</span>);
     if (p.carriedTreasure !== null) badges.push(<span key="t" className="token-badge" title="Carrying treasure">◆</span>);

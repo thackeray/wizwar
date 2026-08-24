@@ -279,16 +279,13 @@ export default function BattleScreen({ config, onExit }: { config: BattleConfig;
             </div>
           )}
 
-          {pendingAction && state && (
+          {state && (
             <Hand
               cards={state.players[state.currentPlayer].hand}
               selected={selectedCard}
-              onCardClick={onCardClick}
-              label="Your Hand — pick a card to cast, or click a highlighted cell to move"
+              onCardClick={pendingAction ? onCardClick : () => {}}
+              label={`${state.players[state.currentPlayer].color} Wizard's Hand${pendingAction ? ' (You)' : ''}${pendingAction ? ' — pick a card to cast, or click a highlighted cell to move' : ''}`}
             />
-          )}
-          {!pendingAction && state && (
-            <Hand cards={state.players[state.currentPlayer].hand} selected={null} onCardClick={() => {}} label="Hand (spectate)" />
           )}
 
           {pendingAction && (

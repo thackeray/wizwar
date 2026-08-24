@@ -35,20 +35,27 @@ function HandCard({ cardId, selected, onClick }: { cardId: string; selected: boo
       onClick={onClick}
       title={card.text}
     >
-      {showImg && (
-        <img
-          src={src!}
-          alt={card.name}
-          className="card-img"
-          onError={() => setImgFailed(true)}
-        />
+      {showImg ? (
+        <>
+          <img
+            src={src!}
+            alt={card.name}
+            className="card-img"
+            onError={() => setImgFailed(true)}
+          />
+          {card.energyValue > 0 && <div className="card-energy">{card.energyValue}</div>}
+          <div className="card-name-overlay">{card.name}</div>
+        </>
+      ) : (
+        <>
+          <div className="card-school-bar" style={{ background: schoolColor }} />
+          {card.energyValue > 0 && <div className="card-energy">{card.energyValue}</div>}
+          <div className="card-name">{card.name}</div>
+          <div className="card-school">{card.school}</div>
+          <div className="card-text">{card.text}</div>
+          <div className="card-type">{card.type}</div>
+        </>
       )}
-      <div className="card-school-bar" style={{ background: schoolColor }} />
-      {card.energyValue > 0 && <div className="card-energy">{card.energyValue}</div>}
-      <div className="card-name">{card.name}</div>
-      <div className="card-school">{card.school}</div>
-      <div className="card-text">{card.text}</div>
-      <div className="card-type">{card.type}</div>
     </div>
   );
 }

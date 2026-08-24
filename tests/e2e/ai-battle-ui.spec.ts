@@ -31,8 +31,8 @@ test('human vs AI shows interactive controls', async ({ page }) => {
   for (let i = 0; i < 3; i++) await boxes.nth(i).check();
   await page.locator('.setup-start').click();
 
-  // Human turn appears: "Your Hand" label + highlightable move cells.
-  await expect(page.locator('.hand-label')).toContainText('Your Hand', { timeout: 15000 });
+  // Human turn appears: hand label marks the player + "(You)", and move cells highlight.
+  await expect(page.locator('.hand-label')).toContainText('Wizard\'s Hand (You)', { timeout: 15000 });
   const moveCells = await page.locator('.board-cell--hl-move').count();
   expect(moveCells).toBeGreaterThanOrEqual(1);
 });
