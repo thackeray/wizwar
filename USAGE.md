@@ -33,7 +33,9 @@ npm run build
 ### 创建新游戏
 1. 打开应用后看到设置界面
 2. 选择玩家数量（2-4人）
-3. 为每个座位选择人类(H)或机器人(B)
+3. 选择游戏模式：
+   - **AI vs AI (Spectate)**: 观看 AI 对战
+   - **Human vs AI**: 人类玩家 vs AI（第一个座位是人类）
 4. 选择 3 个学派（从 6 个可选学派中选 3 个）
 5. 点击 "Start Game"
 
@@ -202,7 +204,28 @@ npm run test:watch
 ```
 
 ### 端口被占用
+ ```bash
+ # 使用不同端口
+ npm run dev -- --port 3000
+ ```
+
+## AI 评估工具
+
+### 评估 bot 胜率
 ```bash
-# 使用不同端口
-npm run dev -- --port 3000
+# 评估 strategic bot（8 个 seed，最多 300 回合）
+npx tsx src/headless/eval.ts strategic 0 8 300
+
+# 评估 heuristic bot
+npx tsx src/headless/eval.ts heuristic 0 8 300
+
+# 输出包含各扇区胜率统计和难度评级
 ```
+
+### 扇区难度说明
+由于棋盘不对称（§18.2），各扇区胜率不同：
+- **green**: 通常最强（★★★）
+- **yellow**: 中等（★★）
+- **blue/red**: 较弱（★）
+
+游戏已加入平衡机制：blue/red 玩家开局多 1 张能量卡。
