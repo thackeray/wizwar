@@ -37,6 +37,23 @@ function showSetup(): void {
   countRow.appendChild(countSel);
   box.appendChild(countRow);
 
+  // Game mode.
+  const modeRow = document.createElement('div');
+  modeRow.className = 'setup__row';
+  modeRow.innerHTML = '<label>Mode: </label>';
+  const modeSel = document.createElement('select');
+  const aiOpt = document.createElement('option');
+  aiOpt.value = 'ai';
+  aiOpt.textContent = 'AI vs AI (Spectate)';
+  aiOpt.selected = true;
+  modeSel.appendChild(aiOpt);
+  const humanOpt = document.createElement('option');
+  humanOpt.value = 'human';
+  humanOpt.textContent = 'Human vs AI';
+  modeSel.appendChild(humanOpt);
+  modeRow.appendChild(modeSel);
+  box.appendChild(modeRow);
+
   // Schools.
   const schoolRow = document.createElement('div');
   schoolRow.className = 'setup__row';
@@ -60,19 +77,27 @@ function showSetup(): void {
   // Start button.
   const startBtn = document.createElement('button');
   startBtn.className = 'setup__start';
-  startBtn.textContent = 'Start AI Battle';
+  startBtn.textContent = 'Start Game';
   startBtn.addEventListener('click', () => {
     const count = parseInt(countSel.value, 10);
+    const mode = modeSel.value;
     const schools = CHOOSABLE_SCHOOLS.filter((s) => schoolChecks[s].checked);
     if (schools.length !== 3) {
       alert('Please select exactly 3 schools.');
       return;
     }
     
-    // AI Battle mode.
-    const botTypes: ('random' | 'heuristic' | 'evolving')[] = Array(
-      count,
-    ).fill('heuristic');
+    // Determine bot types based on mode.
+    let botTypes: ('random' | 'heuristic' | 'evolving' | 'human')[];
+    if (mode === 'human') {
+      // Human vs AI: first player is human, rest are AI.
+      botTypes = Array(count).fill('heuristic');
+      botTypes[0] = 'human';
+    } else {
+      // AI vs AI: all players are AI.
+      botTypes = Array(count).fill('heuristic');
+    }
+    
     const battle = new Battle(root, {
       playerCount: count,
       botTypes,

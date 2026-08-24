@@ -14,7 +14,7 @@ import boardDataJSON from '../board-data.json';
 
 export interface BattleConfig {
   playerCount: number;
-  botTypes: ('random' | 'heuristic' | 'evolving')[];
+  botTypes: ('random' | 'heuristic' | 'evolving' | 'human')[];
   schools: School[];
   speed: 'slow' | 'medium' | 'fast' | 'instant';
   seed: number;
@@ -57,6 +57,10 @@ export class Battle {
           return new HeuristicBot();
         case 'evolving':
           return new EvolvingBot(`Bot ${i}`);
+        case 'human':
+          // Placeholder: Use HeuristicBot for now.
+          // Full human interaction would require UI changes.
+          return new HeuristicBot();
         default:
           return new HeuristicBot();
       }
