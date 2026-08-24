@@ -35,10 +35,12 @@ describe('game state', () => {
     expect(state.players[1].color).toBe('red');
   });
 
-  it('deals starting hands of 5 cards', () => {
+  it('deals starting hands of 5 cards (+ sector bonus)', () => {
     const state = makeGame();
     for (const p of state.players) {
-      expect(p.hand).toHaveLength(5);
+      // §18.2: Blue and red get 1 extra energy card.
+      const expectedSize = (p.color === 'blue' || p.color === 'red') ? 6 : 5;
+      expect(p.hand).toHaveLength(expectedSize);
     }
   });
 

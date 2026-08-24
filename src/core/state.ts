@@ -23,16 +23,26 @@ export function homeRef(color: Color): CellRef {
   return { sector: color, r: 2, c: 2 };
 }
 
+// §18.2: Sector balancing - give weaker sectors advantages.
+// Based on eval results: green is strongest, blue/red are weakest.
+const SECTOR_BONUS: Record<Color, { extraEnergy: number; extraLife: number }> = {
+  blue: { extraEnergy: 1, extraLife: 0 },
+  red: { extraEnergy: 1, extraLife: 0 },
+  yellow: { extraEnergy: 0, extraLife: 0 },
+  green: { extraEnergy: 0, extraLife: 0 },
+};
+
 export function createPlayer(
   id: number,
   color: Color,
   isBot: boolean,
 ): PlayerState {
+  const bonus = SECTOR_BONUS[color];
   return {
     id,
     color,
     isBot,
-    life: 15,
+    life: 15 + bonus.extraLife,
     vp: 0,
     pos: homeRef(color),
     hand: [],
@@ -84,6 +94,11 @@ export function createGameState(
   for (const p of players) {
     for (let i = 0; i < 5; i++) {
       p.hand.push(shuffledDeck.pop()!);
+    }
+    // §18.2: Give sector bonus energy cards.
+    const bonus = SECTOR_BONUS[p.color];
+    for (let i = 0; i < bonus.extraEnergy; i++) {
+      p.hand.push('cantrip-energy');
     }
   }
 
