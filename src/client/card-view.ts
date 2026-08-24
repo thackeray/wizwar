@@ -1,4 +1,4 @@
-// Card rendering: pure HTML/CSS, no card images.
+// Card rendering: with card images.
 
 import type { Color, School } from '../core/types';
 import { getCard } from '../core/cards/registry';
@@ -39,33 +39,44 @@ export function renderCard(cardId: string, opts?: { small?: boolean }): HTMLElem
     el.textContent = cardId;
     return el;
   }
-  const bg = SCHOOL_COLORS[card.school];
-  const fg = SCHOOL_TEXT[card.school];
-  el.style.background = bg;
-  el.style.color = fg;
-
+  
+  // Try to use card image
+  const schoolDir = card.school.charAt(0).toUpperCase() + card.school.slice(1);
+  let cardName = card.name;
+  
+  // For energy cards, try to find the matching image with energy value
+  if (card.name === 'Energy' && card.energyValue > 0) {
+    cardName = `Energy ${card.energyValue}`;
+  }
+  
+  // Encode spaces in the filename
+  const encodedName = cardName.replace(/ /g, '%20');
+  const cardImg = `/images/cards/${schoolDir}/${encodedName}.png`;
+  
+  // Set image as background
+  el.style.backgroundImage = `url(${cardImg})`;
+  el.style.backgroundSize = 'cover';
+  el.style.backgroundPosition = 'center';
+  el.style.backgroundColor = SCHOOL_COLORS[card.school]; // Fallback color
+  
+  // Add text overlay for accessibility
+  const overlay = document.createElement('div');
+  overlay.className = 'card__overlay';
+  
   const name = document.createElement('div');
   name.className = 'card__name';
   name.textContent = card.name;
-  el.appendChild(name);
-
-  const school = document.createElement('div');
-  school.className = 'card__school';
-  school.textContent = card.school;
-  el.appendChild(school);
-
-  const text = document.createElement('div');
-  text.className = 'card__text';
-  text.textContent = card.text;
-  el.appendChild(text);
+  overlay.appendChild(name);
 
   // Energy value badge (blue circle) if usable as energy.
   if (card.energyValue > 0) {
     const energy = document.createElement('div');
     energy.className = 'card__energy';
     energy.textContent = String(card.energyValue);
-    el.appendChild(energy);
+    overlay.appendChild(energy);
   }
+  
+  el.appendChild(overlay);
 
   return el;
 }

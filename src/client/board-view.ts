@@ -1,13 +1,25 @@
-// Board rendering: 16x16 grid (4 sectors of 8x8), tokens, click handling.
+// Board rendering: 10x10 grid (4 sectors of 5x5), tokens, click handling.
 
 import type { GameState, CellRef, Color } from '../core/types';
-import { toGlobal, toLocal } from '../core/board';
+import { toGlobal, toLocal, SECTOR_ORIGIN } from '../core/board';
 
-const SECTOR_BG: Record<Color, string> = {
-  blue: '#dbeafe',
-  red: '#fee2e2',
-  yellow: '#fef9c3',
-  green: '#dcfce7',
+const SECTOR_IMAGE: Record<Color, Record<'front' | 'back', string>> = {
+  blue: {
+    front: '/images/boards/blue%20front.png',
+    back: '/images/boards/blue%20back.png',
+  },
+  red: {
+    front: '/images/boards/red%20front.png',
+    back: '/images/boards/red%20back.png',
+  },
+  yellow: {
+    front: '/images/boards/yellow%20front.png',
+    back: '/images/boards/yellow%20back.png',
+  },
+  green: {
+    front: '/images/boards/green%20front.png',
+    back: '/images/boards/green%20back.png',
+  },
 };
 
 const PLAYER_TOKEN: Record<Color, string> = {
@@ -31,7 +43,7 @@ export function renderBoard(
   container.innerHTML = '';
   const board = document.createElement('div');
   board.className = 'board';
-  board.style.gridTemplateColumns = `repeat(16, 1fr)`;
+  board.style.gridTemplateColumns = `repeat(10, 1fr)`;
 
   const highlightSet = new Set(
     (opts.highlight ?? []).map((r) => `${r.sector}:${r.r}:${r.c}`),
@@ -48,19 +60,41 @@ export function renderBoard(
     playersAt.set(key, arr);
   }
 
-  for (let row = 0; row < 16; row++) {
-    for (let col = 0; col < 16; col++) {
+  for (let row = 0; row < 10; row++) {
+    for (let col = 0; col < 10; col++) {
       const ref = toLocal(row, col);
       const cell = state.board.sectors[ref.sector].grid[ref.r][ref.c];
       const el = document.createElement('div');
       el.className = 'board__cell';
-      el.style.background = SECTOR_BG[ref.sector];
+      
+      // Use sector image as background (based on selected side)
+      const origin = SECTOR_ORIGIN[ref.sector];
+      const localRow = row - origin.row;
+      const localCol = col - origin.col;
+      const sector = state.board.sectors[ref.sector];
+      const img = SECTOR_IMAGE[ref.sector][sector.side];
+      el.style.backgroundImage = `url(${img})`;
+      el.style.backgroundSize = '500% 500%';
+      el.style.backgroundPosition = `${localCol * 25}% ${localRow * 25}%`;
+      
       el.dataset.row = String(row);
       el.dataset.col = String(col);
 
       if (cell.kind === 'home') {
         el.classList.add('board__cell--home');
       }
+
+      // Wall indicators
+      if (cell.walls.N) el.classList.add('board__cell--wall-n');
+      if (cell.walls.S) el.classList.add('board__cell--wall-s');
+      if (cell.walls.E) el.classList.add('board__cell--wall-e');
+      if (cell.walls.W) el.classList.add('board__cell--wall-w');
+
+      // Door indicators
+      if (cell.doors.N) el.classList.add('board__cell--door-n');
+      if (cell.doors.S) el.classList.add('board__cell--door-s');
+      if (cell.doors.E) el.classList.add('board__cell--door-e');
+      if (cell.doors.W) el.classList.add('board__cell--door-w');
 
       // Treasure markers.
       if (cell.treasures.length > 0) {

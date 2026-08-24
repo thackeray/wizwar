@@ -5,6 +5,7 @@ import { applyAction } from '../core/actions';
 import { startTurn } from '../core/turn';
 import { getLegalActions, type AIPlayer } from '../core/ai/bots';
 import { moveDestination } from '../core/board';
+import { getCard } from '../core/cards/registry';
 import { renderBoard } from './board-view';
 import { renderCard, PLAYER_COLORS } from './card-view';
 import { showTurnPrompt, showGameOver } from './hotseat';
@@ -43,10 +44,18 @@ export class GameUI {
       await this.playBotTurn();
     } else {
       const p = this.state.players[this.state.currentPlayer];
-      showTurnPrompt(p.color, PLAYER_COLORS[p.color], () => {
+      // Only show turn prompt if there are multiple human players
+      const humanPlayers = this.state.players.filter((pl) => !pl.isBot);
+      if (humanPlayers.length > 1) {
+        showTurnPrompt(p.color, PLAYER_COLORS[p.color], () => {
+          startTurn(this.state);
+          this.render();
+        });
+      } else {
+        // Single player or vs bots: start turn immediately
         startTurn(this.state);
         this.render();
-      });
+      }
     }
   }
 
@@ -95,7 +104,7 @@ export class GameUI {
       <span class="ui__meta">Turn ${s.turnNumber} · ${s.phase}</span>`;
     this.container.appendChild(header);
 
-    // Main area: board + sidebar.
+    // Main area: board + sidebar (with hand).
     const main = document.createElement('div');
     main.className = 'ui__main';
 
@@ -112,16 +121,17 @@ export class GameUI {
     const sidebar = document.createElement('div');
     sidebar.className = 'ui__sidebar';
     sidebar.appendChild(this.renderPlayerPanels());
-    main.appendChild(sidebar);
-
-    this.container.appendChild(main);
-
-    // Hand + controls.
+    
+    // Hand + controls in sidebar
     const controls = document.createElement('div');
     controls.className = 'ui__controls';
     controls.appendChild(this.renderHand());
     controls.appendChild(this.renderPhaseControls());
-    this.container.appendChild(controls);
+    sidebar.appendChild(controls);
+    
+    main.appendChild(sidebar);
+
+    this.container.appendChild(main);
 
     // Log.
     const log = document.createElement('div');
@@ -139,11 +149,28 @@ export class GameUI {
   private computeHighlights(): CellRef[] {
     if (this.busy || this.isBotTurn()) return [];
     const p = this.state.players[this.state.currentPlayer];
-    const legal = getLegalActions(this.state, p.id);
     const out: CellRef[] = [];
+    
+    // If a card is selected, highlight valid targets
+    if (this.selectedCard) {
+      const card = getCard(this.selectedCard);
+      if (card) {
+        // Highlight all cells with players (for wizard targets)
+        for (const pl of this.state.players) {
+          if (pl.alive && pl.id !== p.id) {
+            out.push(pl.pos);
+          }
+        }
+        // Also highlight the current cell for self-targeting
+        out.push(p.pos);
+      }
+      return out;
+    }
+    
+    // Otherwise, highlight move destinations
+    const legal = getLegalActions(this.state, p.id);
     for (const a of legal) {
       if (a.type === 'move') {
-        // Compute destination for this direction.
         const dest = this.moveDest(p.pos, a.dir);
         if (dest) out.push(dest);
       }
@@ -206,17 +233,51 @@ export class GameUI {
     wrap.className = 'ui__phasecontrols';
     const disabled = this.busy || this.isBotTurn();
     const phase = this.state.phase;
+    const p = this.state.players[this.state.currentPlayer];
 
-    const mkBtn = (text: string, onClick: () => void): HTMLButtonElement => {
+    const mkBtn = (text: string, onClick: () => void, disabledOverride = false): HTMLButtonElement => {
       const b = document.createElement('button');
       b.className = 'ui__endturn';
       b.textContent = text;
-      b.disabled = disabled;
+      b.disabled = disabled || disabledOverride;
       b.addEventListener('click', onClick);
       return b;
     };
 
     if (phase === 'move-cast') {
+      // Punch button (if adjacent enemy exists)
+      const adjacentEnemy = this.state.players.find(
+        (t) => t.id !== p.id && t.alive && this.isAdjacent(p.pos, t.pos)
+      );
+      if (adjacentEnemy && !p.attacked && this.state.turnNumber > 1) {
+        wrap.appendChild(mkBtn('Punch', () => this.handlePunch(adjacentEnemy.id)));
+      }
+      
+      // Pick up treasure (if on treasure cell)
+      const cell = this.state.board.sectors[p.pos.sector].grid[p.pos.r][p.pos.c];
+      if (cell.treasures.length > 0 && p.carriedTreasure === null) {
+        wrap.appendChild(mkBtn('Pick Treasure', () => this.handlePickTreasure(cell.treasures[0])));
+      }
+      
+      // Pick up object (if on object cell)
+      if (cell.objects.length > 0) {
+        wrap.appendChild(mkBtn('Pick Object', () => this.handlePickObject(cell.objects[0].id)));
+      }
+      
+      // Drop item (if carrying items)
+      if (p.carriedItems.length > 0) {
+        wrap.appendChild(mkBtn('Drop Item', () => this.handleDropItem(p.carriedItems[0])));
+      }
+      
+      // Boost speed (if have energy card and not already boosted)
+      const energyCard = p.hand.find((id) => {
+        const card = getCard(id);
+        return card && card.energyValue > 0 && card.type === 'energy';
+      });
+      if (energyCard && !p.speedBoosted) {
+        wrap.appendChild(mkBtn('Boost Speed', () => this.handleBoostSpeed(energyCard)));
+      }
+      
       wrap.appendChild(mkBtn('End Turn', () => this.handleEndTurn()));
     } else if (phase === 'discard-draw') {
       wrap.appendChild(mkBtn('Draw 1', () => this.handleDraw(1)));
@@ -224,6 +285,68 @@ export class GameUI {
       wrap.appendChild(mkBtn('Done', () => this.handleEndTurn()));
     }
     return wrap;
+  }
+
+  private isAdjacent(a: CellRef, b: CellRef): boolean {
+    if (a.sector !== b.sector) return false;
+    const dr = Math.abs(a.r - b.r);
+    const dc = Math.abs(a.c - b.c);
+    return (dr === 1 && dc === 0) || (dr === 0 && dc === 1);
+  }
+
+  private handlePunch(targetId: number): void {
+    if (this.busy || this.isBotTurn()) return;
+    const prev = this.state.players[this.state.currentPlayer].id;
+    const res = applyAction(this.state, { type: 'punch', target: targetId });
+    if (res.ok) {
+      this.afterAction(prev);
+    } else {
+      this.flash(res.reason ?? 'Cannot punch');
+    }
+  }
+
+  private handlePickTreasure(treasureId: number): void {
+    if (this.busy || this.isBotTurn()) return;
+    const prev = this.state.players[this.state.currentPlayer].id;
+    const res = applyAction(this.state, { type: 'pick-up-treasure', treasureId });
+    if (res.ok) {
+      this.afterAction(prev);
+    } else {
+      this.flash(res.reason ?? 'Cannot pick up treasure');
+    }
+  }
+
+  private handlePickObject(objectId: number): void {
+    if (this.busy || this.isBotTurn()) return;
+    const prev = this.state.players[this.state.currentPlayer].id;
+    const res = applyAction(this.state, { type: 'pick-up-object', objectId });
+    if (res.ok) {
+      this.afterAction(prev);
+    } else {
+      this.flash(res.reason ?? 'Cannot pick up object');
+    }
+  }
+
+  private handleDropItem(cardId: string): void {
+    if (this.busy || this.isBotTurn()) return;
+    const prev = this.state.players[this.state.currentPlayer].id;
+    const res = applyAction(this.state, { type: 'drop-item', cardId });
+    if (res.ok) {
+      this.afterAction(prev);
+    } else {
+      this.flash(res.reason ?? 'Cannot drop item');
+    }
+  }
+
+  private handleBoostSpeed(cardId: string): void {
+    if (this.busy || this.isBotTurn()) return;
+    const prev = this.state.players[this.state.currentPlayer].id;
+    const res = applyAction(this.state, { type: 'boost-speed', cardId });
+    if (res.ok) {
+      this.afterAction(prev);
+    } else {
+      this.flash(res.reason ?? 'Cannot boost speed');
+    }
   }
 
   private handleCardClick(cardId: string): void {
@@ -239,7 +362,18 @@ export class GameUI {
 
     // If a card is selected, try to cast at this target.
     if (this.selectedCard) {
-      const target: TargetRef = { kind: 'cell', ref };
+      // Check if there's a player on this cell to target them
+      const targetPlayer = this.state.players.find(
+        (pl) => pl.alive && pl.pos.sector === ref.sector && pl.pos.r === ref.r && pl.pos.c === ref.c
+      );
+      
+      let target: TargetRef;
+      if (targetPlayer) {
+        target = { kind: 'wizard', id: targetPlayer.id };
+      } else {
+        target = { kind: 'cell', ref };
+      }
+      
       const res = applyAction(this.state, {
         type: 'cast',
         cardId: this.selectedCard,
