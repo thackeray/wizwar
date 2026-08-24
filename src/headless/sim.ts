@@ -107,23 +107,24 @@ export async function runSimulation(config: SimConfig): Promise<SimResult> {
 async function main() {
   const args = process.argv.slice(2);
   const useEvolving = args.includes('--evolving');
-  const useStrategic = args.includes('--strategic');
+  const useHeuristic = args.includes('--heuristic');
   const recordFlag = args.find((a) => a.startsWith('--record'));
   const recordDir = recordFlag ? recordFlag.split('=')[1] ?? 'logs' : undefined;
   const seedArg = args.find((a) => !a.startsWith('--'));
   const seed = seedArg ? parseInt(seedArg, 10) : 42;
 
+  // StrategicBot is the default so headless matches the web UI.
   console.log(`Running simulation with seed ${seed}...`);
-  console.log(`Using ${useEvolving ? 'evolving' : useStrategic ? 'strategic' : 'heuristic'} bots${recordDir ? ` (recording to ${recordDir}/)` : ''}`);
+  console.log(`Using ${useEvolving ? 'evolving' : useHeuristic ? 'heuristic' : 'strategic'} bots${recordDir ? ` (recording to ${recordDir}/)` : ''}`);
 
   const result = await runSimulation({
     seed,
     playerColors: ['blue', 'red', 'yellow', 'green'],
     botTypes: useEvolving
       ? ['evolving', 'evolving', 'evolving', 'evolving']
-      : useStrategic
-        ? ['strategic', 'strategic', 'strategic', 'strategic']
-        : ['heuristic', 'heuristic', 'heuristic', 'heuristic'],
+      : useHeuristic
+        ? ['heuristic', 'heuristic', 'heuristic', 'heuristic']
+        : ['strategic', 'strategic', 'strategic', 'strategic'],
     recordDir,
   });
   console.log(`Winner: ${result.winner === null ? 'None (max turns)' : result.finalState.players[result.winner].color}`);
