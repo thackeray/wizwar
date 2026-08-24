@@ -1,5 +1,5 @@
 // Setup screen component
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { GameConfig } from '../App';
 
 const CHOOSABLE_SCHOOLS = [

@@ -1,5 +1,5 @@
 // Main App component
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SetupScreen from './components/SetupScreen';
 import BattleScreen from './components/BattleScreen';
 
