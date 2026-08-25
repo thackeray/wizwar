@@ -16,8 +16,13 @@ const SCHOOL_COLOR: Record<string, string> = {
 
 function cardImage(card: CardDef): string | null {
   const dir = card.school.charAt(0).toUpperCase() + card.school.slice(1);
-  const name = card.name.replace(/ /g, '%20');
-  return `${import.meta.env.BASE_URL}images/cards/${dir}/${name}.png`;
+  // Energy card scans are named by value ("Energy 6", "Energy 5", ...),
+  // while their data name is just "Energy".
+  const display = card.name === 'Energy' && card.energyValue > 0
+    ? `Energy ${card.energyValue}`
+    : card.name;
+  const name = display.replace(/ /g, '%20');
+  return `${import.meta.env.BASE_URL}images/cards/${dir}/${name}.webp`;
 }
 
 function HandCard({ cardId, selected, onClick }: { cardId: string; selected: boolean; onClick: () => void }) {

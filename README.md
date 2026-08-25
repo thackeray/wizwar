@@ -70,7 +70,7 @@ scripts/           Board-topology extraction & card data tooling
 
 ## Notes
 
-- Compressed **board art is committed** (~2 MB). High-res board scans and the 477 MB card scans stay local (git-ignored); if a board image is ever missing, the UI falls back to a CSS-rendered board, so a fresh clone always runs.
+- Compressed **board art (~2 MB)** and **card art (300 cards as 300px WebP, ~16 MB)** are committed, so the online version shows real artwork. High-res scans (477 MB of PNGs) stay local (git-ignored); if an image is ever missing the UI falls back to a CSS-rendered card/board, so a fresh clone always runs.
 - The rulebook PDF/DOCX are intentionally **not** distributed in this repository.
 
 ## License
