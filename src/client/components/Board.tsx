@@ -4,11 +4,12 @@ import type React from 'react';
 import { toGlobal, toLocal, SECTOR_ORIGIN } from '../../core/board';
 import type { GameState, CellRef, Color } from '../../core/types';
 
+const BASE = import.meta.env.BASE_URL;
 const SECTOR_IMAGE: Record<Color, Record<'front' | 'back', string>> = {
-  blue: { front: '/images/boards/blue-front.jpg', back: '/images/boards/blue-back.jpg' },
-  red: { front: '/images/boards/red-front.jpg', back: '/images/boards/red-back.jpg' },
-  yellow: { front: '/images/boards/yellow-front.jpg', back: '/images/boards/yellow-back.jpg' },
-  green: { front: '/images/boards/green-front.jpg', back: '/images/boards/green-back.jpg' },
+  blue: { front: `${BASE}images/boards/blue-front.jpg`, back: `${BASE}images/boards/blue-back.jpg` },
+  red: { front: `${BASE}images/boards/red-front.jpg`, back: `${BASE}images/boards/red-back.jpg` },
+  yellow: { front: `${BASE}images/boards/yellow-front.jpg`, back: `${BASE}images/boards/yellow-back.jpg` },
+  green: { front: `${BASE}images/boards/green-front.jpg`, back: `${BASE}images/boards/green-back.jpg` },
 };
 
 // Fallback background per sector: shows through when the board image is

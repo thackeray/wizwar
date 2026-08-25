@@ -17,7 +17,7 @@ const SCHOOL_COLOR: Record<string, string> = {
 function cardImage(card: CardDef): string | null {
   const dir = card.school.charAt(0).toUpperCase() + card.school.slice(1);
   const name = card.name.replace(/ /g, '%20');
-  return `/images/cards/${dir}/${name}.png`;
+  return `${import.meta.env.BASE_URL}images/cards/${dir}/${name}.png`;
 }
 
 function HandCard({ cardId, selected, onClick }: { cardId: string; selected: boolean; onClick: () => void }) {

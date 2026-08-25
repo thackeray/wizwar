@@ -4,6 +4,14 @@ A browser-based digital adaptation of the **Wiz-War** board game — a pure Type
 
 > ⚠️ This is a fan-made digital adaptation. Wiz-War is a published board game; this project does **not** bundle the original rulebook or artwork scans.
 
+## ▶️ Play online (no install needed)
+
+**https://thackeray.github.io/wizwar/** — just open the link and play in your browser.
+
+<img src="docs/screenshot.png" alt="Wiz-War battle screenshot" width="720" />
+
+<img src="docs/battle.gif" alt="Wiz-War AI battle demo" width="560" />
+
 ## Features
 
 - **Pure TypeScript rule engine** — synchronous, side-effect-free core (`src/core/`) that is fully unit-testable.
@@ -18,6 +26,14 @@ A browser-based digital adaptation of the **Wiz-War** board game — a pure Type
 TypeScript · Vite · React 19 · Tailwind 4 · Vitest · Playwright · tsx
 
 ## Getting started
+
+**Run locally in one command** (installs deps if needed, then starts the dev server):
+
+```bash
+./run.sh
+```
+
+Or manually:
 
 ```bash
 npm install
