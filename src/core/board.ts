@@ -273,7 +273,23 @@ export function moveDestination(
 
   // Check if we're still on the board.
   if (gr < 0 || gr >= BOARD_SIZE || gc < 0 || gc >= BOARD_SIZE) {
-    return null; // Blocked by board edge
+    // Off the board edge -> wrap around (top<->bottom, left<->right).
+    // Only allowed through an opening (no wall) at both exit and entry.
+    let wrappedRow = gr;
+    let wrappedCol = gc;
+    if (gr < 0) wrappedRow = BOARD_SIZE - 1;
+    else if (gr >= BOARD_SIZE) wrappedRow = 0;
+    if (gc < 0) wrappedCol = BOARD_SIZE - 1;
+    else if (gc >= BOARD_SIZE) wrappedCol = 0;
+
+    // Exit must be open (no wall on `from` in `dir`).
+    if (wallBetween(board, from, dir)) return null;
+
+    const wrapDest = toLocal(wrappedRow, wrappedCol);
+    // Entry must be open (no wall on `wrapDest` in opposite dir).
+    if (wallBetween(board, wrapDest, OPPOSITE[dir])) return null;
+
+    return wrapDest;
   }
 
   const dest = toLocal(gr, gc);

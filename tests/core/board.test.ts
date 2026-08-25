@@ -70,12 +70,26 @@ describe('movement', () => {
     expect(dest).toEqual({ sector: 'blue', r: 4, c: 3 });
   });
 
-  it('blocks movement at board edges', () => {
+  it('blocks movement at board edges when walled', () => {
     const board = createBoard();
-    // Moving north from the top edge is blocked.
+    // Add a wall on the top edge to block northward movement.
+    board.sectors.blue.grid[0][3].walls.N = true;
     const from: CellRef = { sector: 'blue', r: 0, c: 3 };
     const dest = moveDestination(board, from, 'N', 'blue');
     expect(dest).toBeNull();
+  });
+
+  it('wraps around the board edge through an opening', () => {
+    const board = createBoard();
+    // Moving north from the top edge wraps to the bottom edge (same column).
+    const from: CellRef = { sector: 'blue', r: 0, c: 3 };
+    const dest = moveDestination(board, from, 'N', 'blue');
+    expect(dest).toEqual({ sector: 'yellow', r: 4, c: 3 });
+
+    // Moving west from the left edge wraps to the right edge (same row).
+    const from2: CellRef = { sector: 'blue', r: 2, c: 0 };
+    const dest2 = moveDestination(board, from2, 'W', 'blue');
+    expect(dest2).toEqual({ sector: 'red', r: 2, c: 4 });
   });
 
   it('returns null for blocked moves', () => {
