@@ -28,3 +28,8 @@ logs/
 
 # Large image assets (654MB) - kept local, not versioned
 public/images/
+
+# Original rulebook (copyrighted) - kept local, not distributed
+WizWar_v2.1.pdf
+Wiz_Wars.docx
+WizWar_components.txt
