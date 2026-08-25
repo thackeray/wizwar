@@ -33,7 +33,7 @@ function HandCard({ cardId, selected, onClick }: { cardId: string; selected: boo
     <div
       className={`card${selected ? ' card-selected' : ''}`}
       onClick={onClick}
-      title={card.text}
+      data-tooltip={card.text}
     >
       {showImg ? (
         <>
