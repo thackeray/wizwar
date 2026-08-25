@@ -18,7 +18,7 @@ Wiz-War（巫师大战）桌游的 Web 数字版：**纯 TypeScript 规则引擎
 ## 当前状态（2026-08-25）
 
 - **§21 React UI 现代化：Phase 0–4 全部完成并已提交**（`82fd22d`→`b777d0d`）：mock 原型 → React 基础设施+战场 → VFX 事件驱动 → HumanInput 真交互 → 打磨。React 组件在 `src/client/components/`，入口 `src/client/main.tsx`。
-- 核心 125 测试全绿（`tests/` 现有 127 个 test/it），typecheck / build 通过。HEAD = `b777d0d`。
+- 核心 154 测试全绿（`tests/` 现有 154 个 test/it），typecheck / build 通过。HEAD = `b777d0d`。
 - **边缘直连已实现**：走出棋盘外缘经开口（无墙）环绕到对边（上↔下、左↔右），见「进行中的任务」。
 - Web 端与无头 sim 都默认 **StrategicBot**（`--heuristic` 保留旧 bot）。施法免费动作，优先级"先施法再移动"。物品可从**手牌或携带物**使用。
 
@@ -28,7 +28,7 @@ Wiz-War（巫师大战）桌游的 Web 数字版：**纯 TypeScript 规则引擎
 
 - 规则确认：**地图外边缘的门直接相连——上↔下（N-S 纵向直连）、左↔右（E-W 横向直连）。不是符文门，也不是成对传送门。**
 - 实现：`moveDestination`（`src/core/board.ts:274`）走出板边时不再返回 `null`，而是**环绕**到对边（同行/同列），仅当出口与入口都无墙（即"门"开口）时放行。真实棋盘外缘每边 index=2 处有开口（front/back 一致）。
-- 测试：`tests/core/board.test.ts` 新增环绕用例 + 改"板边阻挡"为"有墙才挡"。125 测试全绿，typecheck 通过，sim 正常。
+- 测试：`tests/core/board.test.ts` 新增环绕用例 + 改"板边阻挡"为"有墙才挡"。154 测试全绿，typecheck 通过，sim 正常。
 
 ## 已确认的规则/决策（别推翻、别重问）
 
@@ -48,7 +48,7 @@ Wiz-War（巫师大战）桌游的 Web 数字版：**纯 TypeScript 规则引擎
 
 ## 工程红线
 
-- 改动核心必须保持 **124 测试全绿 + `npm run typecheck` 通过**。
+- 改动核心必须保持 **154 测试全绿 + `npm run typecheck` 通过**。
 - 每条规则改动按"当前红 → 修后绿"验证，先写/改测试再实现或同步。
 - 提交按逻辑分组（规则修复 / 卡数据 / AI / 测试 / 文档），message 带 milestone 说明。
 - 不要为"好看"重构已交付且验证过的代码；§21 死代码清理范围以 §21.4 为准。

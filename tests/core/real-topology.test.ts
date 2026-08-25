@@ -1,7 +1,7 @@
 // Tests using real board topology from board-data.json.
 
 import { describe, it, expect } from 'vitest';
-import { createBoardFromTopology, hasLOS, moveDestination } from '../../src/core/board';
+import { createBoardFromTopology, hasLOS, makeDoor, moveDestination } from '../../src/core/board';
 import { convertBoardData } from '../../src/core/board-data';
 import { createGameState } from '../../src/core/state';
 import { buildDeck } from '../../src/core/cards/registry';
@@ -99,21 +99,24 @@ describe('Real Topology Tests', () => {
     expect(homeCount).toBeGreaterThan(0);
   });
 
-  it('should block LOS with walls', () => {
+  it('should block LOS with closed doors', () => {
     const state = makeRealGame();
     const board = state.board;
-    
-    // Find two cells that should be blocked by a wall.
-    // This is a simplified test - in a real scenario, we'd need to find specific cells.
-    const from = { sector: 'blue' as Color, r: 0, c: 0 };
-    const to = { sector: 'blue' as Color, r: 0, c: 4 };
-    
-    // Check if there's a wall between them.
-    const los = hasLOS(board, from, to, 'blue');
-    
-    // The result depends on the actual board layout.
-    // We just verify that the function works without errors.
-    expect([true, false]).toContain(los);
+    const from = { sector: 'blue' as Color, r: 1, c: 1 };
+    const to = { sector: 'blue' as Color, r: 1, c: 3 };
+    // Clear any static walls on the corridor so the door is the only blocker.
+    board.sectors.blue.grid[1][1].walls.E = false;
+    board.sectors.blue.grid[1][2].walls.W = false;
+    board.sectors.blue.grid[1][2].walls.E = false;
+    board.sectors.blue.grid[1][3].walls.W = false;
+
+    // Closed door (different-color observer) blocks LOS...
+    board.sectors.blue.grid[1][1].doors.E = makeDoor('blue', true);
+    expect(hasLOS(board, from, to, 'red')).toBe(false);
+
+    // ...and an open door lets LOS through.
+    board.sectors.blue.grid[1][1].doors.E!.locked = false;
+    expect(hasLOS(board, from, to, 'red')).toBe(true);
   });
 
   it('should generate legal actions with real topology', () => {
