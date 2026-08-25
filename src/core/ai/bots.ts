@@ -51,6 +51,21 @@ export interface AIPlayer {
   chooseCounter?(state: GameState, pending: { cardId: string; caster: number }, myHand: string[]): Promise<{ cardId: string } | null>;
 }
 
+// Pick the best fuel card for boost-speed / spell fuel: prefer dedicated Energy
+// cards (type 'energy'), falling back to any card carrying an energy value.
+function pickFuelCard(hand: string[], excludeCardId?: string): string | null {
+  const candidates: string[] = [];
+  const fallbacks: string[] = [];
+  for (const cardId of hand) {
+    if (cardId === excludeCardId) continue;
+    const c = getCard(cardId);
+    if (!c || c.energyValue <= 0) continue;
+    if (c.type === 'energy') candidates.push(cardId);
+    else fallbacks.push(cardId);
+  }
+  return candidates[0] ?? fallbacks[0] ?? null;
+}
+
 // Generate all legal actions for a player (for AI and UI).
 export function getLegalActions(state: GameState, playerId: number): Action[] {
   const actions: Action[] = [];
@@ -137,12 +152,9 @@ export function getLegalActions(state: GameState, playerId: number): Action[] {
     }
     // §16.4.3: Boost speed if player has energy card and hasn't boosted yet.
     if (!p.speedBoosted) {
-      for (const cardId of p.hand) {
-        const card = getCard(cardId);
-        if (card && card.energyValue > 0) {
-          actions.push({ type: 'boost-speed', cardId });
-          break; // Only add one boost-speed action.
-        }
+      const fuelId = pickFuelCard(p.hand);
+      if (fuelId) {
+        actions.push({ type: 'boost-speed', cardId: fuelId });
       }
     }
     // §16.4.3: Drop item if player has carried items.
@@ -164,20 +176,17 @@ export function getLegalActions(state: GameState, playerId: number): Action[] {
         // Check if this card uses energy damage.
         const usesEnergyDamage = card.effect?.amount === '@energy';
         if (usesEnergyDamage) {
-          // Add cast actions with energy card fuel.
-          for (const fuelCardId of p.hand) {
-            if (fuelCardId === cardId) continue;
-            const fuelCard = getCard(fuelCardId);
-            if (fuelCard && fuelCard.energyValue > 0) {
-              const targets = targetsForCard(state, p, card);
-              if (targets.length > 0) {
-                for (const target of targets) {
-                  actions.push({ type: 'cast', cardId, target, energyCard: fuelCardId });
-                }
-              } else {
-                actions.push({ type: 'cast', cardId, energyCard: fuelCardId });
+          // Add cast actions with energy card fuel. Prefer dedicated Energy
+          // cards over spells that merely carry an energy value.
+          const fuelCardId = pickFuelCard(p.hand, cardId);
+          if (fuelCardId) {
+            const targets = targetsForCard(state, p, card);
+            if (targets.length > 0) {
+              for (const target of targets) {
+                actions.push({ type: 'cast', cardId, target, energyCard: fuelCardId });
               }
-              break; // Only add one fuel variant per card.
+            } else {
+              actions.push({ type: 'cast', cardId, energyCard: fuelCardId });
             }
           }
         }

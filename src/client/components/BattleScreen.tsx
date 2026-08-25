@@ -53,7 +53,10 @@ function cellKey(ref: CellRef): string {
 function describeAction(state: GameState, a: Action): string {
   switch (a.type) {
     case 'punch': return `Punch ${state.players[a.target].color}`;
-    case 'boost-speed': return 'Boost Speed';
+    case 'boost-speed': {
+      const fuel = getCard(a.cardId);
+      return fuel ? `Boost Speed (+${fuel.energyValue} Energy)` : 'Boost Speed';
+    }
     case 'end-turn': return 'End Turn';
     case 'pick-up-treasure': return 'Pick up Treasure';
     case 'drop-treasure': return 'Drop Treasure';
