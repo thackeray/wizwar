@@ -54,7 +54,7 @@ scripts/           Board-topology extraction & card data tooling
 
 ## Notes
 
-- The full board/card **scans live only in `public/images/` on the local machine** (654 MB, git-ignored). Without them the UI renders CSS-drawn board/cards as a fallback, so a fresh clone runs fine.
+- Compressed **board art is committed** (~2 MB). High-res board scans and the 477 MB card scans stay local (git-ignored); if a board image is ever missing, the UI falls back to a CSS-rendered board, so a fresh clone always runs.
 - The rulebook PDF/DOCX are intentionally **not** distributed in this repository.
 
 ## License
