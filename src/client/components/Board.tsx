@@ -5,10 +5,19 @@ import { toGlobal, toLocal, SECTOR_ORIGIN } from '../../core/board';
 import type { GameState, CellRef, Color } from '../../core/types';
 
 const SECTOR_IMAGE: Record<Color, Record<'front' | 'back', string>> = {
-  blue: { front: '/images/boards/blue%20front.png', back: '/images/boards/blue%20back.png' },
-  red: { front: '/images/boards/red%20front.png', back: '/images/boards/red%20back.png' },
-  yellow: { front: '/images/boards/yellow%20front.png', back: '/images/boards/yellow%20back.png' },
-  green: { front: '/images/boards/green%20front.png', back: '/images/boards/green%20back.png' },
+  blue: { front: '/images/boards/blue-front.jpg', back: '/images/boards/blue-back.jpg' },
+  red: { front: '/images/boards/red-front.jpg', back: '/images/boards/red-back.jpg' },
+  yellow: { front: '/images/boards/yellow-front.jpg', back: '/images/boards/yellow-back.jpg' },
+  green: { front: '/images/boards/green-front.jpg', back: '/images/boards/green-back.jpg' },
+};
+
+// Fallback background per sector: shows through when the board image is
+// missing (fresh clone without the scans), so the board stays legible.
+const SECTOR_BG: Record<Color, string> = {
+  blue: '#1e3a5f',
+  red: '#5f2230',
+  yellow: '#5f551e',
+  green: '#1e4a2e',
 };
 
 export interface BoardProps {
@@ -63,6 +72,7 @@ export default function Board({ state, highlight, castTargets, onCellClick, inte
           className={classes.join(' ')}
           style={{
             backgroundImage: `url(${img})`,
+            backgroundColor: SECTOR_BG[ref.sector],
             backgroundSize: '500% 500%',
             backgroundPosition: `${localCol * 25}% ${localRow * 25}%`,
           }}
