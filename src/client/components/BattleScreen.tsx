@@ -259,6 +259,14 @@ export default function BattleScreen({ config, onExit }: { config: BattleConfig;
       </header>
 
       <div className="battle-main">
+        {pendingAction && (
+          <div className="turn-callout">
+            <span className="turn-callout-title">▶ YOUR TURN</span>
+            <span className="turn-callout-hint">
+              Click a <b>glowing cyan cell</b> to move · pick a card to cast · or press <b>End Turn</b>
+            </span>
+          </div>
+        )}
         <div className="battle-board" ref={boardBoxRef}>
           {state && <Board {...boardProps} />}
           <div className="vfx-float-layer" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 30 }}>
@@ -333,7 +341,7 @@ function CounterPrompt({ counter, onPick, onPass }: {
   });
 
   return (
-    <div className="vfx-banner" style={{ display: 'block', textAlign: 'center' }}>
+    <div className="vfx-banner vfx-banner--counter" style={{ display: 'block', textAlign: 'center' }}>
       <div style={{ marginBottom: 8 }}>⚔️ {casterColor} casts <b>{castCard?.name ?? counter.pending.cardId}</b> — counter?</div>
       <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
         {canCounter.map((id) => (

@@ -91,6 +91,32 @@ describe('M1: Counter window (real path)', () => {
     expect(state.discard).toContain('cantrip-negate-neutral');
   });
   
+  it('only includes players who hold a blocking counter card in counterOrder', () => {
+    const state = makeGame();
+    startTurn(state);
+    const p = currentPlayer(state);
+    const opponent = state.players.find((pl) => pl.id !== p.id)!;
+
+    // Opponent holds a counter card for the spell we cast.
+    opponent.hand.push('cantrip-negate-neutral');
+
+    // Cast a neutral spell (no target).
+    const neutralCardId = 'cantrip-pick-lock';
+    p.hand.push(neutralCardId);
+    applyAction(state, { type: 'cast', cardId: neutralCardId });
+
+    // The opponent (who holds a counter) is in counterOrder.
+    expect(state.awaitingCast).not.toBeNull();
+    expect(state.awaitingCast!.counterOrder).toContain(opponent.id);
+
+    // A player with no counter card is NOT in counterOrder — the game never
+    // pauses waiting on someone who cannot respond.
+    const idlePlayer = state.players.find((pl) => pl.id !== p.id && pl.id !== opponent.id);
+    if (idlePlayer) {
+      expect(state.awaitingCast!.counterOrder).not.toContain(idlePlayer.id);
+    }
+  });
+
   it('does not set attacked flag for countered attack spell', () => {
     const state = makeGame();
     startTurn(state);

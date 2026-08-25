@@ -1,6 +1,6 @@
 // All player actions: validation + application. Single entry point.
 
-import type { GameState, Action, Result, GameEvent, CellRef, TargetRef, Dir } from './types';
+import type { GameState, Action, Result, GameEvent, CellRef, TargetRef, Dir, CardDef, PlayerState } from './types';
 import { OPPOSITE } from './types';
 import { addLog, currentPlayer, handSize, MAX_HAND_SIZE } from './state';
 import { moveDestination, adjacentRefs, getCell, toGlobal, doorBetween, isConnectedByPortal } from './board';
@@ -295,7 +295,7 @@ function doCast(state: GameState, id: number, cardId: string, target?: TargetRef
   }
   
   // M1: Set up the awaiting cast state (don't resolve yet).
-  const counterOrder = calculateCounterOrder(state, p.id);
+  const counterOrder = calculateCounterOrder(state, p.id, card, target ?? null);
   state.awaitingCast = {
     caster: p.id,
     cardId,
@@ -314,22 +314,38 @@ function doCast(state: GameState, id: number, cardId: string, target?: TargetRef
   return { ok: true, events };
 }
 
-// M1: Calculate the counter order (players who can counter, in order).
-function calculateCounterOrder(state: GameState, casterId: number): number[] {
+// M1: Calculate the counter order — only players who hold a counter card that
+// actually blocks this cast. Players with nothing to counter are skipped so the
+// game never pauses waiting on someone who cannot respond.
+function calculateCounterOrder(state: GameState, casterId: number, castCard: CardDef, castTarget: TargetRef | null): number[] {
   const order: number[] = [];
   const n = state.players.length;
   const casterIdx = state.players.findIndex((p) => p.id === casterId);
-  
+
   // Start from the next player after the caster.
   for (let i = 1; i < n; i++) {
     const idx = (casterIdx + i) % n;
     const player = state.players[idx];
-    if (player.alive && player.id !== casterId) {
+    if (player.alive && player.id !== casterId && canCounter(player, castCard, castTarget)) {
       order.push(player.id);
     }
   }
-  
+
   return order;
+}
+
+// Does this player hold a counter card that blocks the given cast?
+function canCounter(player: PlayerState, castCard: CardDef, castTarget: TargetRef | null): boolean {
+  for (const cardId of player.hand) {
+    const c = getCard(cardId);
+    if (!c || !c.counter) continue;
+    if (!c.counter.blocks.includes(castCard.type)) continue;
+    if (c.counter.requiresTargetingMe) {
+      if (!castTarget || castTarget.kind !== 'wizard' || castTarget.id !== player.id) continue;
+    }
+    return true;
+  }
+  return false;
 }
 
 // M1: Resolve the cast (after counter window).

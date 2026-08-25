@@ -30,9 +30,15 @@ body {
 .battle-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; margin-bottom: 12px; }
 .battle-title { font-size: 24px; font-weight: bold; margin: 0; }
 .battle-meta { font-size: 14px; opacity: 0.8; display: flex; gap: 12px; align-items: center; }
-.battle-main { display: flex; gap: 16px; align-items: flex-start; }
+.battle-main { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
 .battle-board { flex: 0 0 min(62vw, 620px); position: relative; }
 .battle-sidebar { flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 12px; }
+/* "YOUR TURN" callout — shown above the board only while the human must act. */
+.turn-callout { flex-basis: 100%; display: flex; align-items: center; gap: 10px; background: linear-gradient(90deg, rgba(5,150,105,0.25), rgba(5,150,105,0.05)); border: 1px solid #059669; border-radius: 8px; padding: 8px 14px; animation: callout-in 0.3s ease-out; }
+.turn-callout-title { color: #34d399; font-weight: 800; letter-spacing: 0.5px; font-size: 14px; white-space: nowrap; }
+.turn-callout-hint { font-size: 13px; opacity: 0.9; }
+.turn-callout-hint b { color: #22d3ee; }
+@keyframes callout-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 .battle-btn { background: #334155; border: 1px solid #475569; color: #e2e8f0; border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; transition: filter 0.15s; }
 .battle-btn:hover { filter: brightness(1.15); }
 .battle-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -59,11 +65,11 @@ body {
 /* home tint */
 .board-cell--home { background-color: rgba(250, 204, 21, 0.08); }
 /* highlights */
-.board-cell--hl-move { box-shadow: inset 0 0 0 3px #22d3ee; animation: hl-pulse 1.2s ease-in-out infinite; }
-.board-cell--hl-cast { box-shadow: inset 0 0 0 3px #a855f7; }
-.board-cell--hl-target { box-shadow: inset 0 0 0 3px #facc15; }
+.board-cell--hl-move { box-shadow: inset 0 0 0 3px #22d3ee; background-color: rgba(34,211,238,0.18); animation: hl-pulse 1s ease-in-out infinite; cursor: pointer; }
+.board-cell--hl-cast { box-shadow: inset 0 0 0 3px #a855f7; background-color: rgba(168,85,247,0.18); cursor: pointer; }
+.board-cell--hl-target { box-shadow: inset 0 0 0 3px #facc15; background-color: rgba(250,204,21,0.18); cursor: pointer; }
 .board-cell--hl-current { box-shadow: inset 0 0 0 3px #f8fafc; }
-@keyframes hl-pulse { 0%,100% { box-shadow: inset 0 0 0 2px #22d3ee; } 50% { box-shadow: inset 0 0 0 5px #22d3ee; } }
+@keyframes hl-pulse { 0%,100% { box-shadow: inset 0 0 0 3px #22d3ee; } 50% { box-shadow: inset 0 0 0 7px #22d3ee; background-color: rgba(34,211,238,0.32); } }
 /* board decorations (treasure/object) */
 .board-deco { position: absolute; z-index: 4; font-size: 11px; line-height: 1; pointer-events: none; }
 .board-deco--treasure { bottom: 2px; left: 3px; color: #f59e0b; text-shadow: 0 0 3px #000; }
@@ -133,6 +139,10 @@ body {
 .vfx-flash { animation: cell-flash 0.5s ease-out; }
 @keyframes cell-flash { 0% { box-shadow: inset 0 0 0 4px #ef4444; } 100% { box-shadow: inset 0 0 0 0 transparent; } }
 .vfx-banner { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(15,23,42,0.92); border: 1px solid #475569; border-radius: 8px; padding: 10px 20px; font-weight: bold; box-shadow: 0 6px 20px rgba(0,0,0,0.5); animation: banner-in 0.3s ease-out; }
+/* Counter prompt: violet border + pulse so it reads as "needs your input",
+   not a game-over notification. */
+.vfx-banner--counter { border-color: #7c3aed; background: rgba(30,18,54,0.95); box-shadow: 0 0 0 3px rgba(124,58,237,0.25), 0 6px 20px rgba(0,0,0,0.5); animation: counter-pulse 1.2s ease-in-out infinite; }
+@keyframes counter-pulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(124,58,237,0.25), 0 6px 20px rgba(0,0,0,0.5); } 50% { box-shadow: 0 0 0 6px rgba(124,58,237,0.45), 0 6px 20px rgba(0,0,0,0.5); } }
 
 /* status */
 .status-bar { display: flex; gap: 8px; align-items: center; font-size: 13px; opacity: 0.85; }
